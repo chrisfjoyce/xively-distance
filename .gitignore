@@ -10,8 +10,12 @@ lib-cov
 pids
 logs
 results
+test
+dist
 
 npm-debug.log
 node_modules
+
+app/bower_components/
 
 .vagrant

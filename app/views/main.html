@@ -1,0 +1,80 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container" ng-controller="DataSourcesCtrl">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Devices/Data Sources</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6" ng-repeat='dataSource in dataSources'>
+            {{dataSource}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" ng-controller="AccordionDemoCtrl">
+    <accordion close-others="oneAtATime">
+      <accordion-group heading="Static Header, initially expanded" is-open="true" class='panel-primary'>
+        This content is straight in the template.
+      </accordion-group>
+      <accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+        {{group.content}}
+      </accordion-group>
+    </accordion>
+  </div>
+
+  <div class="container" ng-controller="CollapseDemoCtrl">
+    <button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+    <hr>
+    <div collapse="isCollapsed">
+      <div class="well well-lg">Some content</div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-default">Generate chart!</button>
+
+  <!--
+  Modal Dialog
+  -->
+  <div ng-controller="ModalDemoCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-header">
+        <h3>A modal!</h3>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li ng-repeat="item in items">
+            <a ng-click="selected.item = item">{{ item }}</a>
+          </li>
+        </ul>
+        Selected: <b>{{ selected.item }}</b>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      </div>
+    </script>
+
+    <button class="btn btn-default" ng-click="open()">Open me!</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+  </div>
+
+  <!--
+  Charts
+  -->
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Charts</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          Charts Here!
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
