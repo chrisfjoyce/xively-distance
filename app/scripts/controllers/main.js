@@ -9,27 +9,6 @@ var app = angular.module('xivelyIostpApp')
     ];
   });
 
-
-app.controller('DataSourcesCtrl', function ($scope) {
-    $scope.dataSources = [
-      'asdasd1',
-      'asdasd2',
-      'asdasd3',
-      'asdasd4',
-      'asdasd5',
-      'asdasd6',
-      'asdasd7',
-      'asdasd8',
-      'asdasd9',
-      'asdasd10',
-      'asdasd11'
-    ];
-  });
-
-app.controller('CollapseDemoCtrl', function ($scope) {
-    $scope.isCollapsed = false;
-  });
-
 app.controller('AccordionDemoCtrl', function ($scope) {
     $scope.oneAtATime = true;
 
