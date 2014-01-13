@@ -1,5 +1,9 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
+  <div class="container" ng-controller="XivelyCtrl">
+    <input ng-model="currentValue">
+  </div>
+
   <div class="container" ng-controller="DataSourcesCtrl">
     <div class="panel panel-primary">
       <div class="panel-heading">
@@ -60,6 +64,8 @@
     <button class="btn btn-default" ng-click="open()">Open me!</button>
     <div ng-show="selected">Selection from a modal: {{ selected }}</div>
   </div>
+
+
 
   <!--
   Charts
