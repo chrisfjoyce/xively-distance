@@ -1,7 +1,18 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
   <div class="container" ng-controller="XivelyCtrl">
-    <input ng-model="currentValue">
+    <div class="panel panel-primary" >
+      <div class="panel-heading" ng-click='devicesCollapsed = !devicesCollapsed'>
+        <h3 class="panel-title">Devices</h3>
+      </div>
+      <div class="panel-body" collapse="devicesCollapsed">
+        <div class="row">
+          <div class="col-md-6" ng-repeat='device in devices' >
+            <h5><span class="badge">{{device.title + ' - ' + device.id}} </span></h5>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="container" ng-controller="DataSourcesCtrl">
