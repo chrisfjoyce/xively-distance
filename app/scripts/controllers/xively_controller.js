@@ -9,6 +9,8 @@ var XivelyCtrl = function ($scope) {
   $scope.devicesCollapsed = true;
   $scope.dataSourcesCollapsed = false;
 
+  $scope.urls = [];
+
   //https://api.xively.com/v2/feeds?user=iostp&tag=L1V3&status=live
   var startDevicesTimestamp = Date.now();
   xively.feed.list(
@@ -52,4 +54,25 @@ var XivelyCtrl = function ($scope) {
       });
     }
   );
+  $scope.open = function() {
+    var formResponse = [
+        {
+          'datastream_name'  : 'Wind_Speed',
+          'datastream_label' : 'Wind Speed',
+          'devices' : [{'id':1889266748},{'id':2047541477}]
+        },
+        {
+
+          'datastream_name'  : 'Wind_Direction',
+          'datastream_label' : 'Wind Direction',
+          'devices' : [{'id':2047541477},{'id':434722442}]
+        }
+      ];
+    for (var i = 0; i < formResponse.length; i++) {
+      for (var j = 0; j < formResponse[i].devices.length; j++) {
+        $scope.urls[$scope.urls.length] = 'https://api.xively.com/v2/feeds/' + formResponse[i].devices[j].id + '/datastreams/' + formResponse[i].datastream_name + '.png?t=' + formResponse[i].datastream_label + '&b=true';
+      }
+    }
+    console.log($scope.urls);
+  };
 };
