@@ -41,17 +41,23 @@
   <!--
   Charts
   -->
-    <div class="container">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">Charts</h3>
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div ng-repeat="url in urls">
-              <img ng-src="{{url}}" />
-            </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Charts</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div ng-repeat="url in urls">
+            <img ng-src="{{url}}" />
           </div>
+          <div ng-repeat="datastream in datastreams">
+              <div id="graph-{{datastream}}"></div>
+              <br />
+              <div id="slider-{{datastream}}" style="width: 600px; height: 15px;"></div>
+              <br />
+          </div>
+          <button class="btn btn-default" ng-click="setFeeds(['2047541477'])">Test Feeds!</button>
+          <button class="btn btn-default" ng-click="testFeeds('2047541477')">Test Feeds 2!</button>
         </div>
       </div>
     </div>
