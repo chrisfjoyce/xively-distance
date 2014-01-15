@@ -237,3 +237,7 @@ var updateFeeds = function(feedId, datastreamIds, duration, interval) {
 };
 
 };
+
+XivelyCtrl.$inject = ['$scope'];
+var app = angular.module('xivelyIostpApp');
+app.controller('XivelyCtrl', XivelyCtrl);
