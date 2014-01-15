@@ -1,22 +1,23 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
-  <div class="container" ng-controller="XivelyCtrl">    
+  <div class="container">    
+    
     <div class="panel panel-primary" >
       <div class="panel-heading" ng-click='dataSourcesCollapsed = !dataSourcesCollapsed'>
         <h3 class="panel-title">Data Sources</h3>
       </div>
       <div class="panel-body" collapse="dataSourcesCollapsed">
         <div class="row">
-          <div class="col-md-6" ng-repeat='deviceTag in deviceTags'>
-            <!--<h5><span class="badge">{{deviceTag}}</span></h5>-->
+          <div class="col-md-6" ng-repeat='datasource in datasources'>
             <div class="input-group">
               <span class="input-group-addon">
-                <input type="checkbox">
+                <input type="checkbox" ng-model="selectedDataSourcesMap[datasource]">
               </span>
-              <span type="text" class="form-control" text-overflow> {{deviceTag}} </span>
+              <span type="text" class="form-control" text-overflow> {{datasource}} </span>
             </div><!-- /input-group -->
-          </div>          
+          </div>
         </div>
+        <button class="btn btn-default" ng-click="selectDatasources()">NEXT!</button>
       </div>
     </div>
 
@@ -26,18 +27,24 @@
       </div>
       <div class="panel-body" collapse="devicesCollapsed">
         <div class="row">
-          <div class="col-md-6" ng-repeat='device in devices' >
+          <div class="col-md-6" ng-repeat='datasource in selectedDataSources' >
             <div class="input-group">
-              <span class="input-group-addon">
-                <input type="checkbox">
-              </span>
-              <span type="text" class="form-control" text-overflow> {{device.title + ' - ' + device.id}} </span>
-            </div><!-- /input-group -->
+              <span type="text" class="form-control" text-overflow> {{datasource}} </span>
+            </div>
+            <div ng-repeat='device in devicesByDatasource[datasource]'>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" ng-model="selectedDevicesByDatasource[datasource][device.id]">
+                </span>
+                <span type="text" class="form-control" text-overflow> {{device.title + ' - ' + device.id}} </span>
+              </div>
+            </div>
           </div>
-          <button class="btn btn-default" ng-click="open()">Chart me!</button>
+          <button class="btn btn-default" ng-click="showSelectedDevices()">Chart me!</button>
         </div>
       </div>
     </div>
+ 
   <!--
   Charts
   -->
@@ -50,14 +57,14 @@
           <div ng-repeat="url in urls">
             <img ng-src="{{url}}" />
           </div>
-          <div ng-repeat="datastream in datastreams">
-              <div id="graph-{{datastream}}"></div>
+          <div ng-repeat="datastream in chartDatastreams">
+              <div>{{datastream.label}}</div>
               <br />
-              <div id="slider-{{datastream}}" style="width: 600px; height: 15px;"></div>
+              <div id="graph-{{datastream.id}}"></div>
+              <br />
+              <div id="slider-{{datastream.id}}" style="width: 600px; height: 15px;"></div>
               <br />
           </div>
-          <button class="btn btn-default" ng-click="setFeeds(['2047541477'])">Test Feeds!</button>
-          <button class="btn btn-default" ng-click="testFeeds('2047541477')">Test Feeds 2!</button>
         </div>
       </div>
     </div>
