@@ -32,6 +32,9 @@
 
     <!-- Docs master nav -->
     <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+      <div class="pull-left">
+        <p href="#" class="badge">Build Info: <span id='build_info'></span></p>
+      </div>
       <div class="container">
         <div class="navbar-header">
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -40,6 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+
           <a href="#" class="navbar-brand">Internet of School Things Portal</a>
         </div>
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
@@ -101,6 +105,12 @@
     <script src="bower_components/d3/d3.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+
+    <script>
+      $.get('git_info.txt', function(data) {
+        $('#build_info').html(data);
+      });
+    </script>
 
     <!-- Xively Libs -->
     <script src="bower_components/xively-js/index.js"></script>

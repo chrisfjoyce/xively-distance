@@ -16,6 +16,7 @@ dist
 npm-debug.log
 node_modules
 
+app/git_info.txt
 app/bower_components/
 .sass-cache
 .tmp

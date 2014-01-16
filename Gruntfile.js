@@ -15,6 +15,9 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  //Execute Shell commands
+  var shell = require('shelljs');
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -360,6 +363,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
+      'build_git_info',
       'bower-install',
       'concurrent:server',
       'autoprefixer',
@@ -383,6 +387,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'build_git_info',
     'bower-install',
     'useminPrepare',
     'concurrent:dist',
@@ -398,7 +403,12 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
+  grunt.registerTask('build_git_info', "download jquery bundle", function() {
+    shell.exec('sh get_git_info.sh');
+  });
+
   grunt.registerTask('default', [
+    'build_git_info',
     'newer:jshint',
     'test',
     'build'
