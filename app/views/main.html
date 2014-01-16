@@ -13,7 +13,12 @@
               <span class="input-group-addon">
                 <input type="checkbox" ng-model="selectedDataSourcesMap[datasource]">
               </span>
-              <span type="text" class="form-control" text-overflow> {{datasource}} </span>
+              <span type="text" class="form-control" text-overflow> 
+                {{datasource}}
+                <span class="badge pull-right">
+                  {{devicesByDatasource[datasource].length}}
+                </span>
+              </span>
             </div><!-- /input-group -->
           </div>
         </div>
