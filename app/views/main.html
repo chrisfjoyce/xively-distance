@@ -60,9 +60,10 @@
           <div ng-repeat="datastream in chartDatastreams">
               <div>{{datastream.label}}</div>
               <br />
-              <div id="graph-{{datastream.id}}"></div>
+              <div class="col-md-8" id="graph-{{datastream.id}}"></div>
+              <div class="col-md-4" id="legend-{{datastream.id}}"></div>
               <br />
-              <div id="slider-{{datastream.id}}" style="width: 600px; height: 15px;"></div>
+              <div class="col-md-8" id="slider-{{datastream.id}}"></div>
               <br />
           </div>
         </div>

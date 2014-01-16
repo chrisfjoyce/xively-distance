@@ -403,7 +403,7 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('build_git_info', "download jquery bundle", function() {
+  grunt.registerTask('build_git_info', 'download jquery bundle', function() {
     shell.exec('sh get_git_info.sh');
   });
 

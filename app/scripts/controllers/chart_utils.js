@@ -18,6 +18,24 @@ Date.prototype.parseISO = function(iso){
   return new Date(stamp);
 };
 
+var colorList = [
+  '#000000',
+  '#FF0000',
+  '#00FF00',
+  '#0000FF',
+  '#FFFF00',
+  '#00FFFF',
+  '#FF00FF',
+  '#C0C0C0',
+  '#808080',
+  '#800000',
+  '#808000',
+  '#008000',
+  '#800080',
+  '#008080',
+  '#000080'
+];
+
 var buildFormatter = function(series, x, y) {
   var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + ' padding: 4px;"></span>';
   var content = swatch + '&nbsp;&nbsp;' + parseFloat(y) + '&nbsp;&nbsp;<br>';
@@ -42,9 +60,11 @@ var buildChart = function(scope) {
 
     var data = scope.seriesByDataSource[datastreamId];
     var series = data.series;
+    for (var i = 0; i < series.length; i++) {
+      series[i].color = colorList[i % colorList.length];
+    }
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
-      width: 600,
       height: 200,
       renderer: 'line',
       min: parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
@@ -81,6 +101,27 @@ var buildChart = function(scope) {
     var hoverDetail = new Rickshaw.Graph.HoverDetail({
       graph: graph,
       formatter: buildFormatter
+    });
+
+    //Legend
+    var legend = new Rickshaw.Graph.Legend({
+      graph: graph,
+      element: document.querySelector('#legend-' + datastreamId)
+    });
+
+    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+      graph: graph,
+      legend: legend
+    });
+
+    var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+      graph: graph,
+      legend: legend
+    });
+
+    var order = new Rickshaw.Graph.Behavior.Series.Order({
+      graph: graph,
+      legend: legend
     });
 
     var slider = new Rickshaw.Graph.RangeSlider({
