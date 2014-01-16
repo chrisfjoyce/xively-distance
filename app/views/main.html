@@ -58,7 +58,7 @@
             <img ng-src="{{url}}" />
           </div>
           <div ng-repeat="datastream in chartDatastreams">
-              <div>{{datastream.label}}</div>
+              <div class="col-md-12">{{datastream.label}}</div>
               <br />
               <div class="col-md-8" id="graph-{{datastream.id}}"></div>
               <div class="col-md-4" id="legend-{{datastream.id}}"></div>
