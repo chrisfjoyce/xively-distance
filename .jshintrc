@@ -3,9 +3,11 @@
   "browser": true,
   "esnext": true,
   "bitwise": true,
-  "camelcase": true,
+  "camelcase": false,
   "curly": true,
-  "eqeqeq": true,
+  "eqeqeq": false,
+  "eqnull": true,
+  "-W041": false,
   "immed": true,
   "indent": 2,
   "latedef": false,
@@ -20,6 +22,8 @@
   "smarttabs": true,
   "globals": {
     "angular": false,
-    "xively" : false
+    "xively" : false,
+    "Rickshaw": false,
+    "buildChart": true
   }
 }

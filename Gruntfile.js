@@ -100,7 +100,13 @@ module.exports = function (grunt) {
       all: [
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js'
-      ]
+      ],
+      test: {
+        options: {
+          jshintrc: '.jshintrc'
+        },
+        src: ['test/spec/{,*/}*.js']
+      }
     },
 
     // Empties folders to start fresh
