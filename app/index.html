@@ -61,29 +61,10 @@
 
 
     <!-- Add your site or application content here -->
-    <div ng-view=""></div>
-
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-6">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-6">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div>
+    <div class="jumbotron">
+      <div ng-view="">
       </div>
-
-      <hr>
-
-      <footer>
-        <p>2014</p>
-      </footer>
-    </div> <!-- /container -->
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -114,12 +95,16 @@
 
     <!-- Xively Libs -->
     <script src="bower_components/xively-js/index.js"></script>
-
-
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/chart_utils.js"></script>
-        <script src="scripts/controllers/xively_controller.js"></script>
+        <script src="scripts/utils/xively_utils.js"></script>
+        <script src="scripts/utils/chart_utils.js"></script>
+
+
+        <script src="scripts/controllers/main_controller.js"></script>
+        <script src="scripts/controllers/by_data_type_controller.js"></script>
+        <script src="scripts/controllers/by_school_controller.js"></script>
+        <script src="scripts/controllers/charts_controller.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -11,9 +11,21 @@ angular.module('xivelyIostpApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'XivelyCtrl'
+        controller: 'MainCtrl'
+      })
+      .when('/bySchool', {
+        templateUrl: 'views/bySchool.html',
+        controller: 'BySchoolCtrl'
+      })
+      .when('/byDataType', {
+        templateUrl: 'views/byDataType.html',
+        controller: 'ByDataTypeCtrl'
+      })
+      .when('/charts', {
+        templateUrl: 'views/charts.html',
+        controller: 'ChartsCtrl'
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/byDataType'
       });
   });
