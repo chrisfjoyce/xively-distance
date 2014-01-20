@@ -6,7 +6,7 @@ var ByDataTypeCtrl = function ($scope,$modal) {
   registerXivelyGetData(function(){
     $scope.$apply(
       function(){
-        $scope.datastreams = _datastreams;
+        $scope.weatherTypes = _datastreams;
       }
     );
   });
