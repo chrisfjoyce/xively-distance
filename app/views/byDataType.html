@@ -7,8 +7,14 @@
       <div class="row">
         <div class="col-md-6" ng-repeat='weatherType in weatherTypes'>
           <div class="input-group">
-            <span type="text" class="form-control" ng-click="open(weatherType)" text-overflow> {{weatherType}} </span>
-          </div>
+            <span class="input-group-addon"></span>
+            <span type="text" class="form-control" text-overflow ng-click="open(weatherType)">
+              {{weatherType}}
+              <span class="badge pull-right">
+                {{devicesByDatastream[weatherType].length}}
+              </span>
+            </span>
+          </div><!-- /input-group -->
         </div>
       </div>
     </div>

@@ -7,6 +7,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location) {
     $scope.$apply(
       function(){
         $scope.weatherTypes = _datastreams;
+        $scope.devicesByDatastream = _devicesByDatastream;
       }
     );
   });
@@ -27,10 +28,19 @@ var ByDataTypeCtrl = function ($scope,$modal,$location) {
   };
 
   $scope.open = function (datastream) {
-    $scope.datasource=datastream;
     if($scope.selectedDevicesByDatasource[datastream] == null){
       $scope.selectedDevicesByDatasource[datastream]={};
     }
+
+    $scope.ok = function() {
+      console.log('ok');
+      $scope.modal.dismiss('ok');
+    };
+    $scope.cancel = function() {
+      console.log('cancel');
+      $scope.modal.dismiss('cancel');
+    };
+
     var modalInstance = $modal.open({
       templateUrl: 'views/bySchool.html',
       scope: $scope,
@@ -39,9 +49,9 @@ var ByDataTypeCtrl = function ($scope,$modal,$location) {
     $scope.selectedDS = datastream;
     modalInstance.result.then(function (datastream) {
       $scope.selectedDatastream = datastream;
-    }, function () {
-      // console.log($scope.selectedDevicesByDatasource);
-      // $log.info('Modal dismissed at: ' + new Date());
+    }, function (type) {
+      console.log('Modal dismissed at: ' + new Date());
+      console.log('Caused by: ' + type);
     });
     $scope.modal = modalInstance;
   };
