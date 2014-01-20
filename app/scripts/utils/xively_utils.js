@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-xively.setKey('fk9R1zsvjvb9m4d65JmRl80sahGH13OPAui3T04YA9f7D3Da');
+xively.setKey('LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs');
 var _devicesByDatastream = null;
 var _datastreams = null;
 var _callbacks = [];
@@ -21,7 +21,7 @@ var initXivelyData = function(){
     },
     function(data){
       console.log('Devices collected in: ms ' + (Date.now() - startDevicesTimestamp));
-      //console.log(data);
+      console.log(data);
 
       var devices = data.results;
       var len = devices.length;
