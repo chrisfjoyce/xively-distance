@@ -42,23 +42,11 @@ var buildFormatter = function(series, x, y) {
   return content;
 };
 
-var buildChart = function(scope) {
-  scope.chartDatastreams = [];
-  scope.$apply(function () {
-    for (var datastreamId in scope.seriesByDataSource){
-      scope.chartDatastreams.push(
-        {
-          'id':datastreamId,
-          'label':scope.seriesByDataSource[datastreamId].label
-        }
-      );
-    }
-  });
-
-  for (var datastreamId in scope.seriesByDataSource) {
+var buildChart = function(seriesByDataSource) {
+  for (var datastreamId in seriesByDataSource) {
     // Build Graph
 
-    var data = scope.seriesByDataSource[datastreamId];
+    var data = seriesByDataSource[datastreamId];
     var series = data.series;
     for (var i = 0; i < series.length; i++) {
       series[i].color = colorList[i % colorList.length];
