@@ -13,16 +13,25 @@ var ByDataTypeCtrl = function ($scope,$modal) {
 
   $scope.selectedDatastream = {};
 
+  $scope.selectedDevicesByDatasource={};
+
+
   $scope.open = function (datastream) {
+    $scope.datasource=datastream;
+    if($scope.selectedDevicesByDatasource[datastream] == null){
+      $scope.selectedDevicesByDatasource[datastream]={};
+    }
     var modalInstance = $modal.open({
       templateUrl: 'views/bySchool.html',
       scope: $scope,
+      controller: 'BySchoolCtrl',
     });
-    console.log(datastream);
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
+    $scope.selectedDS = datastream;
+    modalInstance.result.then(function (datastream) {
+      $scope.selectedDatastream = datastream;
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+      // console.log($scope.selectedDevicesByDatasource);
+      // $log.info('Modal dismissed at: ' + new Date());
     });
     $scope.modal = modalInstance;
   };

@@ -21,7 +21,7 @@ var initXivelyData = function(){
     },
     function(data){
       console.log('Devices collected in: ms ' + (Date.now() - startDevicesTimestamp));
-      console.log(data);
+      // console.log(data);
 
       var devices = data.results;
       var len = devices.length;
@@ -49,7 +49,6 @@ var initXivelyData = function(){
       }
       _datastreams = datastreams;
       _devicesByDatastream = devicesByDatastream;
-
       for (var k = _callbacks.length - 1; k >= 0; k--) {
         _callbacks[k]();
       };

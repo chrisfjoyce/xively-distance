@@ -2,7 +2,7 @@
 'use strict';
 
 var BySchoolCtrl = function ($scope) {
-
+  $scope.devices=_devicesByDatastream[$scope.selectedDS];
 };
 
 BySchoolCtrl.$inject = ['$scope'];

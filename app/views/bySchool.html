@@ -1,18 +1,28 @@
 <div>
   <div class="modal-header">
-      <h3>Select Schools</h3>
+      <h3>{{selectedDS}}</h3>
   </div>
+  <b>Select Schools</b>
+  {{datasource}}
   <div class="modal-body">
-      <ul>
-          <li ng-repeat="datastream in datastreams">
-            <!-- <input type= --><!-- "checkbox" ng-model="selectedcuacks[dato]"> -->
-              {{ datastream }}
-          </li>
-      </ul>
-      <!-- Selected: <b>{{ datocuack }}</b> -->
+    <div class="col-md-6" ng-repeat='device in devices'>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="checkbox" ng-model="selectedDevicesByDatasource[datasource][device.id]">
+        </span>
+        <span type="text" class="form-control" text-overflow> {{device.location.name}} </span>
+      </div>
+    </div>
+    <!-- <ul>
+        <li ng-repeat="device in devices">
+          
+            {{ device.location.name }}
+        </li>
+    </ul> -->
+    <!-- Selected: <b>{{ datocuack }}</b> -->
   </div>
   <div class="modal-footer">
-      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-primary" ng-click="console.log(selectedDevicesByDatasource)">OK</button>
       <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
   </div>
   <!-- <button class="btn btn-default" ng-click="open()">Modal Controller</button>
