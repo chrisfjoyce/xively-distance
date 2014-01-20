@@ -2,7 +2,7 @@
 'use strict';
 
 var ChartsCtrl = function ($scope) {
-  
+  console.log(_seriesByDataSource);
 };
 
 ChartsCtrl.$inject = ['$scope'];

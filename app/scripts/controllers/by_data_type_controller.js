@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-var ByDataTypeCtrl = function ($scope,$modal) {
+var ByDataTypeCtrl = function ($scope,$modal,$location) {
   initXivelyData();
   registerXivelyGetData(function(){
     $scope.$apply(
@@ -15,6 +15,16 @@ var ByDataTypeCtrl = function ($scope,$modal) {
 
   $scope.selectedDevicesByDatasource={};
 
+  $scope.generateChart = function(){
+    //getDatapointHistory({'Wind_Direction':{'450493179':true,'948107654':true}});
+    getDatapointHistory(
+      $scope.selectedDevicesByDatasource,
+      function(){
+        console.log(_seriesByDataSource);
+        $location.path('/charts');
+        $scope.$apply();
+      });
+  };
 
   $scope.open = function (datastream) {
     $scope.datasource=datastream;
@@ -39,6 +49,6 @@ var ByDataTypeCtrl = function ($scope,$modal) {
 
 
 
-ByDataTypeCtrl.$inject = ['$scope','$modal'];
+ByDataTypeCtrl.$inject = ['$scope','$modal','$location'];
 var app = angular.module('xivelyIostpApp');
 app.controller('ByDataTypeCtrl', ByDataTypeCtrl);
