@@ -1,7 +1,7 @@
 sudo apt-get install lftp wput
 
 grunt clean
-grunt compass
+grunt --force
 
 rm -rf /tmp/app
 mkdir /tmp/app
