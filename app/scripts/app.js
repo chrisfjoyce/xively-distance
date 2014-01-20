@@ -9,10 +9,10 @@ angular.module('xivelyIostpApp', [
 ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
+      // .when('/', {
+      //   templateUrl: 'views/main.html',
+      //   controller: 'MainCtrl'
+      // })
       .when('/bySchool', {
         templateUrl: 'views/bySchool.html',
         controller: 'BySchoolCtrl'
