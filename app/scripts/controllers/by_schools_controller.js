@@ -11,13 +11,16 @@ var BySchoolsCtrl = function ($scope,$modal) {
     );
   });
 
+  $scope.selectedDatastreamsBySchool={};
+
   $scope.open = function (school) {
-    // if($scope.selectedDevicesByDatasource[datastream] == null){
-    //   $scope.selectedDevicesByDatasource[datastream]={};
-    // }
+    if($scope.selectedDatastreamsBySchool[school] == null){
+      $scope.selectedDatastreamsBySchool[school]={};
+    }
 
     $scope.ok = function() {
       console.log('ok');
+      console.log($scope.selectedDatastreamsBySchool);
       $scope.modal.dismiss('ok');
     };
     $scope.cancel = function() {
