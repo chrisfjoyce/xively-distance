@@ -50,6 +50,8 @@ var buildChart = function(seriesByDataSource) {
     var series = data.series;
     for (var i = 0; i < series.length; i++) {
       series[i].color = colorList[i % colorList.length];
+      series[i].enabledColor = series[i].color;
+      series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.8).toString();;
     }
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
@@ -65,6 +67,8 @@ var buildChart = function(seriesByDataSource) {
       },
       series: series
     });
+
+    seriesByDataSource[datastreamId].graph = graph;
 
     graph.render();
 
@@ -91,26 +95,26 @@ var buildChart = function(seriesByDataSource) {
       formatter: buildFormatter
     });
 
-    //Legend
-    var legend = new Rickshaw.Graph.Legend({
-      graph: graph,
-      element: document.querySelector('#legend-' + datastreamId)
-    });
+    // //Legend
+    // var legend = new Rickshaw.Graph.Legend({
+    //   graph: graph,
+    //   element: document.querySelector('#legend-' + datastreamId)
+    // });
 
-    var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
-      graph: graph,
-      legend: legend
-    });
+    // var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+    //   graph: graph,
+    //   legend: legend
+    // });
 
-    var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-      graph: graph,
-      legend: legend
-    });
+    // var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+    //   graph: graph,
+    //   legend: legend
+    // });
 
-    var order = new Rickshaw.Graph.Behavior.Series.Order({
-      graph: graph,
-      legend: legend
-    });
+    // var order = new Rickshaw.Graph.Behavior.Series.Order({
+    //   graph: graph,
+    //   legend: legend
+    // });
 
     var slider = new Rickshaw.Graph.RangeSlider({
       graph: graph,

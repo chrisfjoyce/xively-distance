@@ -3,20 +3,40 @@
 
 var ChartsCtrl = function ($scope) {
   console.log(_seriesByDataSource);
-  $scope.chartDatastreams = [];
+  $scope.chartDatastreams = _seriesByDataSource;
   for (var datastreamId in _seriesByDataSource){
-    $scope.chartDatastreams.push(
-      {
-        'id': datastreamId,
-        'label': _seriesByDataSource[datastreamId].label
-      }
-    );
+    _seriesByDataSource[datastreamId].id = datastreamId;
   }
+  console.log($scope.chartSeriesByDatastream);
   setTimeout(function() {
-      buildChart(_seriesByDataSource);
+      $scope.$apply( function() {
+        buildChart(_seriesByDataSource);
+      });
     },
     1000
   );
+
+  $scope.enableDisable = function(datastream, serie) {
+    console.log(serie);
+    if (serie.disabled) {
+      serie.disabled = false;
+    } else {
+      serie.disabled = true;
+    }
+    datastream.graph.update();
+  };
+
+  $scope.over = function(datastream, serie) {
+    serie.color = serie.disabledColor;
+    console.log(serie.color);
+    datastream.graph.update();
+  };
+
+  $scope.leave = function(datastream, serie) {
+    serie.color = serie.enabledColor;
+    console.log(serie.color);
+    datastream.graph.update();
+  }
 
 };
 
