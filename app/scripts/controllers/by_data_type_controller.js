@@ -4,12 +4,11 @@
 var ByDataTypeCtrl = function ($scope,$modal,$location) {
   initXivelyData();
   registerXivelyGetData(function(){
-    $scope.$apply(
-      function(){
-        $scope.weatherTypes = _datastreams;
-        $scope.devicesByDatastream = _devicesByDatastream;
-      }
-    );
+    var readGlobals = function(){
+      $scope.weatherTypes = _datastreams;
+      $scope.devicesByDatastream = _devicesByDatastream;
+    };
+    $scope.$apply(readGlobals);
   });
 
   $scope.selectedDatastream = {};

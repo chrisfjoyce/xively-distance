@@ -8,9 +8,10 @@ var ChartsCtrl = function ($scope) {
     _seriesByDataSource[datastreamId].id = datastreamId;
   }
   setTimeout(function() {
-      $scope.$apply( function() {
+      var buildChartToApply = function() {
         buildChart(_seriesByDataSource);
-      });
+      };
+      $scope.$apply(buildChartToApply);
     },
     1000
   );

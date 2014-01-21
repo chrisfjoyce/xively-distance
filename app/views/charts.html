@@ -13,12 +13,10 @@
               <div id="slider-{{datastream.id}}"></div>
             </div>
             <div class="col-md-3" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
-              <div class="input-group">
-                <div style="color: {{serie.color}}">
-                  <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
-                    <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
-                  </label>
-                </div>
+              <div style="color: {{serie.color}}">
+                <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
+                  <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
+                </label>
               </div>
             </div>
             <br />
