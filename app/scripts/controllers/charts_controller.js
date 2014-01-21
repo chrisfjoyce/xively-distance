@@ -7,7 +7,6 @@ var ChartsCtrl = function ($scope) {
   for (var datastreamId in _seriesByDataSource){
     _seriesByDataSource[datastreamId].id = datastreamId;
   }
-  console.log($scope.chartSeriesByDatastream);
   setTimeout(function() {
       $scope.$apply( function() {
         buildChart(_seriesByDataSource);
@@ -26,12 +25,17 @@ var ChartsCtrl = function ($scope) {
   };
 
   $scope.over = function(datastream, serie) {
-    serie.color = serie.disabledColor;
+    for (var i = 0; i < datastream.series.length; i++) {
+      datastream.series[i].color = datastream.series[i].disabledColor;
+    }
+    serie.color = serie.enabledColor;
     datastream.graph.update();
   };
 
   $scope.leave = function(datastream, serie) {
-    serie.color = serie.enabledColor;
+    for (var i = 0; i < datastream.series.length; i++) {
+      datastream.series[i].color = datastream.series[i].enabledColor;
+    }
     datastream.graph.update();
   }
 
