@@ -9,6 +9,7 @@ var _seriesByDataSource = null;
 var _retrievedDevicesCount = null;
 var _schoolsBooleanMap = {};
 var _schools = [];
+var _schoolsByLetter = {};
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -126,6 +127,9 @@ var initXivelyData = function(){
       console.log('Devices collected in: ms ' + (Date.now() - startDevicesTimestamp));
       // console.log(data);
 
+      _schools = [];
+      _schoolsByLetter = {};
+
       var devices = data.results;
       var len = devices.length;
 
@@ -140,8 +144,15 @@ var initXivelyData = function(){
         if(device.location != null){
           var schoolName = device.location.name;
           if(_schoolsBooleanMap[schoolName] == null){
+            var initialLetter = schoolName[0].toUpperCase();
+
             _schoolsBooleanMap[schoolName] = true;
             _schools.push(schoolName);
+
+            if(_schoolsByLetter[initialLetter] == null){
+              _schoolsByLetter[initialLetter] = [];
+            }
+            _schoolsByLetter[initialLetter].push(schoolName);
           }
         }
 
