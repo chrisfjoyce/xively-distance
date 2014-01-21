@@ -9,6 +9,8 @@ var _seriesByDataSource = null;
 var _retrievedDevicesCount = null;
 var _schoolsBooleanMap = {};
 var _schools = [];
+var _schoolsByLetter = {};
+var _datastreamsBySchool = {};
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -126,6 +128,10 @@ var initXivelyData = function(){
       console.log('Devices collected in: ms ' + (Date.now() - startDevicesTimestamp));
       // console.log(data);
 
+      _schools = [];
+      _schoolsByLetter = {};
+      _datastreamsBySchool = {};
+
       var devices = data.results;
       var len = devices.length;
 
@@ -133,16 +139,25 @@ var initXivelyData = function(){
       var devicesByDatastream = {},datastreams=[];
       for(var i=0;i<len;i++){
         var device = devices[i];
-        if(device.datastreams == null){
+        if(device.datastreams == null || device.location == null){
           continue;
         }
 
-        if(device.location != null){
-          var schoolName = device.location.name;
-          if(_schoolsBooleanMap[schoolName] == null){
-            _schoolsBooleanMap[schoolName] = true;
-            _schools.push(schoolName);
+        var schoolName = device.location.name;
+        if(_schoolsBooleanMap[schoolName] == null){
+          //List Of Schools
+          _schoolsBooleanMap[schoolName] = true;
+          _schools.push(schoolName);
+
+          //Initial Letter
+          var initialLetter = schoolName[0].toUpperCase();
+          if(_schoolsByLetter[initialLetter] == null){
+            _schoolsByLetter[initialLetter] = [];
           }
+          _schoolsByLetter[initialLetter].push({'schoolName':schoolName});
+
+          //Preparing for DataStreams
+          _datastreamsBySchool[schoolName] = [];
         }
 
         for(var j=device.datastreams.length - 1;j>=0;j--){
@@ -156,16 +171,17 @@ var initXivelyData = function(){
               datastreams.push(datastream);
             }
             devicesByDatastream[datastream].push(device);
+            _datastreamsBySchool[schoolName].push({'name':datastream});
           }
         }
       }
       _datastreams = datastreams;
       _devicesByDatastream = devicesByDatastream;
+      _schools = _schools.sort();
       for (var k = _callbacks.length - 1; k >= 0; k--) {
         _callbacks[k]();
       }
 
-      _schools = _schools.sort();
       //console.log('Tags collected in: ms ' + (Date.now() - startTagsTimestamp));
       //console.log(_schools)
     }
