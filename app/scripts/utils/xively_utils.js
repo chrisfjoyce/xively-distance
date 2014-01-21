@@ -107,6 +107,12 @@ var buildDataCallback = function(device,datastreamId,selectedDevicesCount,series
   };
 };
 
+var loadChartTestData = function(callback){
+  getDatapointHistory(
+      {'Wind_Direction': {'1734847623':true,'1889266748':true}},
+      callback);
+}
+
 
 //https://api.xively.com/v2/feeds?user=iostp&tag=L1V3&status=live
 var initXivelyData = function(){
