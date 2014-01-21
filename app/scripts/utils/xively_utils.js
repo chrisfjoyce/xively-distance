@@ -11,6 +11,7 @@ var _schoolsBooleanMap = {};
 var _schools = [];
 var _schoolsByLetter = {};
 var _datastreamsBySchool = {};
+var _deviceInformation = {};
 var _xivelyDataInit = false;
 
 var registerXivelyGetData = function(fn){
@@ -98,7 +99,7 @@ var buildDataCallback = function(device,datastreamId,selectedDevicesCount,series
     seriesByDataSource[datastreamId].max_value = Math.max(seriesByDataSource[datastreamId].max_value,datastream_max_value);
 
     seriesByDataSource[datastreamId].series.push({
-      name: device.id,
+      name: _deviceInformation[device.id].schoolName,
       data: points,
       color: '#000000'
     });
@@ -139,6 +140,7 @@ var initXivelyData = function(){
       _schools = [];
       _schoolsByLetter = {};
       _datastreamsBySchool = {};
+      _deviceInformation = {};
 
       var devices = data.results;
       var len = devices.length;
@@ -178,6 +180,7 @@ var initXivelyData = function(){
               devicesByDatastream[datastream] = [];
               datastreams.push(datastream);
             }
+            _deviceInformation[device.id] = {'schoolName' : schoolName};
             devicesByDatastream[datastream].push(device);
             _datastreamsBySchool[schoolName].push({'name':datastream,'deviceId':device.id});
           }
