@@ -38,7 +38,7 @@ var ChartsCtrl = function ($scope) {
       datastream.series[i].color = datastream.series[i].enabledColor;
     }
     datastream.graph.update();
-  }
+  };
 
 };
 

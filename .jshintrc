@@ -24,12 +24,15 @@
     "angular": false,
     "xively" : false,
     "Rickshaw": false,
+    "d3": false,
     "buildChart": true,
     "initXivelyData": true,
     "registerXivelyGetData": true,
     "_datastreams": true,
     "_devicesByDatastream": true,
     "getDatapointHistory": true,
-    "_seriesByDataSource": true
+    "_seriesByDataSource": true,
+    "_datastreamsBySchool": true,
+    "_schools": true
   }
 }

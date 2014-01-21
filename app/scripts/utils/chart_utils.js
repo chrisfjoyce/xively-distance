@@ -51,7 +51,7 @@ var buildChart = function(seriesByDataSource) {
     for (var i = 0; i < series.length; i++) {
       series[i].color = colorList[i % colorList.length];
       series[i].enabledColor = series[i].color;
-      series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();;
+      series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
     }
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
