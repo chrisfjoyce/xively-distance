@@ -17,10 +17,21 @@ var ChartsCtrl = function ($scope) {
   );
 
   $scope.enableDisable = function(datastream, serie) {
+    var countEnabled = 0;
+    for (var i = 0; i < datastream.series.length; i++) {
+      if (!datastream.series[i].disabled) {
+        countEnabled++;
+      }
+    }
+    console.log(countEnabled);
     if (serie.disabled) {
       serie.disabled = false;
     } else {
-      serie.disabled = true;
+      if (countEnabled <= 1) {
+        serie.disabled = false;
+      } else {
+        serie.disabled = true;
+      }
     }
     datastream.graph.update();
   };
