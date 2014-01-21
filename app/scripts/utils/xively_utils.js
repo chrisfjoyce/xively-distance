@@ -152,7 +152,7 @@ var initXivelyData = function(){
             if(_schoolsByLetter[initialLetter] == null){
               _schoolsByLetter[initialLetter] = [];
             }
-            _schoolsByLetter[initialLetter].push(schoolName);
+            _schoolsByLetter[initialLetter].push({'schoolName':schoolName});
           }
         }
 
