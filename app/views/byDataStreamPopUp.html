@@ -1,0 +1,22 @@
+<div>
+  <div class="modal-header">
+      <h3>{{selectedSchool}}</h3>
+  </div>
+  <b>Select Weather Type</b>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-6" ng-repeat='dataStream in dataStreams'>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <input type="checkbox" ng-model='selectedDataStreamsBySchool[selectedSchool][dataStream.name]'>
+          </span>
+          <span type="text" class="form-control" text-overflow> {{dataStream.name}} </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <!-- <button class="btn btn-warning" ng-click="cancel()">Cancel</button> -->
+  </div>
+</div>
