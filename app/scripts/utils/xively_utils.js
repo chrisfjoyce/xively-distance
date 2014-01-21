@@ -132,7 +132,7 @@ var initXivelyData = function(){
         }
 
         if(device.location != null){
-          var schoolName = device.location.name
+          var schoolName = device.location.name;
           if(_schoolsBooleanMap[schoolName] == null){
             _schoolsBooleanMap[schoolName] = true;
             _schools.push(schoolName);
