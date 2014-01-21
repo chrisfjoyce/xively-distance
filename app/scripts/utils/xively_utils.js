@@ -7,6 +7,8 @@ var _datastreams = null;
 var _callbacks = [];
 var _seriesByDataSource = null;
 var _retrievedDevicesCount = null;
+var _schoolsBooleanMap = {};
+var _schools = [];
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -128,6 +130,15 @@ var initXivelyData = function(){
         if(device.datastreams == null){
           continue;
         }
+
+        if(device.location != null){
+          var schoolName = device.location.name
+          if(_schoolsBooleanMap[schoolName] == null){
+            _schoolsBooleanMap[schoolName] = true;
+            _schools.push(schoolName);
+          }
+        }
+
         for(var j=device.datastreams.length - 1;j>=0;j--){
           var datastream = device.datastreams[j].id;
 
@@ -148,7 +159,9 @@ var initXivelyData = function(){
         _callbacks[k]();
       }
 
+      _schools = _schools.sort();
       //console.log('Tags collected in: ms ' + (Date.now() - startTagsTimestamp));
+      //console.log(_schools)
     }
   );
 };
