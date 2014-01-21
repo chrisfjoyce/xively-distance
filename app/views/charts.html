@@ -8,16 +8,20 @@
         <div ng-repeat="datastream in chartDatastreams">
             <div class="col-md-12">{{datastream.id}}</div>
             <br />
-            <div class="col-md-8" id="graph-{{datastream.id}}"></div>
-            <div class="col-md-4" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
-              <div style="color: {{serie.color}}">
-                <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
-                  <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
-                </label>
+            <div class="col-md-9">
+              <div id="graph-{{datastream.id}}"></div>
+              <div id="slider-{{datastream.id}}"></div>
+            </div>
+            <div class="col-md-3" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
+              <div class="input-group">
+                <div style="color: {{serie.color}}">
+                  <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
+                    <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
+                  </label>
+                </div>
               </div>
             </div>
             <br />
-            <div class="col-md-8" id="slider-{{datastream.id}}"></div>
             <br />
         </div>
       </div>

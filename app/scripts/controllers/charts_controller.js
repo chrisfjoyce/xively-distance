@@ -17,7 +17,6 @@ var ChartsCtrl = function ($scope) {
   );
 
   $scope.enableDisable = function(datastream, serie) {
-    console.log(serie);
     if (serie.disabled) {
       serie.disabled = false;
     } else {
@@ -28,13 +27,11 @@ var ChartsCtrl = function ($scope) {
 
   $scope.over = function(datastream, serie) {
     serie.color = serie.disabledColor;
-    console.log(serie.color);
     datastream.graph.update();
   };
 
   $scope.leave = function(datastream, serie) {
     serie.color = serie.enabledColor;
-    console.log(serie.color);
     datastream.graph.update();
   }
 
