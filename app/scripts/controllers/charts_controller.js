@@ -13,15 +13,11 @@ var ChartsCtrl = function ($scope) {
     );
   }
   setTimeout(function() {
-    console.log("aaa");
-    buildChart(_seriesByDataSource)
-    console.log("bbb");
-  }, 1000
+      buildChart(_seriesByDataSource);
+    },
+    1000
   );
 
-  $scope.buildChart = function() {
-    buildChart(_seriesByDataSource);
-  }
 };
 
 ChartsCtrl.$inject = ['$scope'];
