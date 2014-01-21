@@ -33,6 +33,7 @@
     "getDatapointHistory": true,
     "_seriesByDataSource": true,
     "_datastreamsBySchool": true,
-    "_schools": true
+    "_schools": true,
+    "_schoolsByLetter" : true
   }
 }

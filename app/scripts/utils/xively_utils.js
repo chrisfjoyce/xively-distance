@@ -87,22 +87,26 @@ var buildDataCallback = function(device,datastreamId,selectedDevicesCount,series
       }
     }
 
-    if(seriesByDataSource[datastreamId] == null){
-      seriesByDataSource[datastreamId] = {
-        'series' : [],
-        'min_value' : datastream_min_value,
-        'max_value' : datastream_max_value,
-        'label' : datastreamId.replace(/\_/g,' ')
-      };//new serie
-    }
-    seriesByDataSource[datastreamId].min_value = Math.min(seriesByDataSource[datastreamId].min_value,datastream_min_value);
-    seriesByDataSource[datastreamId].max_value = Math.max(seriesByDataSource[datastreamId].max_value,datastream_max_value);
+    if(points.length == 0){
 
-    seriesByDataSource[datastreamId].series.push({
-      name: _deviceInformation[device.id].schoolName,
-      data: points,
-      color: '#000000'
-    });
+    }else{
+      if(seriesByDataSource[datastreamId] == null){
+        seriesByDataSource[datastreamId] = {
+          'series' : [],
+          'min_value' : datastream_min_value,
+          'max_value' : datastream_max_value,
+          'label' : datastreamId.replace(/\_/g,' ')
+        };//new serie
+      }
+      seriesByDataSource[datastreamId].min_value = Math.min(seriesByDataSource[datastreamId].min_value,datastream_min_value);
+      seriesByDataSource[datastreamId].max_value = Math.max(seriesByDataSource[datastreamId].max_value,datastream_max_value);
+
+      seriesByDataSource[datastreamId].series.push({
+        name: _deviceInformation[device.id].schoolName,
+        data: points,
+        color: '#000000'
+      });
+    }
 
     _retrievedDevicesCount++;
     if(selectedDevicesCount == _retrievedDevicesCount){
@@ -154,13 +158,13 @@ var initXivelyData = function(){
         }
 
         var schoolName = device.location.name;
+        var initialLetter = schoolName[0].toUpperCase();
         if(_schoolsBooleanMap[schoolName] == null){
           //List Of Schools
           _schoolsBooleanMap[schoolName] = true;
           _schools.push(schoolName);
 
           //Initial Letter
-          var initialLetter = schoolName[0].toUpperCase();
           if(_schoolsByLetter[initialLetter] == null){
             _schoolsByLetter[initialLetter] = [];
           }
@@ -183,6 +187,17 @@ var initXivelyData = function(){
             _deviceInformation[device.id] = {'schoolName' : schoolName};
             devicesByDatastream[datastream].push(device);
             _datastreamsBySchool[schoolName].push({'name':datastream,'deviceId':device.id});
+          }
+        }
+
+        if(_datastreamsBySchool[schoolName].length == 0){
+          delete _datastreamsBySchool[schoolName];
+          delete _schoolsBooleanMap[schoolName];
+          _schools.pop();
+          _schoolsByLetter[initialLetter].pop();
+
+          if(_schoolsByLetter[initialLetter].length == 0){
+            delete _schoolsByLetter[initialLetter];
           }
         }
       }
