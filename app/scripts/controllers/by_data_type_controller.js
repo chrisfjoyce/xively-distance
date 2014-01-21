@@ -2,14 +2,15 @@
 'use strict';
 
 var ByDataTypeCtrl = function ($scope,$modal,$location) {
-  initXivelyData();
-  registerXivelyGetData(function(){
-    var readGlobals = function(){
-      $scope.weatherTypes = _datastreams;
-      $scope.devicesByDatastream = _devicesByDatastream;
-    };
-    $scope.$apply(readGlobals);
-  });
+  // registerXivelyGetData(function(){
+  //   var readGlobals = function(){
+  //     $scope.weatherTypes = _datastreams;
+  //     $scope.devicesByDatastream = _devicesByDatastream;
+  //   };
+  //   $scope.$apply(readGlobals);
+  // });
+  $scope.weatherTypes = _datastreams;
+  $scope.devicesByDatastream = _devicesByDatastream;
 
   $scope.selectedDatastream = {};
 

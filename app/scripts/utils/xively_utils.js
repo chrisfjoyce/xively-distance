@@ -11,6 +11,7 @@ var _schoolsBooleanMap = {};
 var _schools = [];
 var _schoolsByLetter = {};
 var _datastreamsBySchool = {};
+var _xivelyDataInit = false;
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -34,7 +35,9 @@ var getDatapointHistory = function(selectedDevicesByDatasource,callback){
         selectedDevicesCount++;
       }
     }
-    formResponse.push(datasourceConf);
+    if(datasourceConf.devices.length > 0){
+      formResponse.push(datasourceConf);
+    }
   }
 
   var startDateISO = '2014-01-01T13:35:07.437Z';
@@ -113,11 +116,16 @@ var loadChartTestData = function(callback){
   getDatapointHistory(
       {'Wind_Direction': {'1734847623':true,'1889266748':true}},
       callback);
-}
+};
 
 
 //https://api.xively.com/v2/feeds?user=iostp&tag=L1V3&status=live
 var initXivelyData = function(){
+  if(_xivelyDataInit){
+    return;
+  }
+  _xivelyDataInit = true;
+
   var startDevicesTimestamp = Date.now();
   xively.feed.list(
     {
@@ -171,7 +179,7 @@ var initXivelyData = function(){
               datastreams.push(datastream);
             }
             devicesByDatastream[datastream].push(device);
-            _datastreamsBySchool[schoolName].push({'name':datastream});
+            _datastreamsBySchool[schoolName].push({'name':datastream,'deviceId':device.id});
           }
         }
       }
