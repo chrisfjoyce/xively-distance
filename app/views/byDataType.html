@@ -1,23 +1,13 @@
 <div class="container">
-  <div class="panel panel-primary" >
-    <div class="panel-heading">
-      <h3 class="panel-title">Data Types</h3>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-6" ng-repeat='weatherType in weatherTypes'>
-          <div class="input-group">
-            <span class="input-group-addon"></span>
-            <span type="text" class="form-control" text-overflow ng-click="open(weatherType)">
-              {{weatherType}}
-              <span class="badge pull-right">
-                {{devicesByDatastream[weatherType].length}}
-              </span>
-            </span>
-          </div><!-- /input-group -->
-        </div>
-      </div>
-    </div>
-    <button class="btn btn-default" ng-click="generateChart()">Generate</button>
+  <div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
+    <span class="pull-right">
+      X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-default " ng-click="generateChart()">Generate</button>
+    <span>
+  </div>
+  <div class="row">
+    <span ng-repeat='weatherType in weatherTypes'>
+      <button type="button" ng-click="open(weatherType)" class="btn btn-default datastream-box col-md-3 col-md-offset-1">{{weatherType}}<br/><small>{{devicesByDatastream[weatherType].length}} Schools</small></button>
+    </span>
   </div>
 </div>
