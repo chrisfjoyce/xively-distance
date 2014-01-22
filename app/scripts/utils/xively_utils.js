@@ -208,8 +208,19 @@ var initXivelyData = function(){
         _callbacks[k]();
       }
 
+
+      //Xively Data ended
       //console.log('Tags collected in: ms ' + (Date.now() - startTagsTimestamp));
       //console.log(_schools)
+
+      var rootScope = angular.element('#ngApp').scope();
+      if(rootScope.route != null){
+        var currentController = rootScope.route.current.$$route.controller;
+        console.log(currentController);
+        if(currentController == 'BySchoolsCtrl' || currentController == 'ByDataTypeCtrl'){
+          rootScope.route.reload();
+        }
+      }
     }
   );
 };

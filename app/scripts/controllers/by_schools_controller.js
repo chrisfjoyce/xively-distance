@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-var BySchoolsCtrl = function ($scope,$modal,$location) {
+var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   // var onXivelyReady = function(){
   //   //$scope.schools = _schools;
   //   $scope.schoolsByLetter = _schoolsByLetter;
@@ -10,6 +10,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location) {
   // registerXivelyGetData(function(){
   //   $scope.$apply(onXivelyReady);
   // });
+  $rootScope.route = $route;
 
   $scope.schoolsByLetter = _schoolsByLetter;
 
@@ -64,6 +65,6 @@ var BySchoolsCtrl = function ($scope,$modal,$location) {
   };
 };
 
-BySchoolsCtrl.$inject = ['$scope','$modal','$location'];
+BySchoolsCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope'];
 var app = angular.module('xivelyIostpApp');
 app.controller('BySchoolsCtrl', BySchoolsCtrl);

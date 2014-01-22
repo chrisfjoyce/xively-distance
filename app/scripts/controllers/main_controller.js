@@ -2,7 +2,6 @@
 'use strict';
 
 var MainCtrl = function ($scope) {
-  initXivelyData();
 };
 
 MainCtrl.$inject = ['$scope'];

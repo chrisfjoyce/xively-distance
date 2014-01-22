@@ -41,7 +41,7 @@
       }
     </style>
   </head>
-  <body ng-app="xivelyIostpApp">
+  <body ng-app="xivelyIostpApp" id='ngApp'>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -125,5 +125,8 @@
         <script src="scripts/controllers/by_data_stream_popup_controller.js"></script>
         <script src="scripts/controllers/charts_controller.js"></script>
         <!-- endbuild -->
+    <script>
+      initXivelyData();
+    </script>
 </body>
 </html>

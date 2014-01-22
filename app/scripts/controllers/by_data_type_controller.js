@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-var ByDataTypeCtrl = function ($scope,$modal,$location) {
+var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   // registerXivelyGetData(function(){
   //   var readGlobals = function(){
   //     $scope.weatherTypes = _datastreams;
@@ -9,6 +9,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location) {
   //   };
   //   $scope.$apply(readGlobals);
   // });
+  $rootScope.route = $route;
   $scope.weatherTypes = _datastreams;
   $scope.devicesByDatastream = _devicesByDatastream;
 
@@ -59,6 +60,6 @@ var ByDataTypeCtrl = function ($scope,$modal,$location) {
 
 
 
-ByDataTypeCtrl.$inject = ['$scope','$modal','$location'];
+ByDataTypeCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope'];
 var app = angular.module('xivelyIostpApp');
 app.controller('ByDataTypeCtrl', ByDataTypeCtrl);
