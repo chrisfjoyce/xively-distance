@@ -1,8 +1,12 @@
 /*jshint sub:true*/
 'use strict';
 
-var ChartsCtrl = function ($scope) {
+var ChartsCtrl = function ($scope,$location) {
   console.log(_seriesByDataSource);
+  if(_seriesByDataSource == null){
+    $location.path('/');
+  }
+
   $scope.chartDatastreams = _seriesByDataSource;
   for (var datastreamId in _seriesByDataSource){
     _seriesByDataSource[datastreamId].id = datastreamId;
@@ -53,6 +57,6 @@ var ChartsCtrl = function ($scope) {
 
 };
 
-ChartsCtrl.$inject = ['$scope'];
+ChartsCtrl.$inject = ['$scope','$location'];
 var app = angular.module('xivelyIostpApp');
 app.controller('ChartsCtrl', ChartsCtrl);

@@ -43,9 +43,9 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     };
 
     var modalInstance = $modal.open({
-      templateUrl: 'views/bySchool.html',
+      templateUrl: 'views/bySchoolPopup.html',
       scope: $scope,
-      controller: 'BySchoolCtrl',
+      controller: 'BySchoolPopupCtrl',
     });
     $scope.selectedDS = datastream;
     modalInstance.result.then(function (datastream) {

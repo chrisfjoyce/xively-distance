@@ -1,10 +1,10 @@
 /*jshint sub:true*/
 'use strict';
 
-var BySchoolCtrl = function ($scope) {
+var BySchoolPopupCtrl = function ($scope) {
   $scope.devices=_devicesByDatastream[$scope.selectedDS];
 };
 
-BySchoolCtrl.$inject = ['$scope'];
+BySchoolPopupCtrl.$inject = ['$scope'];
 var app = angular.module('xivelyIostpApp');
-app.controller('BySchoolCtrl', BySchoolCtrl);
+app.controller('BySchoolPopupCtrl', BySchoolPopupCtrl);
