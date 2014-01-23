@@ -41,7 +41,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
     $scope.ok = function() {
       console.log('ok');
-      console.log($scope.selectedDatastreamsBySchool);
+      // selectedElementsCounter($scope.selectedDatastreamsBySchool);
       $scope.modal.dismiss('ok');
     };
     $scope.cancel = function() {
