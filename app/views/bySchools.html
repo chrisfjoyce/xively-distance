@@ -5,15 +5,16 @@
       <button class="btn btn-default " ng-click="generateChart()">Generate</button>
     <span>
   </div>
-  Please select schools to create your observation kit:
+  <span style="color:#909091">Please select schools to create your observation kit:</span>
   <div class="row">
     <div class="col-md-12" ng-repeat='(letter,schools) in schoolsByLetter'>
         <div class="row">
-        <h4><span>&nbsp;&nbsp;{{letter}}</span></h2>
+        <h4><span style="color:#ED992E">&nbsp;&nbsp;{{letter}}</span></h2>
 
         </div>
         <span ng-repeat='school in schools'>
-          <button type="button" ng-click="open(school.schoolName)" class="btn btn-default school-box col-md-3 col-md-offset-1">{{school.schoolName }}<br/><small>13 Weather Types</small></button>
+          <button type="button" ng-click="open(school.schoolName)" class="btn btn-default school-box col-md-3 col-md-offset-1">{{school.schoolName }}<br/>
+          <small style="color:#97989A">13 Weather Types</small></button>
         </span>
     </div>
   </div>

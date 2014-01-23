@@ -117,6 +117,28 @@ var buildDataCallback = function(device,datastreamId,selectedDevicesCount,series
   };
 };
 
+// var selectedElementsCounter = function(selectedDevicesByDatasource,callback){
+//   var formResponse = [];
+//   var selectedDevicesCount = 0;
+//   _retrievedDevicesCount = 0;
+//   for(var datasource in selectedDevicesByDatasource){
+//     var datasourceConf = {
+//       'datastream_name' : datasource,
+//       'devices' : []
+//     };
+//     for(var deviceId in selectedDevicesByDatasource[datasource]){
+//       if(selectedDevicesByDatasource[datasource][deviceId] == true){
+//         datasourceConf.devices.push({'id':deviceId});
+//         selectedDevicesCount++;
+//       }
+//     }
+//     if(datasourceConf.devices.length > 0){
+//       formResponse.push(datasourceConf);
+//     }
+//   }
+//   console.log(selectedDevicesCount);
+// };
+
 var loadChartTestData = function(callback){
   getDatapointHistory(
       {'Wind_Direction': {'1734847623':true,'1889266748':true}},
