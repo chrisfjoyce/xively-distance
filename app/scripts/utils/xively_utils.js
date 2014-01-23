@@ -200,23 +200,25 @@ var initXivelyData = function(){
           var datastream = device.datastreams[j];
           var datastreamId = datastream.id;
 
+          if(datastream.tags == null || datastream.tags.length == 0){
+            continue;
+          }
 
           //datastreamId = datastreamId.replace(/\_/g,' ');
           //Extracting data stream label
-          var datastreamLabel = '@' + datastreamId;
-          if(datastream.tags != null && datastream.tags.length > 0){
-            var index = 0;
-            if(datastream.tags[index] == 'Average'){
-              if(datastream.tags.length <= 1){
-                index = -1;
-              }else{
-                index++;
-              }
-            }
-            if(index != -1){
-              datastreamLabel = datastream.tags[index];
+          var datastreamLabel = datastreamId;
+          var index = 0;
+          if(datastream.tags[index] == 'Average'){
+            if(datastream.tags.length <= 1){
+              index = -1;
+            }else{
+              index++;
             }
           }
+          if(index != -1){
+            datastreamLabel = datastream.tags[index];
+          }
+
 
           if(isNaN(parseInt(datastreamId))){
             //console.log(datastreamId + ' = ' + datastreamLabel);
