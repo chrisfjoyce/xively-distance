@@ -2,15 +2,30 @@
   <div class="modal-header">
       <h3>{{selectedDS.label}}</h3>
   </div>
-  <b>Select Schools</b>
+  <b>
+    Schools
+    &nbsp;&nbsp;&nbsp;
+    {{active}} Active
+    &nbsp;&nbsp;&nbsp;
+    [I]
+    {{inactive}} Inactive
+  </b>
   <div class="modal-body">
     <div class="row">
-      <div class="col-md-6" ng-repeat='device in devices'>
-        <div class="input-group">
-          <span class="input-group-addon">
-            <input type="checkbox" ng-model="selectedDevicesByDatasource[selectedDS.id][device.id]">
-          </span>
-          <span type="text" class="form-control" text-overflow> {{device.location.name}} </span>
+      <div ng-repeat='device in devices'>
+        <div class="input-group col-md-6">
+          <label>
+            <span type="text" class="form-control" text-overflow>
+              <span ng-switch on="dataStream.active">
+                <span ng-switch-when="false">[I]</span>
+                <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
+              </span>
+              {{device.location.name}}
+            </span>
+            <span class="input-group-addon">
+              <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS.id][device.id]' ng-click="setSelected($event)">
+            </span>
+          </label>
         </div>
       </div>
     </div>

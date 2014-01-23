@@ -18,11 +18,11 @@ var ByDataStreamPopUpCtrl = function ($scope) {
   }
   //end simulate active/inactive
 
-  $scope.dataStreamsSelected = 0;
+  $scope.dataStreamsSelected[$scope.selectedSchool] = 0;
   for (var selectedDataStream in $scope.selectedDatastreamsBySchool) {
     for (i = 0; i < $scope.dataStreams.length; i++) {
       if (selectedDataStream == $scope.dataStreams[i].id && $scope.selectedDatastreamsBySchool[selectedDataStream][$scope.dataStreams[i].deviceId]) {
-        $scope.dataStreamsSelected++;
+        $scope.dataStreamsSelected[$scope.selectedSchool]++;
       }
     }
   }
@@ -30,9 +30,9 @@ var ByDataStreamPopUpCtrl = function ($scope) {
   $scope.setSelected = function($event) {
     var checkbox = $event.target;
     if (checkbox.checked) {
-      $scope.dataStreamsSelected++;
+      $scope.dataStreamsSelected[$scope.selectedSchool]++;
     } else {
-      $scope.dataStreamsSelected--;
+      $scope.dataStreamsSelected[$scope.selectedSchool]--;
     }
   };
 };

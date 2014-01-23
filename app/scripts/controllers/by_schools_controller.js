@@ -16,6 +16,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.selectedDatastreamsBySchool={};
 
+  $scope.dataStreamsSelected = {};
+
   $scope.generateChart = function(){
     getDatapointHistory(
       $scope.selectedDatastreamsBySchool,
@@ -60,6 +62,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     }, function (type) {
       console.log('Modal dismissed at: ' + new Date());
       console.log('Caused by: ' + type);
+      console.log($scope.dataStreamsSelected);
     });
     $scope.modal = modalInstance;
   };

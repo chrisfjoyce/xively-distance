@@ -14,7 +14,7 @@
         </div>
         <span ng-repeat='school in schools'>
           <button type="button" ng-click="open(school.schoolName)" class="btn btn-default school-box col-md-3 col-md-offset-1">{{school.schoolName }}<br/>
-          <small style="color:#97989A">13 Weather Types</small></button>
+          <small style="color:#97989A">13 Weather Types {{dataStreamsSelected[school.schoolName]}}</small></button>
         </span>
     </div>
   </div>
