@@ -13,6 +13,7 @@ var _schoolsByLetter = {};
 var _datastreamsBySchool = {};
 var _deviceInformation = {};
 var _xivelyDataInit = false;
+var _startDevicesTimestamp=null;
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -145,6 +146,114 @@ var loadChartTestData = function(callback){
       callback);
 };
 
+var processXivelyFeedData = function(data){
+  console.log('Devices collected in: ms ' + (Date.now() - _startDevicesTimestamp));
+  // console.log(data);
+
+  _schools = [];
+  _schoolsByLetter = {};
+  _datastreamsBySchool = {};
+  _deviceInformation = {};
+
+  var devices = data.results;
+  var len = devices.length;
+
+  var startTagsTimestamp = Date.now();
+  var devicesByDatastream = {},datastreams=[];
+  for(var i=0;i<len;i++){
+    var device = devices[i];
+    if(device.datastreams == null || device.location == null){
+      continue;
+    }
+
+    var schoolName = device.location.name;
+    var initialLetter = schoolName[0].toUpperCase();
+    if(_schoolsBooleanMap[schoolName] == null){
+      //List Of Schools
+      _schoolsBooleanMap[schoolName] = true;
+      _schools.push(schoolName);
+
+      //Initial Letter
+      if(_schoolsByLetter[initialLetter] == null){
+        _schoolsByLetter[initialLetter] = [];
+      }
+      _schoolsByLetter[initialLetter].push({'schoolName':schoolName});
+
+      //Preparing for DataStreams
+      _datastreamsBySchool[schoolName] = [];
+    }
+
+    for(var j=device.datastreams.length - 1;j>=0;j--){
+      var datastream = device.datastreams[j];
+      var datastreamId = datastream.id;
+
+      if(datastream.tags == null || datastream.tags.length == 0){
+        continue;
+      }
+
+      //datastreamId = datastreamId.replace(/\_/g,' ');
+      //Extracting data stream label
+      var datastreamLabel = datastreamId;
+      var index = 0;
+      if(datastream.tags[index] == 'Average'){
+        if(datastream.tags.length <= 1){
+          index = -1;
+        }else{
+          index++;
+        }
+      }
+      if(index != -1){
+        datastreamLabel = datastream.tags[index];
+      }
+
+
+      if(isNaN(parseInt(datastreamId))){
+        //console.log(datastreamId + ' = ' + datastreamLabel);
+        if(devicesByDatastream[datastreamId] == null){
+          devicesByDatastream[datastreamId] = [];
+          datastreams.push({'id':datastreamId,'label':datastreamLabel});
+        }
+
+
+        _deviceInformation[device.id] = {'schoolName' : schoolName};
+        devicesByDatastream[datastreamId].push(device);
+        _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'id':datastreamId});
+      }
+    }
+
+    if(_datastreamsBySchool[schoolName].length == 0){
+      delete _datastreamsBySchool[schoolName];
+      delete _schoolsBooleanMap[schoolName];
+      _schools.pop();
+      _schoolsByLetter[initialLetter].pop();
+
+      if(_schoolsByLetter[initialLetter].length == 0){
+        delete _schoolsByLetter[initialLetter];
+      }
+    }
+  }
+  _datastreams = datastreams.sort();
+  _devicesByDatastream = devicesByDatastream;
+  _schools = _schools.sort();
+  for (var k = _callbacks.length - 1; k >= 0; k--) {
+    _callbacks[k]();
+  }
+
+
+  //Xively Data ended
+  //console.log('Tags collected in: ms ' + (Date.now() - startTagsTimestamp));
+  //console.log(_schools)
+
+  var rootScope = angular.element('#ngApp').scope();
+  if(rootScope.route != null){
+    var currentController = rootScope.route.current.$$route.controller;
+    console.log(currentController);
+    if(currentController == 'BySchoolsCtrl' || currentController == 'ByDataTypeCtrl'){
+      rootScope.route.reload();
+    }
+  }
+};
+
 
 //https://api.xively.com/v2/feeds?user=iostp&tag=L1V3&status=live
 var initXivelyData = function(){
@@ -152,117 +261,20 @@ var initXivelyData = function(){
     return;
   }
   _xivelyDataInit = true;
+  _startDevicesTimestamp = Date.now();
 
-  var startDevicesTimestamp = Date.now();
-  xively.feed.list(
-    {
-      'user':'iostp',
-      'tag' : 'L1V3'
-    },
-    function(data){
-      console.log('Devices collected in: ms ' + (Date.now() - startDevicesTimestamp));
-      // console.log(data);
-
-      _schools = [];
-      _schoolsByLetter = {};
-      _datastreamsBySchool = {};
-      _deviceInformation = {};
-
-      var devices = data.results;
-      var len = devices.length;
-
-      var startTagsTimestamp = Date.now();
-      var devicesByDatastream = {},datastreams=[];
-      for(var i=0;i<len;i++){
-        var device = devices[i];
-        if(device.datastreams == null || device.location == null){
-          continue;
-        }
-
-        var schoolName = device.location.name;
-        var initialLetter = schoolName[0].toUpperCase();
-        if(_schoolsBooleanMap[schoolName] == null){
-          //List Of Schools
-          _schoolsBooleanMap[schoolName] = true;
-          _schools.push(schoolName);
-
-          //Initial Letter
-          if(_schoolsByLetter[initialLetter] == null){
-            _schoolsByLetter[initialLetter] = [];
-          }
-          _schoolsByLetter[initialLetter].push({'schoolName':schoolName});
-
-          //Preparing for DataStreams
-          _datastreamsBySchool[schoolName] = [];
-        }
-
-        for(var j=device.datastreams.length - 1;j>=0;j--){
-          var datastream = device.datastreams[j];
-          var datastreamId = datastream.id;
-
-
-          //datastreamId = datastreamId.replace(/\_/g,' ');
-          //Extracting data stream label
-          var datastreamLabel = '@' + datastreamId;
-          if(datastream.tags != null && datastream.tags.length > 0){
-            var index = 0;
-            if(datastream.tags[index] == 'Average'){
-              if(datastream.tags.length <= 1){
-                index = -1;
-              }else{
-                index++;
-              }
-            }
-            if(index != -1){
-              datastreamLabel = datastream.tags[index];
-            }
-          }
-
-          if(isNaN(parseInt(datastreamId))){
-            //console.log(datastreamId + ' = ' + datastreamLabel);
-            if(devicesByDatastream[datastreamId] == null){
-              devicesByDatastream[datastreamId] = [];
-              datastreams.push({'id':datastreamId,'label':datastreamLabel});
-            }
-
-
-            _deviceInformation[device.id] = {'schoolName' : schoolName};
-            devicesByDatastream[datastreamId].push(device);
-            _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'id':datastreamId});
-          }
-        }
-
-        if(_datastreamsBySchool[schoolName].length == 0){
-          delete _datastreamsBySchool[schoolName];
-          delete _schoolsBooleanMap[schoolName];
-          _schools.pop();
-          _schoolsByLetter[initialLetter].pop();
-
-          if(_schoolsByLetter[initialLetter].length == 0){
-            delete _schoolsByLetter[initialLetter];
-          }
-        }
-      }
-      _datastreams = datastreams.sort();
-      _devicesByDatastream = devicesByDatastream;
-      _schools = _schools.sort();
-      for (var k = _callbacks.length - 1; k >= 0; k--) {
-        _callbacks[k]();
-      }
-
-
-      //Xively Data ended
-      //console.log('Tags collected in: ms ' + (Date.now() - startTagsTimestamp));
-      //console.log(_schools)
-
-      var rootScope = angular.element('#ngApp').scope();
-      if(rootScope.route != null){
-        var currentController = rootScope.route.current.$$route.controller;
-        console.log(currentController);
-        if(currentController == 'BySchoolsCtrl' || currentController == 'ByDataTypeCtrl'){
-          rootScope.route.reload();
-        }
-      }
-    }
-  );
+  if(document.URL.indexOf('fraserFix') != -1){
+    $.get('scripts/sample_feed.asd', function(data) {
+      var cachedData = $.parseJSON(data);
+      processXivelyFeedData(cachedData);
+    });
+  }else{
+    xively.feed.list(
+      {
+        'user':'iostp',
+        'tag' : 'L1V3'
+      },
+      processXivelyFeedData
+    );
+  }
 };
