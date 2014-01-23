@@ -14,6 +14,7 @@ var _datastreamsBySchool = {};
 var _deviceInformation = {};
 var _xivelyDataInit = false;
 var _startDevicesTimestamp=null;
+var _datastreamByDeviceIdDatastreamLabel={};
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -22,18 +23,19 @@ var registerXivelyGetData = function(fn){
   _callbacks.push(fn);
 };
 
-var getDatapointHistory = function(selectedDevicesByDatasource,callback){
+var getDatapointHistory = function(selectedDevicesByDatastream,callback){
   var formResponse = [];
   var selectedDevicesCount = 0;
   _retrievedDevicesCount = 0;
-  for(var datasource in selectedDevicesByDatasource){
+  for(var datastreamLabel in selectedDevicesByDatastream){
     var datasourceConf = {
-      'datastream_name' : datasource,
+      'datastream_name' : datastreamLabel,
       'devices' : []
     };
-    for(var deviceId in selectedDevicesByDatasource[datasource]){
-      if(selectedDevicesByDatasource[datasource][deviceId] == true){
-        datasourceConf.devices.push({'id':deviceId});
+    for(var deviceId in selectedDevicesByDatastream[datastreamLabel]){
+      if(selectedDevicesByDatastream[datastreamLabel][deviceId] == true){
+        var datastreamid = _datastreamByDeviceIdDatastreamLabel[datastreamLabel+deviceId];
+        datasourceConf.devices.push({'id':deviceId,'datastreamId':datastreamid});
         selectedDevicesCount++;
       }
     }
@@ -48,16 +50,16 @@ var getDatapointHistory = function(selectedDevicesByDatasource,callback){
 
   for(var i = 0; i<formResponse.length;i++){
     var dataStreamGroup = formResponse[i];
-    var datastreamId = dataStreamGroup.datastream_name;
+    var datastreamLabel = dataStreamGroup.datastream_name;
 
     for(var j=0;j<dataStreamGroup.devices.length;j++){
       var device = dataStreamGroup.devices[j];
 
-      var historyCallback = buildDataCallback(device,datastreamId,selectedDevicesCount,_seriesByDataSource,callback);
+      var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,_seriesByDataSource,callback);
 
       xively.datapoint.history(
         device.id,
-        datastreamId,
+        device.datastreamId,
         {
           //'duration' : '180days',
           'interval' : 21600,
@@ -71,9 +73,8 @@ var getDatapointHistory = function(selectedDevicesByDatasource,callback){
   }
 };
 
-
-
-var buildDataCallback = function(device,datastreamId,selectedDevicesCount,seriesByDataSource,callback){
+var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback){
+  var filteredDatastreamLabel = datastreamLabel.replace(/ /g,'_');
   return function(data){
     var points = [];
     var datastream_min_value=0,datastream_max_value=0;
@@ -91,18 +92,18 @@ var buildDataCallback = function(device,datastreamId,selectedDevicesCount,series
     if(points.length == 0){
 
     }else{
-      if(seriesByDataSource[datastreamId] == null){
-        seriesByDataSource[datastreamId] = {
+      if(seriesByDataSource[filteredDatastreamLabel] == null){
+        seriesByDataSource[filteredDatastreamLabel] = {
           'series' : [],
           'min_value' : datastream_min_value,
           'max_value' : datastream_max_value,
-          'label' : datastreamId.replace(/\_/g,' ')
+          'label' : datastreamLabel
         };//new serie
       }
-      seriesByDataSource[datastreamId].min_value = Math.min(seriesByDataSource[datastreamId].min_value,datastream_min_value);
-      seriesByDataSource[datastreamId].max_value = Math.max(seriesByDataSource[datastreamId].max_value,datastream_max_value);
+      seriesByDataSource[filteredDatastreamLabel].min_value = Math.min(seriesByDataSource[filteredDatastreamLabel].min_value,datastream_min_value);
+      seriesByDataSource[filteredDatastreamLabel].max_value = Math.max(seriesByDataSource[filteredDatastreamLabel].max_value,datastream_max_value);
 
-      seriesByDataSource[datastreamId].series.push({
+      seriesByDataSource[filteredDatastreamLabel].series.push({
         name: _deviceInformation[device.id].schoolName,
         data: points,
         color: '#000000'
@@ -154,6 +155,7 @@ var processXivelyFeedData = function(data){
   _schoolsByLetter = {};
   _datastreamsBySchool = {};
   _deviceInformation = {};
+  _datastreamByDeviceIdDatastreamLabel={};
 
   var devices = data.results;
   var len = devices.length;
@@ -208,16 +210,16 @@ var processXivelyFeedData = function(data){
 
 
       if(isNaN(parseInt(datastreamId))){
-        //console.log(datastreamId + ' = ' + datastreamLabel);
-        if(devicesByDatastream[datastreamId] == null){
-          devicesByDatastream[datastreamId] = [];
-          datastreams.push({'id':datastreamId,'label':datastreamLabel});
+        //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
+        if(devicesByDatastream[datastreamLabel] == null){
+          devicesByDatastream[datastreamLabel] = [];
+          datastreams.push(datastreamLabel);
         }
 
-
         _deviceInformation[device.id] = {'schoolName' : schoolName};
-        devicesByDatastream[datastreamId].push(device);
+        devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'location':{'name':device.location.name}});
         _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'id':datastreamId});
+        _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
       }
     }
 
@@ -235,10 +237,10 @@ var processXivelyFeedData = function(data){
   _datastreams = datastreams.sort();
   _devicesByDatastream = devicesByDatastream;
   _schools = _schools.sort();
+
   for (var k = _callbacks.length - 1; k >= 0; k--) {
     _callbacks[k]();
   }
-
 
   //Xively Data ended
   //console.log('Tags collected in: ms ' + (Date.now() - startTagsTimestamp));

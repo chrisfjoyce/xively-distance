@@ -22,12 +22,12 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.generateChart = function(){
     getDatapointHistory(
-      $scope.selectedDatastreamsBySchool,
-      function(){
-        console.log(_seriesByDataSource);
-        $location.path('/charts');
-        $scope.$apply();
-      });
+    $scope.selectedDatastreamsBySchool,
+    function(){
+      console.log(_seriesByDataSource);
+      $location.path('/charts');
+      $scope.$apply();
+    });
   };
 
   $scope.open = function (school) {
@@ -38,8 +38,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
     for (var i = _datastreamsBySchool[school].length - 1; i >= 0; i--) {
       var datastream = _datastreamsBySchool[school][i];
-      if($scope.selectedDatastreamsBySchool[datastream.id] == null){
-        $scope.selectedDatastreamsBySchool[datastream.id] = {};
+      if($scope.selectedDatastreamsBySchool[datastream.label] == null){
+        $scope.selectedDatastreamsBySchool[datastream.label] = {};
       }
     }
 
@@ -64,7 +64,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     }, function (type) {
       console.log('Modal dismissed at: ' + new Date());
       console.log('Caused by: ' + type);
-      console.log($scope.dataStreamsSelected);
+      //console.log($scope.dataStreamsSelected);
     });
     $scope.modal = modalInstance;
   };

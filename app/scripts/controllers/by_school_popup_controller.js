@@ -2,7 +2,7 @@
 'use strict';
 
 var BySchoolPopupCtrl = function ($scope) {
-  $scope.devices=_devicesByDatastream[$scope.selectedDS.id];
+  $scope.devices=_devicesByDatastream[$scope.selectedDS];
   $scope.selectedDevices = [];
   $scope.active = 0;
   $scope.inactive = 0;

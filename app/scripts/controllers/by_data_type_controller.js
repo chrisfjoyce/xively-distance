@@ -10,7 +10,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   //   $scope.$apply(readGlobals);
   // });
   $rootScope.route = $route;
-  $scope.weatherTypes = _datastreams;
+  $scope.datastreams = _datastreams;
   $scope.devicesByDatastream = _devicesByDatastream;
 
   $scope.selectedDatastream = {};
@@ -18,19 +18,18 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   $scope.selectedDevicesByDatasource={};
 
   $scope.generateChart = function(){
-    //getDatapointHistory({'Wind_Direction':{'450493179':true,'948107654':true}});
     getDatapointHistory(
       $scope.selectedDevicesByDatasource,
       function(){
-        console.log(_seriesByDataSource);
+        //console.log(_seriesByDataSource);
         $location.path('/charts');
         $scope.$apply();
       });
   };
 
   $scope.open = function (datastream) {
-    if($scope.selectedDevicesByDatasource[datastream.id] == null){
-      $scope.selectedDevicesByDatasource[datastream.id]={};
+    if($scope.selectedDevicesByDatasource[datastream] == null){
+      $scope.selectedDevicesByDatasource[datastream]={};
     }
 
     $scope.ok = function() {
@@ -49,7 +48,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     });
     $scope.selectedDS = datastream;
     modalInstance.result.then(function (datastream) {
-      $scope.selectedDatastream = datastream.id;
+      $scope.selectedDatastream = datastream;
     }, function (type) {
       console.log('Modal dismissed at: ' + new Date());
       console.log('Caused by: ' + type);

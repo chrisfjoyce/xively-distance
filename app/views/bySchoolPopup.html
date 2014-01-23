@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-      <h3>{{selectedDS.label}}</h3>
+      <h3>{{selectedDS}}</h3>
   </div>
   <b>
     Schools
@@ -25,7 +25,7 @@
                   {{device.location.name}}
                 </span>
                 <span class="input-group-addon">
-                  <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS.id][device.id]' ng-click="setSelected($event, device.id)">
+                  <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS][device.id]' ng-click="setSelected($event, device.id)">
                 </span>
               </label>
             </div>
@@ -45,7 +45,7 @@
                   {{device.location.name}}
                 </span>
                 <span class="input-group-addon">
-                  <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS.id][device.id]' ng-click="setSelected($event, device.id)">
+                  <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS][device.id]' ng-click="setSelected($event, device.id)">
                 </span>
               </label>
             </div>

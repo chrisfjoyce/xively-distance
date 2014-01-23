@@ -6,8 +6,8 @@
   </div>
 <div class="container">
   <div class="row">
-    <span ng-repeat='weatherType in weatherTypes'>
-      <button type="button" ng-click="open(weatherType)" class="btn btn-default datastream-box col-md-3 col-md-offset-1">{{weatherType.label}}<br/><small>{{devicesByDatastream[weatherType].length}} Schools</small></button>
+    <span ng-repeat='datastream in datastreams'>
+      <button type="button" ng-click="open(datastream)" class="btn btn-default datastream-box col-md-3 col-md-offset-1">{{datastream}}<br/><small>{{devicesByDatastream[datastream].length}} Schools</small></button>
     </span>
   </div>
 </div>
