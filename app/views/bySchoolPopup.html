@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-      <h3>{{selectedDS}}</h3>
+      <h3>{{selectedDS.label}}</h3>
   </div>
   <b>Select Schools</b>
   <div class="modal-body">
@@ -8,7 +8,7 @@
       <div class="col-md-6" ng-repeat='device in devices'>
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox" ng-model="selectedDevicesByDatasource[selectedDS][device.id]">
+            <input type="checkbox" ng-model="selectedDevicesByDatasource[selectedDS.id][device.id]">
           </span>
           <span type="text" class="form-control" text-overflow> {{device.location.name}} </span>
         </div>

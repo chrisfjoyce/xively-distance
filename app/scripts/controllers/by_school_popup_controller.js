@@ -2,7 +2,7 @@
 'use strict';
 
 var BySchoolPopupCtrl = function ($scope) {
-  $scope.devices=_devicesByDatastream[$scope.selectedDS];
+  $scope.devices=_devicesByDatastream[$scope.selectedDS.id];
 };
 
 BySchoolPopupCtrl.$inject = ['$scope'];

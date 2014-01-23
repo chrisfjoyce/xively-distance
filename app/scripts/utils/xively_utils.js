@@ -197,18 +197,38 @@ var initXivelyData = function(){
         }
 
         for(var j=device.datastreams.length - 1;j>=0;j--){
-          var datastream = device.datastreams[j].id;
+          var datastream = device.datastreams[j];
+          var datastreamId = datastream.id;
 
-          //datastream = datastream.replace(/\_/g,' ');
 
-          if(isNaN(parseInt(datastream))){
-            if(devicesByDatastream[datastream] == null){
-              devicesByDatastream[datastream] = [];
-              datastreams.push({'id':datastream,'label':datastream});
+          //datastreamId = datastreamId.replace(/\_/g,' ');
+          //Extracting data stream label
+          var datastreamLabel = '@' + datastreamId;
+          if(datastream.tags != null && datastream.tags.length > 0){
+            var index = 0;
+            if(datastream.tags[index] == 'Average'){
+              if(datastream.tags.length <= 1){
+                index = -1;
+              }else{
+                index++;
+              }
             }
+            if(index != -1){
+              datastreamLabel = datastream.tags[index];
+            }
+          }
+
+          if(isNaN(parseInt(datastreamId))){
+            //console.log(datastreamId + ' = ' + datastreamLabel);
+            if(devicesByDatastream[datastreamId] == null){
+              devicesByDatastream[datastreamId] = [];
+              datastreams.push({'id':datastreamId,'label':datastreamLabel});
+            }
+
+
             _deviceInformation[device.id] = {'schoolName' : schoolName};
-            devicesByDatastream[datastream].push(device);
-            _datastreamsBySchool[schoolName].push({'label':datastream,'deviceId':device.id,'id':datastream});
+            devicesByDatastream[datastreamId].push(device);
+            _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'id':datastreamId});
           }
         }
 
@@ -223,7 +243,7 @@ var initXivelyData = function(){
           }
         }
       }
-      _datastreams = datastreams;
+      _datastreams = datastreams.sort();
       _devicesByDatastream = devicesByDatastream;
       _schools = _schools.sort();
       for (var k = _callbacks.length - 1; k >= 0; k--) {

@@ -29,8 +29,8 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   };
 
   $scope.open = function (datastream) {
-    if($scope.selectedDevicesByDatasource[datastream] == null){
-      $scope.selectedDevicesByDatasource[datastream]={};
+    if($scope.selectedDevicesByDatasource[datastream.id] == null){
+      $scope.selectedDevicesByDatasource[datastream.id]={};
     }
 
     $scope.ok = function() {
@@ -49,7 +49,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     });
     $scope.selectedDS = datastream;
     modalInstance.result.then(function (datastream) {
-      $scope.selectedDatastream = datastream;
+      $scope.selectedDatastream = datastream.id;
     }, function (type) {
       console.log('Modal dismissed at: ' + new Date());
       console.log('Caused by: ' + type);
