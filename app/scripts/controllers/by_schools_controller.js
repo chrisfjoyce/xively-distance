@@ -18,6 +18,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.dataStreamsSelected = {};
 
+  $scope.datastreamsBySchool = _datastreamsBySchool;
+
   $scope.generateChart = function(){
     getDatapointHistory(
       $scope.selectedDatastreamsBySchool,
