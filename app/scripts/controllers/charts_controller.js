@@ -27,7 +27,6 @@ var ChartsCtrl = function ($scope,$location) {
         countEnabled++;
       }
     }
-    console.log(countEnabled);
     if (serie.disabled) {
       serie.disabled = false;
     } else {
