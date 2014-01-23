@@ -1,10 +1,10 @@
-<div class="container">
-  <div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
+<div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
     <span class="pull-right">
       X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button class="btn btn-default " ng-click="generateChart()">Generate</button>
     <span>
   </div>
+<div class="container">
   <div class="row">
     <span ng-repeat='weatherType in weatherTypes'>
       <button type="button" ng-click="open(weatherType)" class="btn btn-default datastream-box col-md-3 col-md-offset-1">{{weatherType}}<br/><small>{{devicesByDatastream[weatherType].length}} Schools</small></button>
