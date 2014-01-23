@@ -12,20 +12,44 @@
   </b>
   <div class="modal-body">
     <div class="row">
-      <div ng-repeat='device in devices'>
-        <div class="input-group col-md-6">
-          <label>
-            <span type="text" class="form-control" text-overflow>
-              <span ng-switch on="dataStream.active">
-                <span ng-switch-when="false">[I]</span>
-                <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
-              </span>
-              {{device.location.name}}
-            </span>
-            <span class="input-group-addon">
-              <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS.id][device.id]' ng-click="setSelected($event)">
-            </span>
-          </label>
+      <div class="col-md-4">
+        <div class="row">
+          <div ng-repeat='device in selectedDevices'>
+            <div class="input-group col-md-12">
+              <label>
+                <span type="text" class="form-control" text-overflow>
+                  <span ng-switch on="dataStream.active">
+                    <span ng-switch-when="false">[I]</span>
+                    <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
+                  </span>
+                  {{device.location.name}}
+                </span>
+                <span class="input-group-addon">
+                  <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS.id][device.id]' ng-click="setSelected($event, device.id)">
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div ng-repeat='device in devices'>
+            <div class="input-group col-md-6">
+              <label>
+                <span type="text" class="form-control" text-overflow>
+                  <span ng-switch on="dataStream.active">
+                    <span ng-switch-when="false">[I]</span>
+                    <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
+                  </span>
+                  {{device.location.name}}
+                </span>
+                <span class="input-group-addon">
+                  <input type="checkbox" ng-model='selectedDevicesByDatasource[selectedDS.id][device.id]' ng-click="setSelected($event, device.id)">
+                </span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
