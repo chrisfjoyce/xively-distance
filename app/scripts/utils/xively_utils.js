@@ -182,11 +182,11 @@ var initXivelyData = function(){
           if(isNaN(parseInt(datastream))){
             if(devicesByDatastream[datastream] == null){
               devicesByDatastream[datastream] = [];
-              datastreams.push(datastream);
+              datastreams.push({'id':datastream,'label':datastream});
             }
             _deviceInformation[device.id] = {'schoolName' : schoolName};
             devicesByDatastream[datastream].push(device);
-            _datastreamsBySchool[schoolName].push({'name':datastream,'deviceId':device.id});
+            _datastreamsBySchool[schoolName].push({'label':datastream,'deviceId':device.id,'id':datastream});
           }
         }
 

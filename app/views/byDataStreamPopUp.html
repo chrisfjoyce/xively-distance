@@ -8,9 +8,9 @@
       <div class="col-md-6" ng-repeat='dataStream in dataStreams'>
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox" ng-model='selectedDatastreamsBySchool[dataStream.name][dataStream.deviceId]'>
+            <input type="checkbox" ng-model='selectedDatastreamsBySchool[dataStream.id][dataStream.deviceId]'>
           </span>
-          <span type="text" class="form-control" text-overflow> {{dataStream.name}} </span>
+          <span type="text" class="form-control" text-overflow> {{dataStream.label}} </span>
         </div>
       </div>
     </div>

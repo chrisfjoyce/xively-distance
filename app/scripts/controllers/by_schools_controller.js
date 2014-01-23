@@ -34,8 +34,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
     for (var i = _datastreamsBySchool[school].length - 1; i >= 0; i--) {
       var datastream = _datastreamsBySchool[school][i];
-      if($scope.selectedDatastreamsBySchool[datastream.name] == null){
-        $scope.selectedDatastreamsBySchool[datastream.name] = {};
+      if($scope.selectedDatastreamsBySchool[datastream.id] == null){
+        $scope.selectedDatastreamsBySchool[datastream.id] = {};
       }
     }
 
