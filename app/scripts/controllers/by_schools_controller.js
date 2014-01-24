@@ -14,19 +14,29 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.schoolsByLetter = _schoolsByLetter;
 
-  $scope.selectedDatastreamsBySchool={};
+  // $scope.selectedDatastreamsBySchool={};
 
-  $scope.dataStreamsSelected = {};
+  // $scope.dataStreamsSelected = {};
 
   $scope.datastreamsBySchool = _datastreamsBySchool;
+
+  if (_isBack) {
+    _isBack = false;
+    $scope.dataStreamsSelected = _dataStreamsSelected;
+    $scope.selectedDatastreamsBySchool = _selectedDatastreamsBySchool;
+  } else {
+    $scope.dataStreamsSelected = {};
+    $scope.selectedDatastreamsBySchool = {};
+  }
 
   $scope.generateChart = function(){
     getDatapointHistory(
     $scope.selectedDatastreamsBySchool,
     function(){
-      console.log(_seriesByDataSource);
       $location.path('/charts');
       _backLocation = '/bySchool';
+      _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
+      _dataStreamsSelected = $scope.dataStreamsSelected;
       $scope.$apply();
     });
   };
