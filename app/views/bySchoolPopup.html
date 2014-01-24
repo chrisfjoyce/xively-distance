@@ -7,7 +7,7 @@
     &nbsp;&nbsp;&nbsp;
     {{active}} Active
     &nbsp;&nbsp;&nbsp;
-    <span class="red-inactive">·</span>
+    <span class="red-inactive">●</span>
     {{inactive}} Inactive
   </b>
   <div class="modal-body">
@@ -21,7 +21,7 @@
                 <label>
                   <span type="text" class="form-control" text-overflow>
                     <span ng-switch on="device.active">
-                      <span ng-switch-when="false" class="red-inactive">·</span>
+                      <span ng-switch-when="false" class="red-inactive">●</span>
                       <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
                     </span>
                     {{device.location.name}}
@@ -43,7 +43,7 @@
                 <label>
                   <span type="text" class="form-control" text-overflow>
                     <span ng-switch on="device.active">
-                      <span ng-switch-when="false" class="red-inactive">·</span>
+                      <span ng-switch-when="false" class="red-inactive">●</span>
                       <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
                     </span>
                     {{device.location.name}}

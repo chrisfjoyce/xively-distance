@@ -214,7 +214,7 @@ var processXivelyFeedData = function(data){
       }
 
       var diffMillis = nowMillis - Date.parse(datastream.at);
-      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':diffMillis <= INACTIVE_TIMEOUT_MILLIS,'elapsedTime':Math.floor(diffMillis/1000)+'s'};
+      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':diffMillis <= INACTIVE_TIMEOUT_MILLIS,'elapsedTime':Math.round(diffMillis/(1000 * 60))+' minutes'};
 
       if(isNaN(parseInt(datastreamId))){
         //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
