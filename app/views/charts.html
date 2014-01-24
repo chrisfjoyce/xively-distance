@@ -1,28 +1,41 @@
 <div class="container">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Charts</h3>
-    </div>
-    <div class="panel-body">
-      <div class="row">
-        <div ng-repeat="datastream in chartDatastreams">
-            <div class="col-md-12">{{datastream.label}}</div>
-            <br />
-            <div class="col-md-9">
-              <div id="graph-{{datastream.id}}"></div>
-              <div id="slider-{{datastream.id}}"></div>
-            </div>
-            <div class="col-md-3" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
-              <div style="color: {{serie.color}}">
-                <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
-                  <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
-                </label>
-              </div>
-            </div>
-            <br />
-            <br />
+  <div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="pull-left">
+          <button class="btn btn-warning" ng-click="back()">Edit</button>
         </div>
       </div>
+      <div class="col-md-6">
+        <div class="pull-right">
+          X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-success" ng-click="generateFinalChart()">Generate</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <h3>Kit preview</h3>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div ng-repeat="datastream in chartDatastreams">
+      <div class="col-md-12">{{datastream.label}}</div>
+      <br />
+      <div class="col-md-9">
+        <div id="graph-{{datastream.id}}"></div>
+        <div id="slider-{{datastream.id}}"></div>
+      </div>
+      <div class="col-md-3" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
+        <div style="color: {{serie.color}}">
+          <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
+            <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
+          </label>
+        </div>
+      </div>
+      <br />
+      <br />
     </div>
   </div>
 </div>
