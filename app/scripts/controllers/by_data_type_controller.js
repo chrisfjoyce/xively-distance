@@ -11,6 +11,9 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   // });
   $rootScope.route = $route;
   $scope.datastreams = _datastreams;
+
+  $scope.devicesSelected={};
+
   $scope.devicesByDatastream = _devicesByDatastream;
 
   $scope.selectedDatastream = {};
@@ -35,6 +38,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.ok = function() {
       console.log('ok');
       $scope.modal.dismiss('ok');
+      console.log($scope.devicesSelected);
     };
     $scope.cancel = function() {
       console.log('cancel');

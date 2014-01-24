@@ -1,13 +1,25 @@
-<div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
+<div style="background-color:#FFFFFF;overflow: hidden;">
+  <div class="container">
     <span class="pull-right">
-      X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {{devicesSelected.length}} elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button class="btn btn-default " ng-click="generateChart()">Generate</button>
     <span>
   </div>
+</div>
+<br/>
 <div class="container">
   <div class="row">
     <span ng-repeat='datastream in datastreams'>
-      <button type="button" ng-click="open(datastream)" class="btn btn-default datastream-box col-md-3 col-md-offset-1">{{datastream}}<br/><small>{{devicesByDatastream[datastream].length}} Schools</small></button>
+      <button type="button" ng-click="open(datastream)" class="btn btn-default datastream-box col-md-3 col-md-offset-1" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">
+        {{datastream}}
+        <br/>
+        <small style="color:#93C748" ng-if="devicesSelected[datastream]">
+          Selected({{devicesSelected[datastream]}}) 
+        </small>
+        <small style="color:#97989A">
+          {{devicesByDatastream[datastream].length}} Schools 
+        </small>
+      </button>
     </span>
   </div>
 </div>
