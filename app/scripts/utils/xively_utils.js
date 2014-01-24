@@ -9,6 +9,7 @@ var _seriesByDataSource = null;
 var _retrievedDevicesCount = null;
 var _schoolsBooleanMap = {};
 var _schools = [];
+var _schoolsMap = {};
 var _schoolsByLetter = {};
 var _datastreamsBySchool = {};
 var _deviceInformation = {};
@@ -174,6 +175,7 @@ var processXivelyFeedData = function(data){
       //List Of Schools
       _schoolsBooleanMap[schoolName] = true;
       _schools.push(schoolName);
+      _schoolsMap[schoolName]={'datastreams':{}};
 
       //Initial Letter
       if(_schoolsByLetter[initialLetter] == null){
@@ -208,6 +210,7 @@ var processXivelyFeedData = function(data){
         datastreamLabel = datastream.tags[index];
       }
 
+      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':Math.random() <= 0.5,'elapsedTime':'TBD'};
 
       if(isNaN(parseInt(datastreamId))){
         //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
