@@ -26,6 +26,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     function(){
       console.log(_seriesByDataSource);
       $location.path('/charts');
+      _backLocation = '/bySchool';
       $scope.$apply();
     });
   };

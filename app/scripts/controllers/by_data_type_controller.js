@@ -26,6 +26,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
       function(){
         //console.log(_seriesByDataSource);
         $location.path('/charts');
+        _backLocation = '/byDataType';
         $scope.$apply();
       });
   };

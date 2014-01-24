@@ -54,6 +54,14 @@ var ChartsCtrl = function ($scope,$location) {
     datastream.graph.update();
   };
 
+  $scope.back = function() {
+    if (_backLocation != null && _backLocation != '') {
+      console.log(_backLocation);
+      $location.path(_backLocation);
+      _backLocation = '';
+    }
+  }
+
 };
 
 ChartsCtrl.$inject = ['$scope','$location'];
