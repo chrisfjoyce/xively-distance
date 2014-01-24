@@ -12,13 +12,19 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   $rootScope.route = $route;
   $scope.datastreams = _datastreams;
 
-  $scope.devicesSelected={};
 
   $scope.devicesByDatastream = _devicesByDatastream;
 
   $scope.selectedDatastream = {};
 
-  $scope.selectedDevicesByDatasource={};
+  if (_isBack) {
+    _isBack = false;
+    $scope.devicesSelected = _devicesSelected;
+    $scope.selectedDevicesByDatasource = _selectedDevicesByDatasource;
+  } else {
+    $scope.devicesSelected = {};
+    $scope.selectedDevicesByDatasource = {};
+  }
 
   $scope.generateChart = function(){
     getDatapointHistory(
@@ -27,6 +33,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         //console.log(_seriesByDataSource);
         $location.path('/charts');
         _backLocation = '/byDataType';
+        _selectedDevicesByDatasource = $scope.selectedDevicesByDatasource;
         $scope.$apply();
       });
   };

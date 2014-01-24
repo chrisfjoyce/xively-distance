@@ -59,6 +59,7 @@ var ChartsCtrl = function ($scope,$location) {
       console.log(_backLocation);
       $location.path(_backLocation);
       _backLocation = '';
+      _isBack = true;
     }
   }
 
