@@ -21,14 +21,16 @@ var BySchoolPopupCtrl = function ($scope) {
     $scope.devicesSelected = [];
   }
   $scope.devicesSelected[$scope.selectedDS] = 0;
+
   for (var selectedDevice in $scope.selectedDevicesByDatasource[$scope.selectedDS]) {
     if ($scope.selectedDevicesByDatasource[$scope.selectedDS][selectedDevice] == true) {
       $scope.devicesSelected[$scope.selectedDS]++;
     }
   }
-  $scope.setSelected = function($event, deviceId) {
-    var checkbox = $event.target;
-    if (checkbox.checked) {
+
+  $scope.setSelected = function($event, deviceId,value) {
+    $scope.selectedDevicesByDatasource[$scope.selectedDS][deviceId] = !($scope.selectedDevicesByDatasource[$scope.selectedDS][deviceId] || false)
+    if (value) {
       $scope.devicesSelected[$scope.selectedDS]++;
     } else {
       $scope.devicesSelected[$scope.selectedDS]--;
