@@ -1,6 +1,6 @@
 <div>
   <div class="modal-header">
-      <h3>{{selectedDS}}</h3>
+      <h3 class="datastream_text">{{selectedDS}}</h3>
   </div>
   <b>
     Schools
@@ -12,7 +12,7 @@
   </b>
   <div class="modal-body">
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-4 datastream_background">
         <b>School(s) selected: {{devicesSelected[selectedDS]}} of {{devices.length}}</b>
         <div class="row">
           <div ng-repeat='device in devices'>
