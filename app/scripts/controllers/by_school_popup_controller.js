@@ -3,7 +3,6 @@
 
 var BySchoolPopupCtrl = function ($scope) {
   $scope.devices=_devicesByDatastream[$scope.selectedDS];
-  $scope.selectedDevices = [];
   $scope.active = 0;
   $scope.inactive = 0;
   //TODO garivera remove simulation of active/inactive
@@ -18,24 +17,16 @@ var BySchoolPopupCtrl = function ($scope) {
     }
   }
   //end simulate active/inactive
+  if ($scope.devicesSelected == null) {
+    $scope.devicesSelected = [];
+  }
+  $scope.devicesSelected[$scope.selectedDS] = 0;
   $scope.setSelected = function($event, deviceId) {
     var checkbox = $event.target;
     if (checkbox.checked) {
-      for (var i = 0; i < $scope.devices.length; i++) {
-        if ($scope.devices[i].id == deviceId) {
-          $scope.selectedDevices.push($scope.devices[i]);
-          $scope.devices.splice(i, 1);
-        }
-      }
-      // $scope.dataStreamsSelected++;
+      $scope.devicesSelected[$scope.selectedDS]++;
     } else {
-      for (var i = 0; i < $scope.selectedDevices.length; i++) {
-        if ($scope.selectedDevices[i].id == deviceId) {
-          $scope.devices.push($scope.selectedDevices[i]);
-          $scope.selectedDevices.splice(i, 1);
-        }
-      }
-      // $scope.dataStreamsSelected--;
+      $scope.devicesSelected[$scope.selectedDS]--;
     }
   };
 };
