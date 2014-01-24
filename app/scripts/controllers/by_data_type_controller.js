@@ -34,6 +34,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         $location.path('/charts');
         _backLocation = '/byDataType';
         _selectedDevicesByDatasource = $scope.selectedDevicesByDatasource;
+        _devicesSelected = $scope.devicesSelected;
         $scope.$apply();
       });
   };
