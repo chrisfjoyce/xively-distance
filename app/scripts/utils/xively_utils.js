@@ -17,6 +17,8 @@ var _xivelyDataInit = false;
 var _startDevicesTimestamp=null;
 var _datastreamByDeviceIdDatastreamLabel={};
 
+var INACTIVE_TIMEOUT_MILLIS = 1000 * 60 * 90;
+
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
     fn();
@@ -187,6 +189,7 @@ var processXivelyFeedData = function(data){
       _datastreamsBySchool[schoolName] = [];
     }
 
+    var nowMillis = Date.now();
     for(var j=device.datastreams.length - 1;j>=0;j--){
       var datastream = device.datastreams[j];
       var datastreamId = datastream.id;
@@ -210,7 +213,8 @@ var processXivelyFeedData = function(data){
         datastreamLabel = datastream.tags[index];
       }
 
-      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':Math.random() <= 0.5,'elapsedTime':'TBD'};
+      var diffMillis = nowMillis - Date.parse(datastream.at);
+      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':diffMillis <= INACTIVE_TIMEOUT_MILLIS,'elapsedTime':Math.floor(diffMillis/1000)+'s'};
 
       if(isNaN(parseInt(datastreamId))){
         //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
