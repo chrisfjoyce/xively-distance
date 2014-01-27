@@ -5,7 +5,6 @@ xively.setKey('LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs');
 var _devicesByDatastream = null;
 var _datastreams = null;
 var _callbacks = [];
-var _seriesByDataSource = null;
 var _retrievedDevicesCount = null;
 var _schoolsBooleanMap = {};
 var _schools = [];
@@ -16,6 +15,7 @@ var _deviceInformation = {};
 var _xivelyDataInit = false;
 var _startDevicesTimestamp=null;
 var _datastreamByDeviceIdDatastreamLabel={};
+var _seriesByDataSource = null;
 
 var INACTIVE_TIMEOUT_MILLIS = 1000 * 60 * 90;
 
@@ -26,7 +26,7 @@ var registerXivelyGetData = function(fn){
   _callbacks.push(fn);
 };
 
-var getDatapointHistory = function(selectedDevicesByDatastream,callback){
+var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDateISO,endDateISO){
   var formResponse = [];
   var selectedDevicesCount = 0;
   _retrievedDevicesCount = 0;
@@ -47,9 +47,9 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
     }
   }
 
-  var startDateISO = '2014-01-01T13:35:07.437Z';
-  var endDateISO   = '2014-01-14T13:35:07.437Z';
-  _seriesByDataSource = {};
+  var startDateISO = startDateISO;
+  var endDateISO   = endDateISO;
+  var seriesByDataSource = {};
 
   for(var i = 0; i<formResponse.length;i++){
     var dataStreamGroup = formResponse[i];
@@ -58,7 +58,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
     for(var j=0;j<dataStreamGroup.devices.length;j++){
       var device = dataStreamGroup.devices[j];
 
-      var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,_seriesByDataSource,callback);
+      var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback);
 
       xively.datapoint.history(
         device.id,
@@ -115,7 +115,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
 
     _retrievedDevicesCount++;
     if(selectedDevicesCount == _retrievedDevicesCount){
-      callback();
+      callback(seriesByDataSource);
     }
     //console.log(device.id + ' : ' + datastreamId);
     //console.log(points);

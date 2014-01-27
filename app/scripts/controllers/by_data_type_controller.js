@@ -29,14 +29,17 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   $scope.generateChart = function(){
     getDatapointHistory(
       $scope.selectedDevicesByDatasource,
-      function(){
-        //console.log(_seriesByDataSource);
+      function(seriesByDatasource){
         $location.path('/charts');
         _backLocation = '/byDataType';
+        _seriesByDataSource = seriesByDatasource;
         _selectedDevicesByDatasource = $scope.selectedDevicesByDatasource;
         _devicesSelected = $scope.devicesSelected;
         $scope.$apply();
-      });
+      },
+      '2014-01-01T13:35:07.437Z',
+      '2014-01-14T13:35:07.437Z'
+    );
   };
 
   $scope.open = function (datastream) {

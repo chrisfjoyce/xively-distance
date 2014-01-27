@@ -32,13 +32,18 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   $scope.generateChart = function(){
     getDatapointHistory(
     $scope.selectedDatastreamsBySchool,
-    function(){
+    function(seriesByDatasource){
       $location.path('/charts');
       _backLocation = '/bySchool';
+
+      _seriesByDataSource = seriesByDatasource;
       _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
       _dataStreamsSelected = $scope.dataStreamsSelected;
       $scope.$apply();
-    });
+    },
+    '2014-01-01T13:35:07.437Z',
+    '2014-01-14T13:35:07.437Z'
+    );
   };
 
   $scope.open = function (school) {
