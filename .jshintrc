@@ -25,6 +25,7 @@
     "xively" : false,
     "Rickshaw": false,
     "d3": false,
+    "$": false,
     "buildChart": true,
     "initXivelyData": true,
     "registerXivelyGetData": true,
@@ -34,6 +35,14 @@
     "_seriesByDataSource": true,
     "_datastreamsBySchool": true,
     "_schools": true,
-    "_schoolsByLetter" : true
+    "_schoolsByLetter" : true,
+    "_backLocation": true,
+    "_isBack": true,
+    "_dataStreamsSelected": true,
+    "_selectedDatastreamsBySchool": true,
+    "_devicesSelected": true,
+    "_selectedDevicesByDatasource": true,
+    "getDefaultDates": true,
+    "updateChart": true
   }
 }

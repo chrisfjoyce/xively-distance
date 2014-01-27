@@ -47,8 +47,6 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
     }
   }
 
-  var startDateISO = startDateISO;
-  var endDateISO   = endDateISO;
   var seriesByDataSource = {};
 
   for(var i = 0; i<formResponse.length;i++){
@@ -58,7 +56,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
     for(var j=0;j<dataStreamGroup.devices.length;j++){
       var device = dataStreamGroup.devices[j];
 
-      var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback);
+      var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback,startDateISO,endDateISO);
 
       /*
       xively.datapoint.history(
@@ -67,8 +65,8 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
         {
           //'duration' : '180days',
           'interval' : 21600,
-          'start'    : '2014-01-01T13:35:07.437Z',
-          'end'      : '2014-01-14T13:35:07.437Z',
+          'start'    : startDateISO,
+          'end'      : endDateISO,
           'interval_type':'discrete'
         },
         historyCallback
@@ -84,7 +82,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
   }
 };
 
-var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback){
+var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback,startDateISO,endDateISO){
   var filteredDatastreamLabel = datastreamLabel.replace(/ /g,'_');
   return function(resp){
     var data = resp.datapoints;
@@ -109,7 +107,9 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
           'series' : [],
           'min_value' : datastream_min_value,
           'max_value' : datastream_max_value,
-          'label' : datastreamLabel
+          'label' : datastreamLabel,
+          'startDate' : startDateISO,
+          'endDate' : endDateISO
         };//new serie
       }
       seriesByDataSource[filteredDatastreamLabel].min_value = Math.min(seriesByDataSource[filteredDatastreamLabel].min_value,datastream_min_value);
@@ -295,4 +295,12 @@ var initXivelyData = function(){
     {"x-apikey": XIVELY_API_KEY},
     processXivelyFeedData
   );
+};
+
+var getDefaultDates = function() {
+  var result = {};
+  var currentDate = new Date();
+  result.endDate = currentDate.toISOString();
+  result.startDate = new Date(new Date(currentDate).setMonth(currentDate.getMonth() - 1)).toISOString();
+  return result;
 };
