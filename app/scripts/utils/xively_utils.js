@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-xively.setKey('LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs');
+
 var _devicesByDatastream = null;
 var _datastreams = null;
 var _callbacks = [];
@@ -60,6 +60,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
 
       var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback);
 
+      /*
       xively.datapoint.history(
         device.id,
         device.datastreamId,
@@ -72,13 +73,21 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
         },
         historyCallback
       );
+      */
+      var url = 'http://api.xively.com/v2/feeds/'+device.id+'/datastreams/'+device.datastreamId+'?interval=21600&start=2014-01-01T13:35:07.437Z&end=2014-01-14T13:35:07.437Z&interval_type=discrete';
+      $.get(
+        url,
+        {"x-apikey": XIVELY_API_KEY},
+        historyCallback
+      );
     }
   }
 };
 
 var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback){
   var filteredDatastreamLabel = datastreamLabel.replace(/ /g,'_');
-  return function(data){
+  return function(resp){
+    var data = resp.datapoints;
     var points = [];
     var datastream_min_value=0,datastream_max_value=0;
     if(data != null){
@@ -265,6 +274,7 @@ var processXivelyFeedData = function(data){
 
 
 //https://api.xively.com/v2/feeds?user=iostp&tag=L1V3&status=live
+var XIVELY_API_KEY = "LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs";
 var initXivelyData = function(){
   if(_xivelyDataInit){
     return;
@@ -272,18 +282,17 @@ var initXivelyData = function(){
   _xivelyDataInit = true;
   _startDevicesTimestamp = Date.now();
 
-  if(document.URL.indexOf('fraserFix') != -1){
-    $.get('scripts/sample_feed.asd', function(data) {
-      var cachedData = $.parseJSON(data);
-      processXivelyFeedData(cachedData);
-    });
-  }else{
-    xively.feed.list(
-      {
-        'user':'iostp',
-        'tag' : 'L1V3'
-      },
-      processXivelyFeedData
-    );
-  }
+  // xively.feed.list(
+  //   {
+  //     'user':'iostp',
+  //     'tag' : 'L1V3'
+  //   },
+  //   processXivelyFeedData
+  // );
+
+  $.get(
+    "http://api.xively.com/v2/feeds?user=iostp&tag=L1V3",
+    {"x-apikey": XIVELY_API_KEY},
+    processXivelyFeedData
+  );
 };
