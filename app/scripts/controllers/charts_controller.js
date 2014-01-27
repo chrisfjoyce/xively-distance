@@ -12,6 +12,10 @@ var ChartsCtrl = function ($scope,$location) {
     'end' : []
   };
 
+  $scope.export = function(){
+    $('#fa').submit();
+  };
+
   $scope.chartDatastreams = _seriesByDataSource;
   for (var datastreamId in _seriesByDataSource){
     _seriesByDataSource[datastreamId].id = datastreamId;
