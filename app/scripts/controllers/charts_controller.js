@@ -7,6 +7,11 @@ var ChartsCtrl = function ($scope,$location) {
     $location.path('/');
   }
 
+  $scope.isOpened = {
+    'start' : [],
+    'end' : []
+  };
+
   $scope.chartDatastreams = _seriesByDataSource;
   for (var datastreamId in _seriesByDataSource){
     _seriesByDataSource[datastreamId].id = datastreamId;
@@ -21,6 +26,11 @@ var ChartsCtrl = function ($scope,$location) {
   );
 
   $scope.enableDisable = function(datastream, serie) {
+    if(serie.disabled != null) {
+      serie.disabled = !serie.disabled;
+    } else {
+      serie.disabled = false;
+    }
     var countEnabled = 0;
     for (var i = 0; i < datastream.series.length; i++) {
       if (!datastream.series[i].disabled) {
@@ -40,18 +50,22 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.over = function(datastream, serie) {
-    for (var i = 0; i < datastream.series.length; i++) {
-      datastream.series[i].color = datastream.series[i].disabledColor;
+    if (datastream.graph != null) {
+      for (var i = 0; i < datastream.series.length; i++) {
+        datastream.series[i].color = datastream.series[i].disabledColor;
+      }
+      serie.color = serie.enabledColor;
+      datastream.graph.update();
     }
-    serie.color = serie.enabledColor;
-    datastream.graph.update();
   };
 
   $scope.leave = function(datastream, serie) {
-    for (var i = 0; i < datastream.series.length; i++) {
-      datastream.series[i].color = datastream.series[i].enabledColor;
+    if (datastream.graph != null) {
+      for (var i = 0; i < datastream.series.length; i++) {
+        datastream.series[i].color = datastream.series[i].enabledColor;
+      }
+      datastream.graph.update();
     }
-    datastream.graph.update();
   };
 
   $scope.back = function() {
@@ -61,7 +75,58 @@ var ChartsCtrl = function ($scope,$location) {
       _backLocation = '';
       _isBack = true;
     }
-  }
+  };
+
+  $scope.refresh = function(datastream) {
+    var selectedDevicesByDatasourceAndDatastream = {};
+    selectedDevicesByDatasourceAndDatastream[datastream.label] = _selectedDevicesByDatasource[datastream.label];
+    var startDate = datastream.startDate;
+    var endDate = datastream.endDate;
+    getDatapointHistory(
+    selectedDevicesByDatasourceAndDatastream,
+    function(seriesByDatasource){
+      $location.path('/charts');
+      _backLocation = '/bySchool';
+
+      for (var datastreamId in _seriesByDataSource) {
+        if (seriesByDatasource[datastreamId] != null) {
+          seriesByDatasource[datastreamId].graph = _seriesByDataSource[datastreamId].graph;
+        }
+      }
+      updateChart(seriesByDatasource);
+      _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
+      $scope.chartDatastreams = _seriesByDataSource;
+      _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
+      _dataStreamsSelected = $scope.dataStreamsSelected;
+      $scope.$apply();
+    },
+    startDate,
+    endDate
+    );
+  };
+
+  $scope.generateChart = function(){
+    getDatapointHistory(
+    $scope.selectedDatastreamsBySchool,
+    function(seriesByDatasource){
+      $location.path('/charts');
+      _backLocation = '/bySchool';
+
+      _seriesByDataSource = seriesByDatasource;
+      _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
+      _dataStreamsSelected = $scope.dataStreamsSelected;
+      $scope.$apply();
+    },
+    '2014-01-01T13:35:07.437Z',
+    '2014-01-14T13:35:07.437Z'
+    );
+  };
+
+  $scope.open = function($event, datastreamId, type) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    $scope.isOpened[type][datastreamId] = true;
+  };
 
 };
 

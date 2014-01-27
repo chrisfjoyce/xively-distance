@@ -27,6 +27,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   }
 
   $scope.generateChart = function(){
+    var defaultDates = getDefaultDates();
     getDatapointHistory(
       $scope.selectedDevicesByDatasource,
       function(seriesByDatasource){
@@ -37,8 +38,8 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         _devicesSelected = $scope.devicesSelected;
         $scope.$apply();
       },
-      '2014-01-01T13:35:07.437Z',
-      '2014-01-14T13:35:07.437Z'
+      defaultDates.startDate,
+      defaultDates.endDate
     );
   };
 

@@ -21,17 +21,52 @@
   </div>
   <div class="row">
     <div ng-repeat="datastream in chartDatastreams">
-      <div class="col-md-12">{{datastream.label}}</div>
+      <div class="col-md-12">
+        <h4>
+          {{datastream.label}}
+          <i class="glyphicon glyphicon-edit pull-right"></i>
+        </h4>
+      </div>
       <br />
       <div class="col-md-9">
+        <span class="input-group">
+          <input type="text" class="form-control" ng-model="datastream.startDate" datepicker-popup="fullDate" is-open="isOpened['start'][datastream.id]" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+          <input type="text" class="form-control" ng-model="datastream.endDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
+          <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="open($event, datastream.id, 'end')"><i class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+          <span class="input-group-btn">
+            <button class="btn btn-success" ng-click="refresh(datastream)">Refresh</button>
+          </span>
+        </span>
         <div id="graph-{{datastream.id}}"></div>
         <div id="slider-{{datastream.id}}"></div>
       </div>
-      <div class="col-md-3" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
-        <div style="color: {{serie.color}}">
-          <label ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)">
-            <input type="checkbox" ng-checked="!serie.disabled" ng-click="enableDisable(datastream, serie)" />{{serie.name}}
-          </label>
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-12" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
+            <div class="row" ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)" ng-click="enableDisable(datastream, serie)">
+              <i class="glyphicon glyphicon-stop col-md-2" style="color: {{serie.color}}"></i>
+              <span class="col-md-6">{{serie.name}}</span>
+              <span ng-switch on="serie.disabled" class="col-md-2">
+                <i ng-switch-when="true" class="glyphicon glyphicon-eye-close" style="color: #777777"></i>
+                <i ng-switch-default class="glyphicon glyphicon-eye-open" style="color: #ed9c28"></i>
+              </span>
+              <span class="dropdown col-md-2">
+                <a class="dropdown-toggle">
+                  <i class="glyphicon glyphicon-chevron-down"></i>
+                </a>
+                <span class="dropdown-menu">
+                  <div>
+                    Status:
+                  </div>
+                </span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
       <br />

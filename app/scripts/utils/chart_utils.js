@@ -121,5 +121,24 @@ var buildChart = function(seriesByDataSource) {
       element: document.querySelector('#slider-' + datastreamId)
     });
   }
+};
 
+var updateChart = function(seriesByDataSource) {
+  for (var datastreamId in seriesByDataSource) {
+    var data = seriesByDataSource[datastreamId];
+    var series = data.series;
+    for (var i = 0; i < series.length; i++) {
+      series[i].color = colorList[i % colorList.length];
+      series[i].enabledColor = series[i].color;
+      series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
+    }
+    var graph = _seriesByDataSource[datastreamId].graph;
+    graph.min_value = parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));
+    graph.max_value = parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));
+    for (i = 0; i < seriesByDataSource[datastreamId].series.length; i++) {
+      graph.series[i] = seriesByDataSource[datastreamId].series[i];
+    }
+    seriesByDataSource[datastreamId].graph = graph;
+    graph.update();
+  }
 };
