@@ -17,12 +17,19 @@ var ByDataStreamPopUpCtrl = function ($scope) {
     }
   }
   //end simulate active/inactive
-
+  if ($scope.dataStreamsSelected == null) {
+    $scope.dataStreamsSelected = [];
+  }
   $scope.dataStreamsSelected[$scope.selectedSchool] = 0;
-  for (var selectedDataStream in $scope.selectedDatastreamsBySchool) {
-    for (i = 0; i < $scope.dataStreams.length; i++) {
-      if (selectedDataStream == $scope.dataStreams[i].id && $scope.selectedDatastreamsBySchool[selectedDataStream][$scope.dataStreams[i].deviceId]) {
-        $scope.dataStreamsSelected[$scope.selectedSchool]++;
+
+  console.log($scope.selectedDatastreamsBySchool);
+  for (var dataStreamLabel in $scope.selectedDatastreamsBySchool) {
+    for (var deviceId in $scope.selectedDatastreamsBySchool[dataStreamLabel]) {
+      if($scope.selectedDatastreamsBySchool[dataStreamLabel][deviceId]==true){
+        var schoolName = _deviceInformation[deviceId].schoolName;
+        if(schoolName == $scope.selectedSchool){
+          $scope.dataStreamsSelected[$scope.selectedSchool]++;
+        }
       }
     }
   }
