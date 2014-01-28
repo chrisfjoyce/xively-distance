@@ -119,8 +119,8 @@ var ChartsCtrl = function ($scope,$location) {
   $scope.refresh = function(datastream) {
     var selectedDevicesByDatasourceAndDatastream = {};
     selectedDevicesByDatasourceAndDatastream[datastream.label] = _selectedDevicesByDatasource[datastream.label];
-    var startDate = datastream.startDate;
-    var endDate = datastream.endDate;
+    var startDate = new Date(Date.parse(datastream.startDate)).toISOString();
+    var endDate = new Date(Date.parse(datastream.endDate)).toISOString();
     getDatapointHistory(
     selectedDevicesByDatasourceAndDatastream,
     function(seriesByDatasource){
@@ -145,6 +145,7 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.generateChart = function(){
+    var defaultDates = getDefaultDates();
     getDatapointHistory(
     $scope.selectedDatastreamsBySchool,
     function(seriesByDatasource){
@@ -156,8 +157,8 @@ var ChartsCtrl = function ($scope,$location) {
       _dataStreamsSelected = $scope.dataStreamsSelected;
       $scope.$apply();
     },
-    '2014-01-01T13:35:07.437Z',
-    '2014-01-14T13:35:07.437Z'
+    defaultDates.startDate.toISOString(),
+    defaultDates.endDate.toISOString()
     );
   };
 

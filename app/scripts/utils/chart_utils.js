@@ -125,6 +125,7 @@ var buildChart = function(seriesByDataSource) {
 
 var updateChart = function(seriesByDataSource) {
   for (var datastreamId in seriesByDataSource) {
+    seriesByDataSource[datastreamId].id = datastreamId;
     var data = seriesByDataSource[datastreamId];
     var series = data.series;
     for (var i = 0; i < series.length; i++) {

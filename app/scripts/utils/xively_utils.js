@@ -72,7 +72,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
         historyCallback
       );
       */
-      var url = 'http://api.xively.com/v2/feeds/'+device.id+'/datastreams/'+device.datastreamId+'?interval=21600&start=2014-01-01T13:35:07.437Z&end=2014-01-14T13:35:07.437Z&interval_type=discrete';
+      var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=21600&start=' + startDateISO + '&end=' + endDateISO + '&interval_type=discrete';
       $.get(
         url,
         {'x-apikey': XIVELY_API_KEY},
@@ -300,7 +300,7 @@ var initXivelyData = function(){
 var getDefaultDates = function() {
   var result = {};
   var currentDate = new Date();
-  result.endDate = currentDate.toISOString();
-  result.startDate = new Date(new Date(currentDate).setMonth(currentDate.getMonth() - 1)).toISOString();
+  result.endDate = currentDate;
+  result.startDate = new Date(new Date(currentDate).setMonth(currentDate.getMonth() - 1));
   return result;
 };

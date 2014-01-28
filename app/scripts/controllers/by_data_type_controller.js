@@ -38,8 +38,8 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         _devicesSelected = $scope.devicesSelected;
         $scope.$apply();
       },
-      defaultDates.startDate,
-      defaultDates.endDate
+      defaultDates.startDate.toISOString(),
+      defaultDates.endDate.toISOString()
     );
   };
 
