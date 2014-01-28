@@ -8,11 +8,9 @@ var ByDataStreamPopUpCtrl = function ($scope) {
   //TODO garivera remove simulation of active/inactive
   //simulate active/inactive
   for (var i = 0; i < $scope.dataStreams.length; i++) {
-    if (i % 3 == 0) {
-      $scope.dataStreams[i].active = true;
+    if ($scope.dataStreams[i].active) {
       $scope.active++;
     } else {
-      $scope.dataStreams[i].active = false;
       $scope.inactive++;
     }
   }
