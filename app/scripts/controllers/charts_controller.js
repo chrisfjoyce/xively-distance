@@ -65,9 +65,7 @@ var ChartsCtrl = function ($scope,$location) {
   );
 
   $scope.enableDisable = function(datastream, serie) {
-    if(serie.disabled != null) {
-      serie.disabled = !serie.disabled;
-    } else {
+    if(serie.disabled == null) {
       serie.disabled = false;
     }
     var countEnabled = 0;
