@@ -12,6 +12,45 @@ var ChartsCtrl = function ($scope,$location) {
     'end' : []
   };
 
+  $scope.export = function(){
+    var jsonData = JSON.stringify({
+    "Wind Direction": {
+        "start_date": "2014-01-01T13:35:07.437Z",
+        "end_date": "2014-01-21T13:35:07.437Z",
+        "devices": [
+            {
+                "id": 491325353,
+                "schoolName":"School1",
+                "datastreamId": "Wind_Direction"
+            },
+            {
+                "id": 491325353,
+                "schoolName":"School2",
+                "datastreamId": "Wind_Direction"
+            }
+        ]
+    },
+   "Wind Direction2": {
+        "start_date": "2014-01-01T13:35:07.437Z",
+        "end_date": "2014-01-21T13:35:07.437Z",
+        "devices": [
+            {
+                "id": 491325353,
+                "schoolName":"School1",
+                "datastreamId": "Wind_Direction"
+            },
+            {
+                "id": 491325353,
+                "schoolName":"School2",
+                "datastreamId": "Wind_Direction"
+            }
+        ]
+    }
+});
+    $('#ta').html(jsonData);
+    $('#fa').submit();
+  };
+
   $scope.chartDatastreams = _seriesByDataSource;
   for (var datastreamId in _seriesByDataSource){
     _seriesByDataSource[datastreamId].id = datastreamId;
