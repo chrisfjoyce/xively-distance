@@ -117,6 +117,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
 
       seriesByDataSource[filteredDatastreamLabel].series.push({
         name: _deviceInformation[device.id].schoolName,
+        deviceId: device.id,
         data: points,
         color: '#000000'
       });
