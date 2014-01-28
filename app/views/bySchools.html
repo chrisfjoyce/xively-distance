@@ -15,11 +15,11 @@
   <div class="row">
     <div class="col-md-12" ng-repeat='(letter,schools) in schoolsByLetter'>
         <div class="row">
-        <h4><span style="color:#ED992E">&nbsp;&nbsp;{{letter}}</span></h2>
+        <h4><span style="color:#ED992E">&nbsp;&nbsp;{{letter}}</span></h4>
 
         </div>
         <span ng-repeat='school in schools'>
-          <button type="button" ng-click="open(school.schoolName)" class="btn btn-default school-box col-md-3 col-md-offset-1" ng-class="{'school-box-selected':dataStreamsSelected[school.schoolName]}">{{school.schoolName }}
+          <button type="button" ng-click="open(school.schoolName)" class="btn school-box col-md-3 col-md-offset-1" ng-class="{'school-box-selected':dataStreamsSelected[school.schoolName]}">{{school.schoolName }}
             <br/>
             <small style="color:#93C748" ng-if="dataStreamsSelected[school.schoolName]">Selected({{dataStreamsSelected[school.schoolName]}}) </small>
             <small style="color:#97989A">{{datastreamsBySchool[school.schoolName].length}} Weather Types </small>
