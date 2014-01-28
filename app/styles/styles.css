@@ -76,6 +76,15 @@
   font-weight: bolder;
 }
 
+.green-active {
+  color: green;
+  font-weight: bolder;
+}
+
+.dropdown-menu {
+  z-index: 100;
+}
+
 .navbar-inverse {
   background-color: #414143;
   border-color: #090909;

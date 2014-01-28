@@ -1,5 +1,5 @@
-<div class="container">
-  <div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
+<div style="background-color:#FFFFFF;overflow: hidden; width: 100%;">
+  <div class="container">
     <div class="row" ng-show="isPreview">
       <div class="col-md-3">
         <h4>Kit preview</h4>
@@ -7,7 +7,7 @@
       <div class="col-md-3">
         <button class="btn btn-warning" ng-click="back()">
           Edit
-          <i class="glyphicon glyphicon-edit"></i>
+          <i class="glyphicon glyphicon-cog"></i>
         </button>
       </div>
       <div class="col-md-6">
@@ -29,57 +29,62 @@
       </div>
     </div>
   </div>
+</div>
+<br />
+<div class="container">
   <div class="row">
     <div ng-repeat="datastream in chartDatastreams">
-      <div class="col-md-12">
+      <div class="col-md-12" style="background-color: #414042; color: white;">
         <h4>
           {{datastream.label}}
         </h4>
       </div>
       <br />
-      <div class="col-md-9">
-        <span class="input-group" ng-show="isPreview">
-          <input type="text" class="form-control" ng-model="datastream.startDate" datepicker-popup="fullDate" is-open="isOpened['start'][datastream.id]" />
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
+      <div class="row" style="margin-bottom: 24px;">
+        <div class="col-md-9">
+          <span class="input-group" ng-show="isPreview">
+            <input type="text" class="form-control" ng-model="datastream.startDate" datepicker-popup="fullDate" is-open="isOpened['start'][datastream.id]" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <input type="text" class="form-control" ng-model="datastream.endDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
+            <span class="input-group-btn">
+              <button class="btn btn-default" ng-click="open($event, datastream.id, 'end')"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            <span class="input-group-btn">
+              <button class="btn btn-success" ng-click="refresh(datastream)">Refresh</button>
+            </span>
           </span>
-          <input type="text" class="form-control" ng-model="datastream.endDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
-          <span class="input-group-btn">
-            <button class="btn btn-default" ng-click="open($event, datastream.id, 'end')"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-          <span class="input-group-btn">
-            <button class="btn btn-success" ng-click="refresh(datastream)">Refresh</button>
-          </span>
-        </span>
-        <div id="graph-{{datastream.id}}"></div>
-        <div id="slider-{{datastream.id}}" ng-show="!isPreview"></div>
-      </div>
-      <div class="col-md-3">
-        <div class="row">
-          <div class="col-md-12" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series">
-            <div class="row" ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)" ng-click="enableDisable(datastream, serie)">
-              <i class="glyphicon glyphicon-stop col-md-2" style="color: {{serie.color}}"></i>
-              <span class="col-md-6">{{serie.name}}</span>
-              <span ng-switch on="serie.disabled" class="col-md-2">
-                <i ng-switch-when="true" class="glyphicon glyphicon-eye-close" style="color: #777777"></i>
-                <i ng-switch-default class="glyphicon glyphicon-eye-open" style="color: #ed9c28"></i>
-              </span>
-              <span class="dropdown col-md-2">
-                <a class="dropdown-toggle">
-                  <i class="glyphicon glyphicon-chevron-down"></i>
-                </a>
-                <span class="dropdown-menu">
-                  Status:
-                  <span ng-switch on="serie.active">
-                    <span ng-switch-when="true" class="green-active">
-                      Active
-                    </span>
-                    <span ng-switch-default class="red-inactive">
-                      Inactive
+          <div id="graph-{{datastream.id}}"></div>
+          <div id="slider-{{datastream.id}}" ng-show="!isPreview"></div>
+        </div>
+        <div class="col-md-3">
+          <div class="row" style="height: 234px; overflow: auto;">
+            <div class="col-md-12" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series" style="padding-top: 5px">
+              <div class="row" ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)" ng-click="enableDisable(datastream, serie)" style="border: solid; border-radius: 6px; border-width: {{serie.borderWidth}}; border-color: {{serie.borderColor}}; margin-bottom: 5px;">
+                <i class="glyphicon glyphicon-stop col-md-2" style="color: {{serie.color}}"></i>
+                <span class="col-md-6">{{serie.name}}</span>
+                <span ng-switch on="serie.disabled" class="col-md-2">
+                  <i ng-switch-when="true" class="glyphicon glyphicon-eye-close" style="color: #777777"></i>
+                  <i ng-switch-default class="glyphicon glyphicon-eye-open" style="color: #ed9c28"></i>
+                </span>
+                <span class="dropdown col-md-2">
+                  <a class="dropdown-toggle">
+                    <i class="glyphicon glyphicon-chevron-down"></i>
+                  </a>
+                  <span class="dropdown-menu pull-right">
+                    Status:
+                    <span ng-switch on="serie.active">
+                      <span ng-switch-when="true" class="green-active">
+                        Active
+                      </span>
+                      <span ng-switch-default class="red-inactive">
+                        Inactive
+                      </span>
                     </span>
                   </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
         </div>
