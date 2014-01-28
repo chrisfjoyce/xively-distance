@@ -26,6 +26,14 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.selectedDevicesByDatasource = {};
   }
 
+  $scope.totalSelected = function(){
+    var sum = 0;
+    for(var datastream in $scope.devicesSelected){
+      sum += $scope.devicesSelected[datastream];
+    }
+    return sum;
+  };
+
   $scope.generateChart = function(){
     var defaultDates = getDefaultDates();
     getDatapointHistory(

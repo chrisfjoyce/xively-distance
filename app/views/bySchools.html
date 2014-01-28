@@ -1,8 +1,11 @@
 <div style="background-color:#FFFFFF;overflow: hidden;">
   <div class="container">
     <span class="pull-right">
-      X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button class="btn btn-default " ng-click="generateChart()">Generate</button>
+      <span style="color:#93C748">{{totalSchoolsSelected()}}</span> school(s) selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span ng-switch="totalSchoolsSelected()">
+        <button ng-switch-when="0"class="btn btn-disabled">Preview</button>
+        <button ng-switch-default class="btn btn-warning" ng-click="generateChart()">Preview</button>
+      </span>
     <span>
   </div>
 </div>

@@ -29,6 +29,18 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.selectedDatastreamsBySchool = {};
   }
 
+  $scope.totalSchoolsSelected = function(){
+    var sum = 0;
+
+    for(var schoolName in $scope.dataStreamsSelected){
+      if($scope.dataStreamsSelected[schoolName] > 0){
+        sum ++;
+      }
+    }
+
+    return sum;
+  };
+
   $scope.generateChart = function(){
     var defaultDates = getDefaultDates();
     getDatapointHistory(
