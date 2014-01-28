@@ -2,16 +2,19 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]> <html class="no-js"> <![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
+
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
+    <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
+
     <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -19,90 +22,10 @@
     <link rel="stylesheet" href="bower_components/rickshaw/rickshaw.min.css" />
     <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css" />
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <!-- endbuild -->
     <style>
-      .nav, .pagination, .carousel a { cursor: pointer; }
-      .input-group { font-size: 14px !important; }
-
-      .datastream_text{
-        color: #F8B041;
-      }
-      .datastream_background{
-        background-color: #F1F1F1;
-      }
-
-      .school-box{
-        -webkit-box-shadow: 0 5px 3px 0px #8DCF91;
-        -moz-box-shadow:    0 5px 3px 0px #8DCF91;
-         box-shadow:        0 5px 3px 0px #8DCF91;
-         margin-bottom: 10px;
-         background-color:#E6E7E9;
-      }
-
-      .school-box-selected{
-        -webkit-box-shadow: 0 5px 3px 0px #8DCF91;
-        -moz-box-shadow:    0 5px 3px 0px #8DCF91;
-         box-shadow:        0 5px 3px 0px #8DCF91;
-         margin-bottom: 10px;
-         background-color:#FFFFFF;
-      }
-
-      .datastream-box{
-        -webkit-box-shadow: 0 5px 3px 0px #F8B041;
-        -moz-box-shadow:    0 5px 3px 0px #F8B041;
-         box-shadow:        0 5px 3px 0px #F8B041;
-         margin-bottom: 10px;
-         background-color:#E6E6E6;
-      }
-
-      .datastream-box-selected{
-        -webkit-box-shadow: 0 5px 3px 0px #F8B041;
-        -moz-box-shadow:    0 5px 3px 0px #F8B041;
-         box-shadow:        0 5px 3px 0px #F8B041;
-         margin-bottom: 10px;
-         background-color:#FFFFFF;
-      }
-
-      .datastream-box-migo{
-        -moz-box-shadow:inset 0px -6px 0px 0px #ffaa4f;
-        -webkit-box-shadow:inset 0px -6px 0px 0px #ffaa4f;
-        box-shadow:inset 0px -6px 0px 0px #ffaa4f;
-        background-color:#ededed;
-        -webkit-border-top-left-radius:6px;
-        -moz-border-radius-topleft:6px;
-        border-top-left-radius:6px;
-        -webkit-border-top-right-radius:6px;
-        -moz-border-radius-topright:6px;
-        border-top-right-radius:6px;
-        -webkit-border-bottom-right-radius:6px;
-        -moz-border-radius-bottomright:6px;
-        border-bottom-right-radius:6px;
-        -webkit-border-bottom-left-radius:6px;
-        -moz-border-radius-bottomleft:6px;
-        border-bottom-left-radius:6px;
-        text-indent:0px;
-        display:inline-block;
-        color:#777777;
-        height:62px;
-        line-height:62px;
-        width:154px;
-        text-decoration:none;
-        text-align:center;
-      }
-
-      .modal-dialog {
-        width: 800px;
-      }
-
-      .red-inactive {
-        color: red;
-        font-weight: bolder;
-      }
-
-      .navbar-inverse {
-        background-color: #414143;
-        border-color: #090909;
-      }
+      
     </style>
   </head>
   <body ng-app="xivelyIostpApp" id='ngApp'>
@@ -142,7 +65,7 @@
       </div>
     </header>
     <!-- Add your site or application content here -->
-    <br><br><br>
+    <br/><br/><br/>
     <div ng-view="">
     </div>
 
