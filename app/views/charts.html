@@ -1,26 +1,28 @@
 <div class="container">
   <div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="pull-left">
-          <button class="btn btn-warning" ng-click="back()">Edit</button>
-        </div>
+    <div class="row" ng-show="isPreview">
+      <div class="col-md-3">
+        <h4>Kit preview</h4>
+      </div>
+      <div class="col-md-3">
+        <button class="btn btn-warning" ng-click="back()">Edit</button>
       </div>
       <div class="col-md-6">
         <div class="pull-right">
-          X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span ng-click='export();'>TestExport</span><br>
-          
-          <form id='fa' method="POST" action="http://ec2-54-242-146-91.compute-1.amazonaws.com/services/merge_xively_csv.php">
-            <textarea id='ta' name='ta' style="display:none;"></textarea>
-          </form>
-
+          X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
           <button class="btn btn-success" ng-click="generateFinalChart()">Generate</button>
         </div>
       </div>
     </div>
-    <div>
-      <div>
-        <h3>Kit preview</h3>
+    <div class="row" ng-show="!isPreview">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <span ng-click='export();'>TestExport</span><br>
+        
+        <form id='fa' method="POST" action="http://ec2-54-242-146-91.compute-1.amazonaws.com/services/merge_xively_csv.php">
+          <textarea id='ta' name='ta' style="display:none;"></textarea>
+        </form>
       </div>
     </div>
   </div>
@@ -34,7 +36,7 @@
       </div>
       <br />
       <div class="col-md-9">
-        <span class="input-group">
+        <span class="input-group" ng-show="isPreview">
           <input type="text" class="form-control" ng-model="datastream.startDate" datepicker-popup="fullDate" is-open="isOpened['start'][datastream.id]" />
           <span class="input-group-btn">
             <button class="btn btn-default" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -48,7 +50,7 @@
           </span>
         </span>
         <div id="graph-{{datastream.id}}"></div>
-        <div id="slider-{{datastream.id}}"></div>
+        <div id="slider-{{datastream.id}}" ng-show="!isPreview"></div>
       </div>
       <div class="col-md-3">
         <div class="row">

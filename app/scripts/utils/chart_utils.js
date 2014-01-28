@@ -18,22 +18,41 @@ Date.prototype.parseISO = function(iso){
   return new Date(stamp);
 };
 
+// var colorList = [
+//   '#000000',
+//   '#FF0000',
+//   '#00FF00',
+//   '#0000FF',
+//   '#FFFF00',
+//   '#00FFFF',
+//   '#FF00FF',
+//   '#C0C0C0',
+//   '#808080',
+//   '#800000',
+//   '#808000',
+//   '#008000',
+//   '#800080',
+//   '#008080',
+//   '#000080'
+// ];
+
 var colorList = [
-  '#000000',
-  '#FF0000',
-  '#00FF00',
-  '#0000FF',
-  '#FFFF00',
-  '#00FFFF',
-  '#FF00FF',
-  '#C0C0C0',
-  '#808080',
-  '#800000',
-  '#808000',
-  '#008000',
-  '#800080',
-  '#008080',
-  '#000080'
+  '#27aae1',
+  '#f15a29',
+  '#8dc63f',
+  '#594a42',
+  '#00a14b',
+  '#7f3f98',
+  '#a97c50',
+  '#931f63',
+  '#da1c5c',
+  '#da1c5c',
+  '#be1e2d',
+  '#1c75bc',
+  '#262262',
+  '#fbb040',
+  '#00a79d',
+  '#754c29'
 ];
 
 var buildFormatter = function(series, x, y) {
@@ -125,6 +144,7 @@ var buildChart = function(seriesByDataSource) {
 
 var updateChart = function(seriesByDataSource) {
   for (var datastreamId in seriesByDataSource) {
+    seriesByDataSource[datastreamId].id = datastreamId;
     var data = seriesByDataSource[datastreamId];
     var series = data.series;
     for (var i = 0; i < series.length; i++) {

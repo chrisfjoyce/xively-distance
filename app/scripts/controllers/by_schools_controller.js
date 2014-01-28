@@ -42,8 +42,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         _dataStreamsSelected = $scope.dataStreamsSelected;
         $scope.$apply();
       },
-      defaultDates.startDate,
-      defaultDates.endDate
+      defaultDates.startDate.toISOString(),
+      defaultDates.endDate.toISOString()
     );
   };
 
