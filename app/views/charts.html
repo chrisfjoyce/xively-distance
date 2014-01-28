@@ -67,9 +67,15 @@
                   <i class="glyphicon glyphicon-chevron-down"></i>
                 </a>
                 <span class="dropdown-menu">
-                  <div>
-                    Status:
-                  </div>
+                  Status:
+                  <span ng-switch on="serie.active">
+                    <span ng-switch-when="true" class="green-active">
+                      Active
+                    </span>
+                    <span ng-switch-default class="red-inactive">
+                      Inactive
+                    </span>
+                  </span>
                 </span>
               </span>
             </div>
