@@ -12,6 +12,8 @@ var ChartsCtrl = function ($scope,$location) {
     'end' : []
   };
 
+  $scope.isPreview = true;
+
   $scope.export = function(){
     var jsonData = JSON.stringify({
       'Wind Direction': {
@@ -164,6 +166,10 @@ var ChartsCtrl = function ($scope,$location) {
     $event.preventDefault();
     $event.stopPropagation();
     $scope.isOpened[type][datastreamId] = true;
+  };
+
+  $scope.generateFinalChart = function() {
+    $scope.isPreview = false;
   };
 
 };
