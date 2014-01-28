@@ -12,7 +12,7 @@
       </div>
       <div class="col-md-6">
         <div class="pull-right">
-          X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          X elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <button class="btn btn-success" ng-click="generateFinalChart()">Generate</button>
         </div>
       </div>
@@ -37,7 +37,6 @@
           <i class="glyphicon glyphicon-download-alt"></i>
         </button>
         <br />
-        
         <form id='fa' method="POST" action="http://ec2-54-242-146-91.compute-1.amazonaws.com/services/merge_xively_csv.php">
           <textarea id='ta' name='ta' style="display:none;"></textarea>
         </form>
@@ -87,17 +86,17 @@
                   <a class="dropdown-toggle">
                     <i class="glyphicon glyphicon-chevron-down"></i>
                   </a>
-                  <span class="dropdown-menu pull-right">
+                  <small class="dropdown-menu pull-right">
                     Status:
                     <span ng-switch on="serie.active">
-                      <span ng-switch-when="true" class="green-active">
-                        Active
+                      <span ng-switch-when="true" >
+                        <span class="green-active">Active</span><br>{{serie.at}}
                       </span>
-                      <span ng-switch-default class="red-inactive">
-                        Inactive
+                      <span ng-switch-default>
+                        <span class="red-inactive">Inactive</span><br>{{serie.at}}
                       </span>
                     </span>
-                  </span>
+                  </small>
                 </span>
               </div>
             </div>
