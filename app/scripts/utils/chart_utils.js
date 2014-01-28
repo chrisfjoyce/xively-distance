@@ -71,6 +71,8 @@ var buildChart = function(seriesByDataSource) {
       series[i].color = colorList[i % colorList.length];
       series[i].enabledColor = series[i].color;
       series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
+      series[i].borderColor = '#9b9b9b';
+      series[i].borderWidth = '1px';
       //TODO garivera remove simulation of active/inactive
       //simulate active/inactive
       if (i % 3 == 0) {

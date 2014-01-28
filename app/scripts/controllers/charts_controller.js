@@ -94,6 +94,9 @@ var ChartsCtrl = function ($scope,$location) {
         datastream.series[i].color = datastream.series[i].disabledColor;
       }
       serie.color = serie.enabledColor;
+      serie.borderColor = '#ed9c28';
+      // serie.borderWidth = '2px';
+      serie.borderWidth = '1px';
       datastream.graph.update();
     }
   };
@@ -103,6 +106,8 @@ var ChartsCtrl = function ($scope,$location) {
       for (var i = 0; i < datastream.series.length; i++) {
         datastream.series[i].color = datastream.series[i].enabledColor;
       }
+      serie.borderColor = '#9b9b9b';
+      serie.borderWidth = '1px';
       datastream.graph.update();
     }
   };
