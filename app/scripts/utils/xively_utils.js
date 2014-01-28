@@ -51,7 +51,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
 
   for(var i = 0; i<formResponse.length;i++){
     var dataStreamGroup = formResponse[i];
-    var datastreamLabel = dataStreamGroup.datastream_name;
+    datastreamLabel = dataStreamGroup.datastream_name;
 
     for(var j=0;j<dataStreamGroup.devices.length;j++){
       var device = dataStreamGroup.devices[j];
@@ -75,7 +75,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
       var url = 'http://api.xively.com/v2/feeds/'+device.id+'/datastreams/'+device.datastreamId+'?interval=21600&start=2014-01-01T13:35:07.437Z&end=2014-01-14T13:35:07.437Z&interval_type=discrete';
       $.get(
         url,
-        {"x-apikey": XIVELY_API_KEY},
+        {'x-apikey': XIVELY_API_KEY},
         historyCallback
       );
     }
@@ -274,7 +274,7 @@ var processXivelyFeedData = function(data){
 
 
 //https://api.xively.com/v2/feeds?user=iostp&tag=L1V3&status=live
-var XIVELY_API_KEY = "LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs";
+var XIVELY_API_KEY = 'LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs';
 var initXivelyData = function(){
   if(_xivelyDataInit){
     return;
@@ -291,8 +291,8 @@ var initXivelyData = function(){
   // );
 
   $.get(
-    "http://api.xively.com/v2/feeds?user=iostp&tag=L1V3",
-    {"x-apikey": XIVELY_API_KEY},
+    'http://api.xively.com/v2/feeds?user=iostp&tag=L1V3',
+    {'x-apikey': XIVELY_API_KEY},
     processXivelyFeedData
   );
 };

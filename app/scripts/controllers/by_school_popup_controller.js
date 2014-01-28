@@ -29,7 +29,7 @@ var BySchoolPopupCtrl = function ($scope) {
   }
 
   $scope.setSelected = function($event, deviceId,value) {
-    $scope.selectedDevicesByDatasource[$scope.selectedDS][deviceId] = !($scope.selectedDevicesByDatasource[$scope.selectedDS][deviceId] || false)
+    $scope.selectedDevicesByDatasource[$scope.selectedDS][deviceId] = !($scope.selectedDevicesByDatasource[$scope.selectedDS][deviceId] || false);
     if (value) {
       $scope.devicesSelected[$scope.selectedDS]++;
     } else {

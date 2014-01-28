@@ -43,6 +43,7 @@
     "_devicesSelected": true,
     "_selectedDevicesByDatasource": true,
     "getDefaultDates": true,
-    "updateChart": true
+    "updateChart": true,
+    "_deviceInformation": true
   }
 }
