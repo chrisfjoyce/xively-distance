@@ -8,11 +8,9 @@ var BySchoolPopupCtrl = function ($scope) {
   //TODO garivera remove simulation of active/inactive
   //simulate active/inactive
   for (var i = 0; i < $scope.devices.length; i++) {
-    if (i % 3 == 0) {
-      $scope.devices[i].active = true;
+    if ($scope.devices[i].active) {
       $scope.active++;
     } else {
-      $scope.devices[i].active = false;
       $scope.inactive++;
     }
   }

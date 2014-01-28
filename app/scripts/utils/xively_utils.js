@@ -234,7 +234,7 @@ var processXivelyFeedData = function(data){
         }
 
         _deviceInformation[device.id] = {'schoolName' : schoolName};
-        devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'location':{'name':device.location.name}});
+        devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
         _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
         _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
       }
