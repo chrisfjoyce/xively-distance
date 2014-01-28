@@ -34,13 +34,22 @@ var ByDataStreamPopUpCtrl = function ($scope) {
     }
   }
 
-  $scope.setSelected = function($event) {
-    var checkbox = $event.target;
-    if (checkbox.checked) {
+  $scope.checkSchool = function (label,deviceId){
+    if($scope.selectedDatastreamsBySchool[label]==null){
+      $scope.selectedDatastreamsBySchool[label]={};
+    }
+
+    var checked = $scope.selectedDatastreamsBySchool[label][deviceId];
+
+    checked = checked == null ? true : !$scope.selectedDatastreamsBySchool[label][deviceId];
+    console.log(checked);
+    $scope.selectedDatastreamsBySchool[label][deviceId]=checked;
+    if (checked) {
       $scope.dataStreamsSelected[$scope.selectedSchool]++;
     } else {
       $scope.dataStreamsSelected[$scope.selectedSchool]--;
     }
+
   };
 };
 

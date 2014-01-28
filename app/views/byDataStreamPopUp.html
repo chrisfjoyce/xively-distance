@@ -1,31 +1,35 @@
 <div>
   <div class="modal-header">
       <h3>{{selectedSchool}}</h3>
+      <b>
+        Weather Types
+        &nbsp;&nbsp;&nbsp;
+        {{active}} Active
+        &nbsp;&nbsp;&nbsp;
+        <span class="red-inactive">●</span>
+        {{inactive}} Inactive
+      </b>
   </div>
-  <b>
-    Weather Types
-    &nbsp;&nbsp;&nbsp;
-    {{active}} Active
-    &nbsp;&nbsp;&nbsp;
-    <span class="red-inactive">●</span>
-    {{inactive}} Inactive
-  </b>
-  <div class="modal-body">
+  <div class="modal-body" style="overflow:auto;overflow-x:hidden;height:300px">
     <div class="row">
       <div ng-repeat='dataStream in dataStreams'>
-        <div class="input-group col-md-6">
-          <label>
-            <span type="text" class="form-control" text-overflow>
-              <span ng-switch on="dataStream.active">
-                <span ng-switch-when="false">●</span>
-                <span ng-switch-when="true">&nbsp;&nbsp;&nbsp;</span>
+        <div class="input-group col-md-4">
+            <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
+              <span type="text" text-overflow class="col-md-9" style="display:inline-block">
+                <span ng-switch on="dataStream.active" style="width:7px;display:inline-block">
+                  <span class="red-inactive" ng-switch-when="false">●</span>
+                  <span ng-switch-when="true" style="width:7px;display:inline-block"/>
+                </span>
+                {{dataStream.label}}
               </span>
-              {{dataStream.label}}
-            </span>
-            <span class="input-group-addon">
-              <input type="checkbox" ng-model='selectedDatastreamsBySchool[dataStream.label][dataStream.deviceId]' ng-click="setSelected($event)">
-            </span>
-          </label>
+              <span class="col-md-3" style="display:inline-block">
+                <span ng-switch on="selectedDatastreamsBySchool[dataStream.label][dataStream.deviceId]">
+                  <span ng-switch-when="true"><span class='glyphicon glyphicon-check' style='color:#8dce91;font-size:17px'/></span>
+                  <span ng-switch-default><span class='glyphicon glyphicon-unchecked' style='color:#8dce91;font-size:17px'/></span>
+                  <!-- <img src='images/checked.png'  /> -->
+                </span> 
+              </span>
+            </div>
         </div>
       </div>
     </div>
