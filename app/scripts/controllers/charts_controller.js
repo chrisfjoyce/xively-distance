@@ -15,40 +15,58 @@ var ChartsCtrl = function ($scope,$location) {
   $scope.isPreview = true;
 
   $scope.export = function(){
-    var jsonData = JSON.stringify({
-      'Wind Direction': {
-        'start_date': '2014-01-01T13:35:07.437Z',
-        'end_date': '2014-01-21T13:35:07.437Z',
-        'devices': [
-          {
-            'id': 491325353,
-            'schoolName':'School1',
-            'datastreamId': 'Wind_Direction'
-          },
-          {
-            'id': 491325353,
-            'schoolName':'School2',
-            'datastreamId': 'Wind_Direction'
-          }
-        ]
-      },
-      'Wind Direction2': {
-        'start_date': '2014-01-01T13:35:07.437Z',
-        'end_date': '2014-01-21T13:35:07.437Z',
-        'devices': [
-          {
-            'id': 491325353,
-            'schoolName':'School1',
-            'datastreamId': 'Wind_Direction'
-          },
-          {
-            'id': 491325353,
-            'schoolName':'School2',
-            'datastreamId': 'Wind_Direction'
-          }
-        ]
+    // var jsonData = JSON.stringify({
+    //   'Wind Direction': {
+    //     'start_date': '2014-01-01T13:35:07.437Z',
+    //     'end_date': '2014-01-21T13:35:07.437Z',
+    //     'devices': [
+    //       {
+    //         'id': 491325353,
+    //         'schoolName':'School1',
+    //         'datastreamId': 'Wind_Direction'
+    //       },
+    //       {
+    //         'id': 491325353,
+    //         'schoolName':'School2',
+    //         'datastreamId': 'Wind_Direction'
+    //       }
+    //     ]
+    //   },
+    //   'Wind Direction2': {
+    //     'start_date': '2014-01-01T13:35:07.437Z',
+    //     'end_date': '2014-01-21T13:35:07.437Z',
+    //     'devices': [
+    //       {
+    //         'id': 491325353,
+    //         'schoolName':'School1',
+    //         'datastreamId': 'Wind_Direction'
+    //       },
+    //       {
+    //         'id': 491325353,
+    //         'schoolName':'School2',
+    //         'datastreamId': 'Wind_Direction'
+    //       }
+    //     ]
+    //   }
+    // });
+    var jsonObject = {};
+    for (var datastreamId in _seriesByDataSource) {
+      jsonObject[datastreamId] = {};
+      jsonObject[datastreamId]['start_date'] = _seriesByDataSource[datastreamId].startDate;
+      jsonObject[datastreamId]['end_date'] = _seriesByDataSource[datastreamId].endDate;
+      jsonObject[datastreamId]['devices'] = [];
+      for (var i = 0; i < _seriesByDataSource[datastreamId].series.length; i++) {
+        var serie = _seriesByDataSource[datastreamId].series[i];
+        jsonObject[datastreamId]['devices'][i] = {};
+        jsonObject[datastreamId]['devices'][i]['id'] = serie.deviceId;
+        jsonObject[datastreamId]['devices'][i]['schoolName'] = serie.name;
+        jsonObject[datastreamId]['devices'][i]['datastreamId'] = datastreamId;
       }
-    });
+    }
+    var jsonData = JSON.stringify(jsonObject);
+    console.log(_seriesByDataSource);
+    console.log(jsonObject);
+    console.log(jsonData);
     $('#ta').html(jsonData);
     $('#fa').submit();
   };

@@ -18,10 +18,25 @@
       </div>
     </div>
     <div class="row" ng-show="!isPreview">
-      <div class="col-md-6">
+      <div class="col-md-4">
+        Public link:
+        <input type="text" ng-disabled="true" />
+        <button>
+          <i class="glyphicon glyphicon-link"></i>
+        </button>
       </div>
-      <div class="col-md-6">
-        <span ng-click='export();'>TestExport</span><br>
+      <div class="col-md-4">
+        <button class="btn btn-warning pull-right">
+          Share via email
+          <i class="glyphicon glyphicon-envelope"></i>
+        </button>
+      </div>
+      <div class="col-md-4">
+        <button ng-click='export();' class="btn btn-success pull-right">
+          Export Data Charts
+          <i class="glyphicon glyphicon-download-alt"></i>
+        </button>
+        <br />
         
         <form id='fa' method="POST" action="http://ec2-54-242-146-91.compute-1.amazonaws.com/services/merge_xively_csv.php">
           <textarea id='ta' name='ta' style="display:none;"></textarea>
