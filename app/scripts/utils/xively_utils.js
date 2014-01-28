@@ -119,6 +119,8 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
         name: _deviceInformation[device.id].schoolName,
         deviceId: device.id,
         data: points,
+        active: _deviceInformation[device.id].active,
+        at: _deviceInformation[device.id].at,
         color: '#000000'
       });
     }
@@ -234,7 +236,7 @@ var processXivelyFeedData = function(data){
           datastreams.push(datastreamLabel);
         }
 
-        _deviceInformation[device.id] = {'schoolName' : schoolName};
+        _deviceInformation[device.id] = {'schoolName' : schoolName,'active':activeDevice,'at':datastream.at};
         devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
         _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
         _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
