@@ -66,11 +66,14 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
       $scope.modal.dismiss('cancel');
     };
 
-    var modalInstance = $modal.open({
-      templateUrl: 'views/bySchoolPopup.html',
-      scope: $scope,
-      controller: 'BySchoolPopupCtrl',
-    });
+    var modalInstance = $modal.open(
+      {
+        templateUrl: 'views/bySchoolPopup.html',
+        scope: $scope,
+        controller: 'BySchoolPopupCtrl',
+        backdrop: 'static'
+      }
+    );
     $scope.selectedDS = datastream;
     modalInstance.result.then(function (datastream) {
       $scope.selectedDatastream = datastream;
