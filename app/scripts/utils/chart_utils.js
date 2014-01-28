@@ -71,6 +71,13 @@ var buildChart = function(seriesByDataSource) {
       series[i].color = colorList[i % colorList.length];
       series[i].enabledColor = series[i].color;
       series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
+      //TODO garivera remove simulation of active/inactive
+      //simulate active/inactive
+      if (i % 3 == 0) {
+        series[i].active = true;
+      } else {
+        series[i].active = false;
+      }
     }
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
@@ -151,6 +158,13 @@ var updateChart = function(seriesByDataSource) {
       series[i].color = colorList[i % colorList.length];
       series[i].enabledColor = series[i].color;
       series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
+      //TODO garivera remove simulation of active/inactive
+      //simulate active/inactive
+      if (i % 3 == 0) {
+        series[i].active = true;
+      } else {
+        series[i].active = false;
+      }
     }
     var graph = _seriesByDataSource[datastreamId].graph;
     graph.min_value = parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));

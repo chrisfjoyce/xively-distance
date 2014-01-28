@@ -1,23 +1,27 @@
 <div style="background-color:#FFFFFF;overflow: hidden;">
   <div class="container">
     <span class="pull-right">
-      {{devicesSelected.length}} elements selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button class="btn btn-default " ng-click="generateChart()">Generate</button>
+      <span style="color:#93C748">Selected {{totalSelected()}}</span> of {{datastreams.length}} Weather Types &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span ng-switch="totalSelected()">
+        <button ng-switch-when="0"class="btn btn-disabled">Preview</button>
+        <button ng-switch-default class="btn btn-warning" ng-click="generateChart()">Preview</button>
+      </span>
     <span>
   </div>
 </div>
 <br/>
 <div class="container">
   <div class="row">
+    <h4>Please Select the Weather Types to create your observation kit</h4><br>
     <span ng-repeat='datastream in datastreams'>
       <button type="button" ng-click="open(datastream)" class="btn btn-default datastream-box col-md-3 col-md-offset-1" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">
         {{datastream}}
         <br/>
         <small style="color:#93C748" ng-if="devicesSelected[datastream]">
-          Selected({{devicesSelected[datastream]}}) 
+          Selected({{devicesSelected[datastream]}})
         </small>
         <small style="color:#97989A">
-          {{devicesByDatastream[datastream].length}} Schools 
+          {{devicesByDatastream[datastream].length}} Schools
         </small>
       </button>
     </span>
