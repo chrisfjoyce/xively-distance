@@ -82,11 +82,14 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
       $scope.modal.dismiss('cancel');
     };
 
-    var modalInstance = $modal.open({
-      templateUrl: 'views/byDataStreamPopUp.html',
-      scope: $scope,
-      controller: 'ByDataStreamPopUpCtrl',
-    });
+    var modalInstance = $modal.open(
+      {
+        templateUrl: 'views/byDataStreamPopUp.html',
+        scope: $scope,
+        controller: 'ByDataStreamPopUpCtrl',
+        backdrop: 'static'
+      }
+    );
     $scope.selectedSchool = school;
     modalInstance.result.then(function (school) {
       $scope.selectedSchool = school;

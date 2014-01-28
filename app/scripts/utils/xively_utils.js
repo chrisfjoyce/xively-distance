@@ -223,7 +223,8 @@ var processXivelyFeedData = function(data){
       }
 
       var diffMillis = nowMillis - Date.parse(datastream.at);
-      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':diffMillis <= INACTIVE_TIMEOUT_MILLIS,'elapsedTime':Math.round(diffMillis/(1000 * 60))+' minutes'};
+      var activeDevice = diffMillis <= INACTIVE_TIMEOUT_MILLIS;
+      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':activeDevice,'elapsedTime':Math.round(diffMillis/(1000 * 60))+' minutes'};
 
       if(isNaN(parseInt(datastreamId))){
         //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
@@ -234,7 +235,7 @@ var processXivelyFeedData = function(data){
 
         _deviceInformation[device.id] = {'schoolName' : schoolName};
         devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'location':{'name':device.location.name}});
-        _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'id':datastreamId});
+        _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
         _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
       }
     }
