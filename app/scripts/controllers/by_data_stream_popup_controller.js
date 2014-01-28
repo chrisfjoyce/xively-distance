@@ -22,7 +22,6 @@ var ByDataStreamPopUpCtrl = function ($scope) {
   }
   $scope.dataStreamsSelected[$scope.selectedSchool] = 0;
 
-  console.log($scope.selectedDatastreamsBySchool);
   for (var dataStreamLabel in $scope.selectedDatastreamsBySchool) {
     for (var deviceId in $scope.selectedDatastreamsBySchool[dataStreamLabel]) {
       if($scope.selectedDatastreamsBySchool[dataStreamLabel][deviceId]==true){
