@@ -1,6 +1,6 @@
 <div class="container">
   <div style="background-color:#F0F0F0;overflow: hidden;border: 10px solid white;">
-    <div class="row" ng-class="!isPreview && 'not-display-preview' || ''">
+    <div class="row" ng-show="isPreview">
       <div class="col-md-3">
         <h4>Kit preview</h4>
       </div>
@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div class="row" ng-class="isPreview && 'not-display-preview' || 'display-preview-inline'">
+    <div class="row" ng-show="!isPreview">
       <div class="col-md-6">
       </div>
       <div class="col-md-6">
@@ -36,7 +36,7 @@
       </div>
       <br />
       <div class="col-md-9">
-        <span class="input-group" ng-class="!isPreview && 'not-display-preview' || ''">
+        <span class="input-group" ng-show="isPreview">
           <input type="text" class="form-control" ng-model="datastream.startDate" datepicker-popup="fullDate" is-open="isOpened['start'][datastream.id]" />
           <span class="input-group-btn">
             <button class="btn btn-default" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -50,7 +50,7 @@
           </span>
         </span>
         <div id="graph-{{datastream.id}}"></div>
-        <div id="slider-{{datastream.id}}" ng-class="isPreview && 'not-display-preview' || 'display-preview-block'"></div>
+        <div id="slider-{{datastream.id}}" ng-show="!isPreview"></div>
       </div>
       <div class="col-md-3">
         <div class="row">
