@@ -17,7 +17,7 @@
           <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
             <span type="text" text-overflow class="col-md-9" style="display:inline-block">
               <span ng-switch on="dataStream.active" style="width:7px;display:inline-block">
-                <span class="red-inactive" ng-switch-when="false">●</span>
+                <span class="red-inactive" ng-switch-when="false" tooltip="{{dataStream.at}}">●</span>
                 <span ng-switch-when="true" style="width:7px;display:inline-block"/>
               </span>
               {{dataStream.label}}
@@ -26,7 +26,7 @@
               <span ng-switch on="selectedDatastreamsBySchool[dataStream.label][dataStream.deviceId]">
                 <span ng-switch-when="true"><span class='glyphicon glyphicon-check' style='color:#8dce91;font-size:17px'/></span>
                 <span ng-switch-default><span class='glyphicon glyphicon-unchecked' style='color:#8dce91;font-size:17px'/></span>
-              </span> 
+              </span>
             </span>
           </div>
         </div>
