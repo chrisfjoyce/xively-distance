@@ -7,6 +7,9 @@ var ChartsCtrl = function ($scope,$location) {
     $location.path('/');
   }
 
+  var absUrl = $location.absUrl();
+  $scope.baseUrl = absUrl.substring(0, absUrl.indexOf('#'));
+
   $scope.isOpened = {
     'start' : [],
     'end' : []
@@ -202,7 +205,31 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.generateFinalChart = function() {
-    $scope.isPreview = false;
+    console.log(_seriesByDataSource);
+    var jsonObject = {};
+    for (var datastreamId in _seriesByDataSource) {
+      var datastreamLabel = _seriesByDataSource[datastreamId].label;
+      jsonObject[datastreamLabel] = {};
+      jsonObject[datastreamLabel]['start_date'] = _seriesByDataSource[datastreamId].startDate;
+      jsonObject[datastreamLabel]['end_date'] = _seriesByDataSource[datastreamId].endDate;
+      for (var i = 0; i < _seriesByDataSource[datastreamId].series.length; i++) {
+        var serie = _seriesByDataSource[datastreamId].series[i];
+        jsonObject[datastreamLabel][serie.deviceId] = true;
+      }
+    }
+    var jsonData = JSON.stringify(jsonObject);
+    $.post(
+      'http://xively-iostp-test.tierconnect.com/services/create_permalink.php',
+      {
+        'json_obskit': jsonData
+      },
+      function(data) {
+        console.log(data);
+        $scope.permalink = data.code;
+        $scope.isPreview = false;
+        $scope.$apply();
+      }
+    );
   };
 
 };

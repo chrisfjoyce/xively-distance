@@ -25,6 +25,10 @@ angular.module('xivelyIostpApp', [
         templateUrl: 'views/charts.html',
         controller: 'ChartsCtrl'
       })
+      .when('/permalink/:code/', {
+        templateUrl: 'views/charts.html',
+        controller: 'PermalinkCtrl'
+      })
       .otherwise({
         redirectTo: '/byDataType'
       });
