@@ -1,0 +1,32 @@
+<script src='http://code.jquery.com/jquery-1.11.0.js'></script>
+
+<script>
+  var data = {"asd":Date.now()};
+  var jsonData = JSON.stringify(data);
+  console.log(data);
+  console.log(jsonData);
+
+  function get_permalink_data(code){
+    $.get(
+      'http://xively-iostp-test.tierconnect.com/services/get_permalink.php?code=' + code,
+      function(data){
+        console.log('Data Received:');
+        console.log(data);
+      }
+    );
+  }
+
+  $.post(
+    'http://xively-iostp-test.tierconnect.com/services/create_permalink.php',
+    {
+      'json_obskit': jsonData
+    }
+    ,function(data){
+      console.log(data);
+      get_permalink_data(data.code);
+    }
+  );
+
+
+
+</script>

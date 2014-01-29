@@ -11,6 +11,8 @@
    $line = mysql_fetch_array($ans);
 
    header('Content-type: application/json');
+   header('Access-Control-Allow-Origin: *');
+
    if($line == null){
       echo '{"error":"not_found"}';
    }else{

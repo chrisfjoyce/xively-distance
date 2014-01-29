@@ -26,5 +26,6 @@
    mysql_query($sql) or die(mysql_error());
 
    header('Content-type: application/json');
-   echo "{\"code\":\"$unique_code\"}";
+   header('Access-Control-Allow-Origin: *');
+   echo "{\"code\":\"$unique_code\",\"sql\":\"$sql\"}";
 ?>
