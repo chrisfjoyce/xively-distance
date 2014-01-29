@@ -140,7 +140,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
     }
 
     if(points.length == 0){
-      _datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not contain data for the given dates.');
+      //_datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not contain data for the given dates.');
     }else{
       if(seriesByDataSource[filteredDatastreamLabel] == null){
         seriesByDataSource[filteredDatastreamLabel] = {

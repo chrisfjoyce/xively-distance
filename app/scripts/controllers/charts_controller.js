@@ -28,7 +28,6 @@ var ChartsCtrl = function ($scope,$location) {
     $scope.alerts.splice(index, 1);
   };
 
-  var _datapointErrors = [1,2];
   if (_datapointErrors != null) {
     if (_datapointErrors.length > 0) {
       $scope.xivelyDataInitComplete = false;
