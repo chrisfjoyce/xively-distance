@@ -152,6 +152,8 @@ var ChartsCtrl = function ($scope,$location) {
     selectedDevicesByDatasourceAndDatastream[datastream.label] = _selectedDevicesByDatasource[datastream.label];
     var startDate = new Date(Date.parse(datastream.startDate)).toISOString();
     var endDate = new Date(Date.parse(datastream.endDate)).toISOString();
+    selectedDevicesByDatasourceAndDatastream[datastream.label].start_date = startDate;
+    selectedDevicesByDatasourceAndDatastream[datastream.label].end_date = endDate;
     getDatapointHistory(
     selectedDevicesByDatasourceAndDatastream,
     function(seriesByDatasource){
@@ -164,14 +166,14 @@ var ChartsCtrl = function ($scope,$location) {
         }
       }
       updateChart(seriesByDatasource);
+      console.log(seriesByDatasource[datastream.id]);
       _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
       $scope.chartDatastreams = _seriesByDataSource;
       _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
       _dataStreamsSelected = $scope.dataStreamsSelected;
+      console.log(datastream);
       $scope.$apply();
-    },
-    startDate,
-    endDate
+    }
     );
   };
 
