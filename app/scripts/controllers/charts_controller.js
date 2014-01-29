@@ -2,9 +2,36 @@
 'use strict';
 
 var ChartsCtrl = function ($scope,$location) {
+  $scope.alerts = [];
+
+  $scope.addAlert = function(message) {
+    $scope.alerts.push({type: 'danger', msg: message});
+  };
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
+  $scope.xivelyDataInitComplete = true;
+
   console.log(_seriesByDataSource);
   if(_seriesByDataSource == null){
     $location.path('/');
+  } else {
+    var seriesLength = 0;
+    for (var serie in _seriesByDataSource) {
+      seriesLength++;
+    }
+    if (seriesLength == 0) {
+      $scope.xivelyDataInitComplete = false;
+      $scope.addAlert("None of the Schools contains data to be displayed. You will be redirected to Edit the Observation Kit in 5 seconds.");
+      setTimeout(function() {
+        if ($scope.alerts.length > 0) {
+          $scope.back();
+          $scope.$apply();
+        }
+      }, 5000);
+    }
   }
 
   var absUrl = $location.absUrl();
@@ -16,30 +43,19 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.isPreview = true;
-  $scope.xivelyDataInitComplete = true;
 
-  $scope.alerts = [];
-
-  $scope.addAlert = function(message) {
-    $scope.alerts.push({type: 'danger', msg: message});
-  };
-
-  $scope.closeAlert = function(index) {
-    $scope.alerts.splice(index, 1);
-  };
-
-  if (_datapointErrors != null) {
-    if (_datapointErrors.length > 0) {
-      $scope.xivelyDataInitComplete = false;
-      $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
-      setTimeout(function() {
-        if ($scope.alerts.length > 0) {
-          $location.path('/');
-          $scope.$apply();
-        }
-      }, 5000);
-    }
-  }
+  // if (_datapointErrors != null) {
+  //   if (_datapointErrors.length > 0) {
+  //     $scope.xivelyDataInitComplete = false;
+  //     $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
+  //     setTimeout(function() {
+  //       if ($scope.alerts.length > 0) {
+  //         $location.path('/');
+  //         $scope.$apply();
+  //       }
+  //     }, 5000);
+  //   }
+  // }
 
   $scope.totalWeatherTypes = function(){
     var sum = 0;
