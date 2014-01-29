@@ -40,7 +40,7 @@ foreach ($devicesByDatastream as $datastreamLabel => $datastream) {
 
    echo $datastreamLabel . "\n";
    for($col=0;$col<$cols;$col++){
-      echo 'Date' . ',' . $schools[$col] . ',,';
+      echo 'Date' . ',"' . $schools[$col] . '",,';
    }
    echo "\n";
    for($row=0;$row<$rows;$row++){

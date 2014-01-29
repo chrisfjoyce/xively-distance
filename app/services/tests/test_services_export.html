@@ -1,0 +1,31 @@
+<script src='http://code.jquery.com/jquery-1.11.0.js'></script>
+
+<script>
+  var json = {
+    "Wind_Chill": {
+        "start_date": "2013-12-29T18:01:54.622Z",
+        "end_date": "2014-01-29T18:01:54.622Z",
+        "devices": [
+            {
+                "id": "491325353",
+                "schoolName": "Alder Grange",
+                "datastreamId": "Wind_chill"
+            }
+        ]
+    }
+};
+  var jsonData = JSON.stringify(json);
+
+  $.post(
+    'http://localhost:8080/merge_xively_csv.php',
+    {
+      'ta': jsonData
+    }
+    ,function(data){
+      console.log(data);
+    }
+  );
+
+
+
+</script>

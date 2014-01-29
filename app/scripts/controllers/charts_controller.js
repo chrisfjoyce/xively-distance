@@ -61,17 +61,18 @@ var ChartsCtrl = function ($scope,$location) {
     //   }
     // });
     var jsonObject = {};
-    for (var datastreamId in _seriesByDataSource) {
-      jsonObject[datastreamId] = {};
-      jsonObject[datastreamId]['start_date'] = _seriesByDataSource[datastreamId].startDate;
-      jsonObject[datastreamId]['end_date'] = _seriesByDataSource[datastreamId].endDate;
-      jsonObject[datastreamId]['devices'] = [];
-      for (var i = 0; i < _seriesByDataSource[datastreamId].series.length; i++) {
-        var serie = _seriesByDataSource[datastreamId].series[i];
-        jsonObject[datastreamId]['devices'][i] = {};
-        jsonObject[datastreamId]['devices'][i]['id'] = serie.deviceId;
-        jsonObject[datastreamId]['devices'][i]['schoolName'] = serie.name;
-        jsonObject[datastreamId]['devices'][i]['datastreamId'] = datastreamId;
+    for (var datastreamFixedLabel in _seriesByDataSource) {
+      var datastreamLabel = _seriesByDataSource[datastreamFixedLabel].label;
+      jsonObject[datastreamLabel] = {};
+      jsonObject[datastreamLabel]['start_date'] = _seriesByDataSource[datastreamFixedLabel].startDate;
+      jsonObject[datastreamLabel]['end_date'] = _seriesByDataSource[datastreamFixedLabel].endDate;
+      jsonObject[datastreamLabel]['devices'] = [];
+      for (var i = 0; i < _seriesByDataSource[datastreamFixedLabel].series.length; i++) {
+        var serie = _seriesByDataSource[datastreamFixedLabel].series[i];
+        jsonObject[datastreamLabel]['devices'][i] = {};
+        jsonObject[datastreamLabel]['devices'][i]['id'] = serie.deviceId;
+        jsonObject[datastreamLabel]['devices'][i]['schoolName'] = serie.name;
+        jsonObject[datastreamLabel]['devices'][i]['datastreamId'] = serie.datastreamId;
       }
     }
     var jsonData = JSON.stringify(jsonObject);
