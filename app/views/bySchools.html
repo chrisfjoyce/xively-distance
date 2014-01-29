@@ -1,7 +1,8 @@
-<div style="background-color:#FFFFFF;overflow: hidden;">
-  <div class="container smallBar-div">
+<div class="smallBar-div">
+  <div class="container">
     <span class="pull-right">
-      <span style="color:#93C748">{{totalSchoolsSelected()}}</span> school(s) selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="state-bar-green-text">{{totalSchoolsSelected()}}</span>
+      <span class="state-bar-text">school(s) selected</span>
       <span ng-switch="totalSchoolsSelected()">
         <button ng-switch-when="0"class="btn preview-btn-disabled">PREVIEW <img src="images/preview-btn-dis.png"></button>
         <button ng-switch-default class="btn preview-btn" ng-click="generateChart()">PREVIEW <img src="images/preview-btn-en.png"></button>
@@ -11,15 +12,17 @@
 </div>
 <br/>
 <div class="container">
-  <span style="color:#909091">Please select schools to create your observation kit:</span>
+  <span class="h3">
+    <small>Please select schools to create your observation kit:</small>
+  </span>
   <div class="row">
     <div class="col-md-12" ng-repeat='(letter,schools) in schoolsByLetter'>
         <div class="row">
-        <h4><span style="color:#ED992E">&nbsp;&nbsp;{{letter}}</span></h4>
-
+          <span class="h3-single-letter">{{letter}}</span>
         </div>
         <span ng-repeat='school in schools'>
-          <button type="button" ng-click="open(school.schoolName)" class="btn school-box col-md-3 col-md-offset-1" ng-class="{'school-box-selected':dataStreamsSelected[school.schoolName]}">{{school.schoolName }}
+          <button type="button" ng-click="open(school.schoolName)" class="btn school-box col-md-3" ng-class="{'school-box-selected':dataStreamsSelected[school.schoolName]}">
+            {{school.schoolName }}
             <br/>
             <small style="color:#93C748" ng-if="dataStreamsSelected[school.schoolName]">Selected({{dataStreamsSelected[school.schoolName]}}) of </small>
             <small style="color:#97989A">{{datastreamsBySchool[school.schoolName].length}} Weather Types </small>
