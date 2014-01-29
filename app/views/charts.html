@@ -69,8 +69,18 @@
               <button class="btn btn-success" ng-click="refresh(datastream)">Refresh</button>
             </span>
           </span>
-          <div id="graph-{{datastream.id}}"></div>
-          <div id="slider-{{datastream.id}}" ng-show="!isPreview"></div>
+          <br />
+          <div class="row">
+            <div class="col-md-1">
+              <div id="vslider-{{datastream.id}}" style="height:200px;" class="pull-right" ng-show="!isPreview"></div>
+            </div>
+            <div class="col-md-10">
+              <div id="graph-{{datastream.id}}"></div>
+              <br />
+              <div id="slider-{{datastream.id}}" ng-show="!isPreview"></div>
+            </div>
+            <div class="col-md-1">&nbsp;</div>
+          </div>
         </div>
         <div class="col-md-3">
           <div class="row" style="height: 234px; overflow: auto;">
