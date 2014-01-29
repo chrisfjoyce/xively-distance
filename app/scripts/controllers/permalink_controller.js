@@ -9,6 +9,8 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
 
   $scope.permalink = $routeParams.code;
 
+  $scope.isPreview = false;
+
   $scope.isOpened = {
     'start' : [],
     'end' : []

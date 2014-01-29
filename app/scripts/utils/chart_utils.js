@@ -66,6 +66,10 @@ var buildChart = function(seriesByDataSource) {
     // Build Graph
 
     var data = seriesByDataSource[datastreamId];
+    data.current_min_value = parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));
+    data.current_max_value = parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));
+    data.step = (data.current_max_value - data.current_min_value) / 10;
+    data.zoom = 0;
     var series = data.series;
     for (var i = 0; i < series.length; i++) {
       series[i].color = colorList[i % colorList.length];
@@ -141,6 +145,24 @@ var buildChart = function(seriesByDataSource) {
       graph: graph,
       element: document.querySelector('#slider-' + datastreamId)
     });
+
+    $('#vslider-' + datastreamId).slider({
+      orientation: "vertical",
+      range: true,
+      max: graph.max,
+      min: graph.min,
+      datastreamId: datastreamId,
+      values: [ graph.min, graph.max ],
+      slide: function( event, ui ) {
+        var dsid = event.target.id.substring(event.target.id.indexOf('-') + 1);
+        console.log(dsid);
+        console.log(ui);
+        _seriesByDataSource[dsid].graph.min = ui.values[0];
+        _seriesByDataSource[dsid].graph.max = ui.values[1];
+        _seriesByDataSource[dsid].graph.update();
+      }
+    });
+
   }
 };
 
