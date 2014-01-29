@@ -150,14 +150,31 @@
   margin-left: 13px;
 }
 
+.h3-green{
+  color:#8dce91;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 2em;
+  display: inline-block;
+}
+
 .normal-text{
   color:#838384;
   font-family: 'Ropa Sans', sans-serif;
   font-size: 1.3em;
 }
 
+.modal-items-text{
+  color:black;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 1.2em;
+}
+
+.modal-active-inactive{
+  width:7px;
+  display:inline-block;
+}
+
 .state-bar-green-text{
-  /*padding-top: 5px;*/
   vertical-align: bottom;
   color:#93C748;
   font-size: 1.3em;
@@ -165,10 +182,14 @@
 
 .state-bar-text{
   vertical-align: bottom;
-  /*padding-top: 5px;*/
   color:#414042;
   font-size: 1.3em;
   padding-right: 15px;
+}
+
+.modal-header{
+  padding-top: 0px;
+  line-height: 16px;
 }
 
 .modal-content{
@@ -285,4 +306,5 @@
   background: #A8A9AD;
   padding: 0px 0px 0px 0px;
   text-decoration: none;
+  margin-left: 13px;
 }
