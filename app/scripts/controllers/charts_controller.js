@@ -16,6 +16,7 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.isPreview = true;
+  $scope.xivelyDataInitComplete = true;
 
   $scope.totalWeatherTypes = function(){
     var sum = 0;

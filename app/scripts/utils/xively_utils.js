@@ -16,6 +16,7 @@ var _xivelyDataInit = false;
 var _startDevicesTimestamp=null;
 var _datastreamByDeviceIdDatastreamLabel={};
 var _seriesByDataSource = null;
+var _xivelyDataInitComplete = false;
 
 var INACTIVE_TIMEOUT_MILLIS = 1000 * 60 * 90;
 
@@ -175,6 +176,7 @@ var loadChartTestData = function(callback){
 var processXivelyFeedData = function(data){
   console.log('Devices collected in: ms ' + (Date.now() - _startDevicesTimestamp));
   // console.log(data);
+  _xivelyDataInitComplete = true;
 
   _schools = [];
   _schoolsByLetter = {};
