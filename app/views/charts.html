@@ -100,10 +100,12 @@
                     Status:
                     <span ng-switch on="serie.active">
                       <span ng-switch-when="true" >
-                        <span class="green-active">Active</span><br>{{serie.at}}
+                        <span class="green-active">Active</span><br />Last reported: {{serie.lastReported}}
                       </span>
                       <span ng-switch-default>
-                        <span class="red-inactive">Inactive</span><br>{{serie.at}}
+                        <span class="red-inactive">Inactive</span>(has not reported in {{serie.hasNotReported}} hrs)
+                        <br />
+                        Last reported: {{serie.lastReported}}
                       </span>
                     </span>
                   </small>
