@@ -1,10 +1,10 @@
 <div style="background-color:#FFFFFF;overflow: hidden;">
-  <div class="container">
+  <div class="container smallBar-div">
     <span class="pull-right">
       <span style="color:#93C748">{{totalSchoolsSelected()}}</span> school(s) selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <span ng-switch="totalSchoolsSelected()">
-        <button ng-switch-when="0"class="btn btn-disabled">Preview</button>
-        <button ng-switch-default class="btn btn-warning" ng-click="generateChart()">Preview</button>
+        <button ng-switch-when="0"class="btn preview-btn-disabled">PREVIEW <img src="images/preview-btn-dis.png"></button>
+        <button ng-switch-default class="btn preview-btn" ng-click="generateChart()">PREVIEW <img src="images/preview-btn-en.png"></button>
       </span>
     <span>
   </div>
