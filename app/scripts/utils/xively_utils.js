@@ -26,6 +26,33 @@ var registerXivelyGetData = function(fn){
   _callbacks.push(fn);
 };
 
+var _toEuroFormat = function(isoStringDate){
+  var lastReported = new Date(Date.parse(isoStringDate));
+  var now = new Date();
+  var lrDate = lastReported.getDate();
+  if (lrDate < 10) {
+    lrDate = '0' + lrDate;
+  }
+  var lrMonth = lastReported.getMonth() + 1;
+  if (lrMonth < 10) {
+    lrMonth = '0' + lrMonth;
+  }
+  var lrYear = lastReported.getFullYear();
+  var lrHour = lastReported.getHours();
+  if (lrHour < 10) {
+    lrHour = '0' + lrHour;
+  }
+  var lrMinutes = lastReported.getMinutes();
+  if (lrMinutes < 10) {
+    lrMinutes = '0' + lrMinutes;
+  }
+  var lrSeconds = lastReported.getSeconds();
+  if (lrSeconds < 10) {
+    lrSeconds = '0' + lrSeconds;
+  }
+  return lrDate + "." + lrMonth + "." + lrYear + " " + lrHour + ":" + lrMinutes + ":" + lrSeconds;
+};
+
 var getDatapointHistory = function(selectedDevicesByDatastream,callback){
   var formResponse = [];
   var selectedDevicesCount = 0;

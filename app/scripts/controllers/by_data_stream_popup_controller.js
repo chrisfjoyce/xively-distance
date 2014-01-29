@@ -5,6 +5,7 @@ var ByDataStreamPopUpCtrl = function ($scope) {
   $scope.dataStreams=_datastreamsBySchool[$scope.selectedSchool];
   $scope.active = 0;
   $scope.inactive = 0;
+  $scope.toEuroFormat = _toEuroFormat;
   //TODO garivera remove simulation of active/inactive
   //simulate active/inactive
   for (var i = 0; i < $scope.dataStreams.length; i++) {

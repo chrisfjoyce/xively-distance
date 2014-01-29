@@ -5,6 +5,7 @@ var BySchoolPopupCtrl = function ($scope) {
   $scope.devices=_devicesByDatastream[$scope.selectedDS];
   $scope.active = 0;
   $scope.inactive = 0;
+  $scope.toEuroFormat = _toEuroFormat;
   //TODO garivera remove simulation of active/inactive
   //simulate active/inactive
   for (var i = 0; i < $scope.devices.length; i++) {
