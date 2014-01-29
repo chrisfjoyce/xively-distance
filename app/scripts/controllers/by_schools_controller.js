@@ -43,6 +43,11 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.generateChart = function(){
     var defaultDates = getDefaultDates();
+
+    for(var datastreamLabel in $scope.selectedDatastreamsBySchool){
+      $scope.selectedDatastreamsBySchool[datastreamLabel].startDate = defaultDates.startDate.toISOString();
+      $scope.selectedDatastreamsBySchool[datastreamLabel].endDate = defaultDates.endDate.toISOString();
+    }
     getDatapointHistory(
       $scope.selectedDatastreamsBySchool,
       function(seriesByDatasource){
@@ -53,9 +58,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
         _dataStreamsSelected = $scope.dataStreamsSelected;
         $scope.$apply();
-      },
-      defaultDates.startDate.toISOString(),
-      defaultDates.endDate.toISOString()
+      }
     );
   };
 

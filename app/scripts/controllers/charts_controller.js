@@ -14,6 +14,14 @@ var ChartsCtrl = function ($scope,$location) {
 
   $scope.isPreview = true;
 
+  $scope.totalWeatherTypes = function(){
+    var sum = 0;
+    for(var datastreamLabel in _seriesByDataSource){
+      sum++;
+    }
+    return sum;
+  };
+
   $scope.export = function(){
     // var jsonData = JSON.stringify({
     //   'Wind Direction': {

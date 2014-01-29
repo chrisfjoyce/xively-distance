@@ -36,6 +36,11 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.generateChart = function(){
     var defaultDates = getDefaultDates();
+    for(var datastreamLabel in $scope.selectedDevicesByDatasource){
+      $scope.selectedDevicesByDatasource[datastreamLabel].start_date = defaultDates.startDate.toISOString();
+      $scope.selectedDevicesByDatasource[datastreamLabel].end_date   = defaultDates.endDate.toISOString();
+    }
+
     getDatapointHistory(
       $scope.selectedDevicesByDatasource,
       function(seriesByDatasource){
@@ -45,9 +50,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         _selectedDevicesByDatasource = $scope.selectedDevicesByDatasource;
         _devicesSelected = $scope.devicesSelected;
         $scope.$apply();
-      },
-      defaultDates.startDate.toISOString(),
-      defaultDates.endDate.toISOString()
+      }
     );
   };
 

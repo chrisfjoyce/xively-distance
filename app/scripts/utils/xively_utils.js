@@ -26,13 +26,15 @@ var registerXivelyGetData = function(fn){
   _callbacks.push(fn);
 };
 
-var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDateISO,endDateISO){
+var getDatapointHistory = function(selectedDevicesByDatastream,callback){
   var formResponse = [];
   var selectedDevicesCount = 0;
   _retrievedDevicesCount = 0;
   for(var datastreamLabel in selectedDevicesByDatastream){
     var datasourceConf = {
       'datastream_name' : datastreamLabel,
+      'start_date': selectedDevicesByDatastream[datastreamLabel].start_date,
+      'end_date'  : selectedDevicesByDatastream[datastreamLabel].end_date,
       'devices' : []
     };
     for(var deviceId in selectedDevicesByDatastream[datastreamLabel]){
@@ -52,6 +54,9 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback,startDat
   for(var i = 0; i<formResponse.length;i++){
     var dataStreamGroup = formResponse[i];
     datastreamLabel = dataStreamGroup.datastream_name;
+
+    var startDateISO = dataStreamGroup.start_date;
+    var endDateISO   = dataStreamGroup.end_date;
 
     for(var j=0;j<dataStreamGroup.devices.length;j++){
       var device = dataStreamGroup.devices[j];
