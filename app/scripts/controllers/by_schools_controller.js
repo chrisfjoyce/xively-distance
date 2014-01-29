@@ -23,7 +23,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   if (_isBack) {
     _isBack = false;
     $scope.dataStreamsSelected = _dataStreamsSelected;
-    $scope.selectedDatastreamsBySchool = _selectedDatastreamsBySchool;
+    $scope.selectedDatastreamsBySchool = _selectedDevicesByDatasource;
   } else {
     $scope.dataStreamsSelected = {};
     $scope.selectedDatastreamsBySchool = {};
@@ -57,7 +57,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
         _backLocation = '/bySchool';
 
         _seriesByDataSource = seriesByDatasource;
-        _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
+        _selectedDevicesByDatasource=$scope.selectedDatastreamsBySchool;
         _dataStreamsSelected = $scope.dataStreamsSelected;
         $scope.$apply();
       }
