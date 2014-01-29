@@ -59,6 +59,11 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
       $scope.selectedDevicesByDatasource[datastream]={};
     }
 
+    $scope.preModalState = {
+      devicesSelected         : jQuery.extend(true, {}, $scope.devicesSelected),
+      selectedDevicesByDatasource : jQuery.extend(true, {}, $scope.selectedDevicesByDatasource)
+    };
+
     $scope.ok = function() {
       console.log('ok');
       $scope.modal.dismiss('ok');
@@ -67,6 +72,9 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.cancel = function() {
       console.log('cancel');
       $scope.modal.dismiss('cancel');
+
+      $scope.devicesSelected             = _devicesSelected             = $scope.preModalState.devicesSelected;
+      $scope.selectedDevicesByDatasource = _selectedDevicesByDatasource = $scope.preModalState.selectedDevicesByDatasource;
     };
 
     var modalInstance = $modal.open(
