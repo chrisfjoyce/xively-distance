@@ -1,24 +1,25 @@
 <div class="modal-div">
   <div class="modal-header">
-      <h3 style="color:#8dce91">{{selectedSchool}}</h3>
-      <b>
+      <h3 class="h3-green">{{selectedSchool}}</h3>
+      <br/>
+      <small class="normal-text">
         Weather Types
         &nbsp;&nbsp;&nbsp;
         {{active}} Active
         &nbsp;&nbsp;&nbsp;
         <span class="red-inactive">●</span>
         {{inactive}} Inactive
-      </b>
+      </small>
   </div>
   <div class="modal-body" style="overflow:auto;overflow-x:hidden">
     <div class="row">
       <div ng-repeat='dataStream in dataStreams'>
         <div class="input-group col-md-4">
           <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
-            <span type="text" text-overflow class="col-md-9" style="display:inline-block">
-              <span ng-switch on="dataStream.active" style="width:7px;display:inline-block">
+            <span type="text" text-overflow class="col-md-9 modal-items-text" style="display:inline-block">
+              <span ng-switch on="dataStream.active" class="modal-active-inactive">
                 <span class="red-inactive" ng-switch-when="false" tooltip="{{dataStream.at}}">●</span>
-                <span ng-switch-when="true" style="width:7px;display:inline-block"/>
+                <span ng-switch-when="true" class="modal-active-inactive"/>
               </span>
               {{dataStream.label}}
             </span>
@@ -33,7 +34,7 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer normal-text">
     Selected [{{dataStreamsSelected[selectedSchool]}}] of [{{dataStreams.length}}] Weather Types
     <button class="btn popup-cancel-btn" ng-click="cancel()" style="background-color:lightgray">CANCEL</button>
     <button class="btn popup-save-btn" ng-click="ok()">SAVE</button>
