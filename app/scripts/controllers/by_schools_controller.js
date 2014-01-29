@@ -45,9 +45,11 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     var defaultDates = getDefaultDates();
 
     for(var datastreamLabel in $scope.selectedDatastreamsBySchool){
-      $scope.selectedDatastreamsBySchool[datastreamLabel].startDate = defaultDates.startDate.toISOString();
-      $scope.selectedDatastreamsBySchool[datastreamLabel].endDate = defaultDates.endDate.toISOString();
+      $scope.selectedDatastreamsBySchool[datastreamLabel].start_date = defaultDates.startDate.toISOString();
+      $scope.selectedDatastreamsBySchool[datastreamLabel].end_date = defaultDates.endDate.toISOString();
     }
+
+    console.log($scope.selectedDatastreamsBySchool);
     getDatapointHistory(
       $scope.selectedDatastreamsBySchool,
       function(seriesByDatasource){
