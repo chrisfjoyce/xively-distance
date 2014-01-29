@@ -204,7 +204,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
     var link = "mailto:?"
              + "&subject=" + escape("Check my observation kit!!!")
              + "&body=" + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
-    window.location.href = link;
+    window.open(link, '_blank');
   }
 
 };
