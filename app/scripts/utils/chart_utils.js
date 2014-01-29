@@ -57,7 +57,7 @@ var colorList = [
 
 var buildFormatter = function(series, x, y) {
   var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + ' padding: 4px;"></span>';
-  var content = swatch + '&nbsp;&nbsp;' + parseFloat(y) + '&nbsp;&nbsp;<br>';
+  var content = swatch + '&nbsp;&nbsp;' + parseFloat(y) + '&nbsp;' + series.unit + '&nbsp;&nbsp;<br>';
   return content;
 };
 
@@ -77,6 +77,7 @@ var buildChart = function(seriesByDataSource) {
       series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
       series[i].borderColor = '#9b9b9b';
       series[i].borderWidth = '1px';
+      series[i].unit = data.unit;
     }
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
