@@ -81,28 +81,7 @@ var buildChart = function(seriesByDataSource) {
       var lastReported = new Date(Date.parse(series[i].at));
       var now = new Date();
       series[i].hasNotReported = Math.round(Math.abs(now.getTime() - lastReported.getTime()) / 1000 / 3600 * 100) / 100;
-      var lrDate = lastReported.getDate();
-      if (lrDate < 10) {
-        lrDate = '0' + lrDate;
-      }
-      var lrMonth = lastReported.getMonth() + 1;
-      if (lrMonth < 10) {
-        lrMonth = '0' + lrMonth;
-      }
-      var lrYear = lastReported.getFullYear();
-      var lrHour = lastReported.getHours();
-      if (lrHour < 10) {
-        lrHour = '0' + lrHour;
-      }
-      var lrMinutes = lastReported.getMinutes();
-      if (lrMinutes < 10) {
-        lrMinutes = '0' + lrMinutes;
-      }
-      var lrSeconds = lastReported.getSeconds();
-      if (lrSeconds < 10) {
-        lrSeconds = '0' + lrSeconds;
-      }
-      series[i].lastReported = lrDate + "." + lrMonth + "." + lrYear + " " + lrHour + ":" + lrMinutes + ":" + lrSeconds;
+      series[i].lastReported = _toEuroFormat(series[i].at);
     }
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
