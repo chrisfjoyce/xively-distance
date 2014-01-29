@@ -10,6 +10,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   $scope.permalink = $routeParams.code;
 
   $scope.isPreview = false;
+  $scope.xivelyDataInitComplete = false;
 
   $scope.isOpened = {
     'start' : [],
@@ -17,6 +18,11 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   };
 
   var permalinkGeneration = function() {
+    if (!_xivelyDataInitComplete) {
+      setTimeout(permalinkGeneration, 500);
+      return;
+    }
+    $scope.xivelyDataInitComplete = true;
     var getDataFromPermalink = function(code, callback) {
       $.get(
         'http://xively-iostp-test.tierconnect.com/services/get_permalink.php?code=' + code,
@@ -60,7 +66,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   if(_seriesByDataSource == null){
     var isReceived = true;
     if (isReceived) {
-      setTimeout(permalinkGeneration, 5000);
+      permalinkGeneration();
     } else {
       $location.path('/');
     }
