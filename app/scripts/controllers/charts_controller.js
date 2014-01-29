@@ -18,6 +18,30 @@ var ChartsCtrl = function ($scope,$location) {
   $scope.isPreview = true;
   $scope.xivelyDataInitComplete = true;
 
+  $scope.alerts = [];
+
+  $scope.addAlert = function(message) {
+    $scope.alerts.push({type: 'danger', msg: message});
+  };
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
+  var _datapointErrors = [1,2];
+  if (_datapointErrors != null) {
+    if (_datapointErrors.length > 0) {
+      $scope.xivelyDataInitComplete = false;
+      $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
+      setTimeout(function() {
+        if ($scope.alerts.length > 0) {
+          $location.path('/');
+          $scope.$apply();
+        }
+      }, 5000);
+    }
+  }
+
   $scope.totalWeatherTypes = function(){
     var sum = 0;
     for(var datastreamLabel in _seriesByDataSource){
@@ -157,6 +181,18 @@ var ChartsCtrl = function ($scope,$location) {
     selectedDevicesByDatasourceAndDatastream[datastream.label] = _selectedDevicesByDatasource[datastream.label];
     var startDate = new Date(Date.parse(datastream.startDate)).toISOString();
     var endDate = new Date(Date.parse(datastream.endDate)).toISOString();
+    var startDateObject = new Date(Date.parse(datastream.startDate));
+    var endDateObject = new Date(Date.parse(datastream.endDate));
+    if (startDateObject.getTime() - endDateObject.getTime() > 0) {
+      $scope.addAlert("The end date should be before the start date.");
+      setTimeout(function() {
+        if ($scope.alerts.length > 0) {
+          $scope.alerts.splice(0, 1);
+          $scope.$apply();
+        }
+      }, 5000);
+      return;
+    }
     selectedDevicesByDatasourceAndDatastream[datastream.label].start_date = startDate;
     selectedDevicesByDatasourceAndDatastream[datastream.label].end_date = endDate;
     getDatapointHistory(
