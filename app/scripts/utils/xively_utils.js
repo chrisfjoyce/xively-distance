@@ -17,6 +17,7 @@ var _startDevicesTimestamp=null;
 var _datastreamByDeviceIdDatastreamLabel={};
 var _seriesByDataSource = null;
 var _xivelyDataInitComplete = false;
+var _datapointErrors = [];
 
 var INACTIVE_TIMEOUT_MILLIS = 1000 * 60 * 90;
 
@@ -80,6 +81,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
   }
 
   var seriesByDataSource = {};
+  _datapointErrors = [];
 
   for(var i = 0; i<formResponse.length;i++){
     var dataStreamGroup = formResponse[i];
@@ -136,7 +138,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
     }
 
     if(points.length == 0){
-
+      _datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not conatain data for the given dates.');
     }else{
       if(seriesByDataSource[filteredDatastreamLabel] == null){
         seriesByDataSource[filteredDatastreamLabel] = {
