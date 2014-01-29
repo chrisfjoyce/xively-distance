@@ -17,6 +17,16 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
     'end' : []
   };
 
+  $scope.alerts = [];
+
+  $scope.addAlert = function(message) {
+    $scope.alerts.push({type: 'danger', msg: message});
+  };
+
+  $scope.closeAlert = function(index) {
+    $scope.alerts.splice(index, 1);
+  };
+
   var permalinkGeneration = function() {
     if (!_xivelyDataInitComplete) {
       setTimeout(permalinkGeneration, 500);
@@ -29,7 +39,17 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
         function(data){
           console.log('Data Received:');
           console.log(data);
-          callback(data);
+          if (data.error != null) {
+            $scope.addAlert('Permalink code error: ' + data.error.replace(/\_/g,' ') + '. You will be redirected to Create New Observation Kit in 5 seconds.');
+            $scope.xivelyDataInitComplete = false;
+            setTimeout(function() {
+              $location.path('/');
+              $scope.$apply();
+            }, 5000);
+            $scope.$apply();
+          } else {
+            callback(data);
+          }
         }
       );
     };
