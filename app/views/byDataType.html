@@ -1,24 +1,27 @@
-<div style="background-color:#FFFFFF;overflow: hidden;">
+<div class="smallBar-div">
   <div class="container">
     <span class="pull-right">
-      <span style="color:#93C748">Selected {{totalSelected()}}</span> of {{datastreams.length}} Weather Types &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="state-bar-green-text">Selected {{totalSelected()}}</span>
+      <span class="state-bar-text"> of {{datastreams.length}} Weather Types </span>
       <span ng-switch="totalSelected()">
-        <button ng-switch-when="0"class="btn btn-disabled">Preview</button>
-        <button ng-switch-default class="btn btn-warning" ng-click="generateChart()">Preview</button>
+        <button ng-switch-when="0"class="btn preview-btn-disabled">PREVIEW</button>
+        <button ng-switch-default class="btn preview-btn" ng-click="generateChart()">PREVIEW<img src="images/preview-btn-en.png"></button>
       </span>
     <span>
   </div>
 </div>
 <br/>
 <div class="container">
-  <div class="row">
-    <h4>Please Select the Weather Types to create your observation kit</h4><br>
+  <span class="h3">
+    <small>Please select the Weather Type(s) to create your observation kit:</small>
+  </span>
+  <div class="row col-md-12 byDataType-div">
     <span ng-repeat='datastream in datastreams'>
-      <button type="button" ng-click="open(datastream)" class="btn btn-default datastream-box col-md-3 col-md-offset-1" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">
+      <button type="button" ng-click="open(datastream)" class="btn datastream-box col-md-4" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">
         {{datastream}}
         <br/>
         <small style="color:#93C748" ng-if="devicesSelected[datastream]">
-          Selected({{devicesSelected[datastream]}})
+          Selected({{devicesSelected[datastream]}}) of 
         </small>
         <small style="color:#97989A">
           {{devicesByDatastream[datastream].length}} Schools

@@ -32,20 +32,25 @@
 }
 
 .datastream-box{
-  -webkit-box-shadow: 0 5px 3px 0px #F8B041;
-  -moz-box-shadow:    0 5px 3px 0px #F8B041;
-   box-shadow:        0 5px 3px 0px #F8B041;
+   width:270px; 
+  -webkit-box-shadow: 0 5px 0px 0px #F8B041;
+  -moz-box-shadow:    0 5px 0px 0px #F8B041;
+   box-shadow:        0 5px 0px 0px #F8B041;
    margin-bottom: 20px;
-   margin-right: 30px;
-   background-color:#E6E6E6;
+   margin-right: 22px;
+   background-color:#D1D1D1;
+   text-align: left;
+   font-size: 1.5em;
+   line-height: 22px;
+   color: #414042;
 }
 
 .datastream-box-selected{
-  -webkit-box-shadow: 0 5px 3px 0px #F8B041;
-  -moz-box-shadow:    0 5px 3px 0px #F8B041;
-   box-shadow:        0 5px 3px 0px #F8B041;
+  -webkit-box-shadow: 0 5px 0px 0px #F8B041;
+  -moz-box-shadow:    0 5px 0px 0px #F8B041;
+   box-shadow:        0 5px 0px 0px #F8B041;
    margin-bottom: 20px;
-   margin-right: 30px;
+   margin-right: 22px;
    background-color:#FFFFFF;
 }
 
@@ -214,6 +219,10 @@
 .home-div{
   padding-top: 30px;
   padding-bottom: 8px;
+}
+
+.byDataType-div{
+  margin-top: 20px;
 }
 
 .home-btn {
