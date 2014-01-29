@@ -1,18 +1,19 @@
-<div>
+<div class="modal-div">
   <div class="modal-header">
-    <h3 class="datastream_text">{{selectedDS}}</h3>
-    <b>
+    <h3 class="h3-orange">{{selectedDS}}</h3>
+    <br/>
+    <small class="normal-text">
       Schools
       &nbsp;&nbsp;&nbsp;
       {{active}} Active
       &nbsp;&nbsp;&nbsp;
       <span class="red-inactive">●</span>
       {{inactive}} Inactive
-    </b>
+    </small>
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-md-4 datastream_background">
+      <div class="col-md-4 datastream_background modal-body-weathertype">
         <b>School(s) selected: {{devicesSelected[selectedDS]}} of {{devices.length}}</b>
         <div class="row">
           <div ng-repeat='device in devices'>
@@ -31,7 +32,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-md-8 modal-body-weathertype">
         <div class="row">
           <div ng-repeat='device in devices' class="col-md-6">
             <div ng-if="selectedDevicesByDatasource[selectedDS][device.id] == null || selectedDevicesByDatasource[selectedDS][device.id] == false" ng-click="setSelected($event, device.id,true)">
@@ -53,8 +54,8 @@
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button class="btn btn-default" ng-click="cancel()" style="background-color:lightgray">CANCEL</button>
-    <button class="btn btn-success" ng-click="ok()" >SAVE</button>
+  <div class="modal-footer normal-text">
+    <button class="btn popup-cancel-btn" ng-click="cancel()">CANCEL</button>
+    <button class="btn popup-save-btn" ng-click="ok()" >SAVE</button>
   </div>
 </div>
