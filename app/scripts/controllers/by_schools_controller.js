@@ -29,6 +29,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.selectedDatastreamsBySchool = {};
   }
 
+  $scope.preModalState = {};
+
   $scope.totalSchoolsSelected = function(){
     var sum = 0;
 
@@ -65,7 +67,13 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   };
 
   $scope.open = function (school) {
+    $scope.dataStreamsSelected = _dataStreamsSelected;
+    $scope.selectedDatastreamsBySchool = _selectedDevicesByDatasource;
 
+    $scope.preModalState = {
+      dataStreamsSelected         : jQuery.extend(true, {}, $scope.dataStreamsSelected),
+      selectedDatastreamsBySchool : jQuery.extend(true, {}, $scope.selectedDatastreamsBySchool)
+    };
     // if($scope.selectedDatastreamsBySchool[school] == null){
     //   $scope.selectedDatastreamsBySchool[school]={};
     // }
@@ -84,7 +92,11 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     };
     $scope.cancel = function() {
       console.log('cancel');
+
       $scope.modal.dismiss('cancel');
+
+      $scope.dataStreamsSelected         = _dataStreamsSelected         = $scope.preModalState.dataStreamsSelected;
+      $scope.selectedDatastreamsBySchool = _selectedDevicesByDatasource = $scope.preModalState.selectedDatastreamsBySchool;
     };
 
     var modalInstance = $modal.open(
@@ -96,12 +108,12 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
       }
     );
     $scope.selectedSchool = school;
+
     modalInstance.result.then(function (school) {
       $scope.selectedSchool = school;
     }, function (type) {
       console.log('Modal dismissed at: ' + new Date());
       console.log('Caused by: ' + type);
-      //console.log($scope.dataStreamsSelected);
     });
     $scope.modal = modalInstance;
   };
