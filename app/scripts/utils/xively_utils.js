@@ -95,6 +95,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
     var data = resp.datapoints;
     var points = [];
     var datastream_min_value=0,datastream_max_value=0;
+    var unit = resp.unit.symbol;
     if(data != null){
       var len = data.length;
       datastream_min_value = datastream_max_value = data[0].value;
@@ -116,7 +117,8 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
           'max_value' : datastream_max_value,
           'label' : datastreamLabel,
           'startDate' : startDateISO,
-          'endDate' : endDateISO
+          'endDate' : endDateISO,
+          'unit' : unit
         };//new serie
       }
       seriesByDataSource[filteredDatastreamLabel].min_value = Math.min(seriesByDataSource[filteredDatastreamLabel].min_value,datastream_min_value);

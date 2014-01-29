@@ -1,4 +1,4 @@
-<div>
+<div class="modal-div">
   <div class="modal-header">
       <h3 style="color:#8dce91">{{selectedSchool}}</h3>
       <b>
@@ -35,7 +35,7 @@
   </div>
   <div class="modal-footer">
     Selected [{{dataStreamsSelected[selectedSchool]}}] of [{{dataStreams.length}}] Weather Types
-    <button class="btn btn-default" ng-click="cancel()" style="background-color:lightgray">CANCEL</button>
-    <button class="btn-success btn-primary" ng-click="ok()">SAVE</button>
+    <button class="btn popup-cancel-btn" ng-click="cancel()" style="background-color:lightgray">CANCEL</button>
+    <button class="btn popup-save-btn" ng-click="ok()">SAVE</button>
   </div>
 </div>
