@@ -87,7 +87,10 @@
 
 .navbar-inverse {
   background-color: #414143;
-  border-color: #090909;
+  border-color: #414143;
+  -webkit-box-shadow: 0px 7px 0px #58595b;
+  -moz-box-shadow: 0px 7px 0px #58595b;
+  box-shadow: 0px 7px 0px #58595b;
 }
 
 .panel-heading-schools{
@@ -95,7 +98,7 @@
   color: white;
   background-color: #8dce91;
   padding: 7px 15px 3px;
-  border-bottom: 1px solid transparent;
+  border-bottom: 0px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
@@ -108,6 +111,32 @@
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+}
+
+.panel-body-schools{
+  border-color: #F2F2F2;
+  -webkit-box-shadow: 0px 5px 0px #8dce91;
+  -moz-box-shadow: 0px 5px 0px #8dce91;
+  box-shadow: 0px 5px 0px #8dce91;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-bottomright: 6px;
+  border-bottom-right-radius: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.panel-body-dataTypes{
+  border-color: #F2F2F2;
+  -webkit-box-shadow: 0px 5px 0px #f7941e;
+  -moz-box-shadow: 0px 5px 0px #f7941e;
+  box-shadow: 0px 5px 0px #f7941e;
+  -webkit-border-bottom-right-radius: 6px;
+  -moz-border-radius-bottomright: 6px;
+  border-bottom-right-radius: 6px;
+  -webkit-border-bottom-left-radius: 6px;
+  -moz-border-radius-bottomleft: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 .h1-title{
@@ -138,6 +167,7 @@
 }
 
 .mid-div{
+  padding-top: 65px;
   margin-right: 170px;
   margin-left: 170px;
 }
@@ -145,6 +175,11 @@
 .smallBar-div{
   height: 50px;
   padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.home-div{
+  padding-top: 30px;
   padding-bottom: 8px;
 }
 
