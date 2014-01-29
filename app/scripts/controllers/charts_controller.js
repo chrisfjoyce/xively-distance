@@ -285,6 +285,13 @@ var ChartsCtrl = function ($scope,$location) {
     );
   };
 
+  $scope.sendEmail = function() {
+    var link = "mailto:?"
+             + "&subject=" + escape("Check my observation kit!")
+             + "&body=" + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
+    window.location.href = link;
+  }
+
 };
 
 ChartsCtrl.$inject = ['$scope','$location'];

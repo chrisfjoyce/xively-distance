@@ -62,7 +62,6 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       jsonObject,
       function(seriesByDatasource){
 
-        var _datapointErrors = [1,2];
         if (_datapointErrors != null) {
           if (_datapointErrors.length > 0) {
             $scope.xivelyDataInitComplete = false;
@@ -200,6 +199,13 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       _isBack = true;
     }
   };
+
+  $scope.sendEmail = function() {
+    var link = "mailto:?"
+             + "&subject=" + escape("Check my observation kit!!!")
+             + "&body=" + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
+    window.location.href = link;
+  }
 
 };
 
