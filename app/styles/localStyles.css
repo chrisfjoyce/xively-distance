@@ -162,6 +162,13 @@
   display: inline-block;
 }
 
+.h3-orange{
+  color:#F8B041;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 2em;
+  display: inline-block;
+}
+
 .normal-text{
   color:#838384;
   font-family: 'Ropa Sans', sans-serif;
@@ -190,6 +197,12 @@
   color:#414042;
   font-size: 1.3em;
   padding-right: 15px;
+}
+
+.modal-body-weathertype{
+  height: 300px;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .modal-header{
