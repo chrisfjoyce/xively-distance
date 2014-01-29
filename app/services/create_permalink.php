@@ -27,5 +27,5 @@
 
    header('Content-type: application/json');
    header('Access-Control-Allow-Origin: *');
-   echo "{\"code\":\"$unique_code\",\"sql\":\"$sql\"}";
+   echo "{\"code\":\"$unique_code\"}";
 ?>
