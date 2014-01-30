@@ -3,22 +3,22 @@
     <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
   </div>
 </div>
-<div style="background-color:#FFFFFF;overflow: hidden; width: 100%;" ng-show="xivelyDataInitComplete">
+<div class="smallBar-div" ng-show="xivelyDataInitComplete">
   <div class="container">
     <div class="row" ng-show="isPreview">
       <div class="col-md-3">
-        <h4>Kit preview</h4>
+        <span class="h3" style="vertical-align: bottom">KIT PREVIEW</span>
       </div>
       <div class="col-md-3">
-        <button class="btn btn-warning" ng-click="back()">
-          Edit
-          <i class="glyphicon glyphicon-cog"></i>
+        <button class="btn btn-edit" ng-click="back()">
+          <span style="vertical-align: middle;">EDIT&nbsp;<i class="glyphicon glyphicon-cog"/></span>
+          
         </button>
       </div>
       <div class="col-md-6">
         <div class="pull-right">
-          {{totalWeatherTypes()}} Weather Type(s) Selected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button class="btn btn-success" ng-click="generateFinalChart()">Generate</button>
+          <span class="state-bar-text">{{totalWeatherTypes()}} Weather Type(s) Selected</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-generate" ng-click="generateFinalChart()">GENERATE<img src="images/preview-btn-en.png"></button>
         </div>
       </div>
     </div>
