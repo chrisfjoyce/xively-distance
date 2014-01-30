@@ -4,7 +4,7 @@
       <span class="state-bar-green-text">Selected {{totalSelected()}}</span>
       <span class="state-bar-text"> of {{datastreams.length}} Weather Types </span>
       <span ng-switch="totalSelected()">
-        <button ng-switch-when="0"class="btn preview-btn-disabled">PREVIEW</button>
+        <button ng-switch-when="0"class="btn preview-btn-disabled">PREVIEW<img src="images/preview-btn-dis.png"></button>
         <button ng-switch-default class="btn preview-btn" ng-click="generateChart()">PREVIEW<img src="images/preview-btn-en.png"></button>
       </span>
     <span>

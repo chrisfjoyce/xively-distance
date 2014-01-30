@@ -55,7 +55,7 @@
 }
 
 .modal-dialog {
-  width: 800px;
+  width: 830px;
 }
 
 .red-inactive {
@@ -63,6 +63,11 @@
   font-weight: bolder;
   width:12px;
   display:inline-block;
+}
+
+.red-inactive-text {
+  color: red;
+  font-weight: bolder;
 }
 
 .green-active {
