@@ -232,7 +232,6 @@ var ChartsCtrl = function ($scope,$location) {
     selectedDevicesByDatasourceAndDatastream,
     function(seriesByDatasource){
       $location.path('/charts');
-      _backLocation = '/bySchool';
 
       for (var datastreamId in _seriesByDataSource) {
         if (seriesByDatasource[datastreamId] != null) {
