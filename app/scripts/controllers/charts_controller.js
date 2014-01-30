@@ -200,19 +200,8 @@ var ChartsCtrl = function ($scope,$location) {
     var startDateObject = new Date(Date.parse(datastream.startDate));
     var endDateObject = new Date(Date.parse(datastream.endDate));
     var todayObject = new Date();
-    if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000)) {
+    if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000) || Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
       $scope.addAlert("The start date should be less than end date.");
-      setTimeout(function() {
-        if ($scope.alerts.length > 0) {
-          $scope.alerts.splice(0, 1);
-          $scope.$apply();
-        }
-      }, 5000);
-      return;
-    }
-
-    if (Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
-      $scope.addAlert("Any date later than today is invalid.");
       setTimeout(function() {
         if ($scope.alerts.length > 0) {
           $scope.alerts.splice(0, 1);
