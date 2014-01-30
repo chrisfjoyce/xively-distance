@@ -1,6 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
+var TWO_YEAR_SECONDS = 60 * 60 * 24 * 365;
 var ChartsCtrl = function ($scope,$location) {
   $scope.alerts = [];
 
@@ -211,7 +212,18 @@ var ChartsCtrl = function ($scope,$location) {
     }
 
     if (Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
-      $scope.addAlert("The maximum value for end date is today");
+      $scope.addAlert("Any date later than today is invalid.");
+      setTimeout(function() {
+        if ($scope.alerts.length > 0) {
+          $scope.alerts.splice(0, 1);
+          $scope.$apply();
+        }
+      }, 5000);
+      return;
+    }
+
+    if (Math.floor(endDateObject.getTime()/1000) - Math.floor(startDateObject.getTime()/1000) >= TWO_YEAR_SECONDS) {
+      $scope.addAlert("You can only request a two year range.");
       setTimeout(function() {
         if ($scope.alerts.length > 0) {
           $scope.alerts.splice(0, 1);
