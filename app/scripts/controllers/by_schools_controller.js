@@ -12,6 +12,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   // });
   $rootScope.route = $route;
 
+  $scope.totalSchools = _schools.length;
   $scope.schoolsByLetter = _schoolsByLetter;
 
   // $scope.selectedDatastreamsBySchool={};
