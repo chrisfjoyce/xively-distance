@@ -256,8 +256,6 @@ var ChartsCtrl = function ($scope,$location) {
         console.log(seriesByDatasource[datastream.id]);
         _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
         $scope.chartDatastreams = _seriesByDataSource;
-        _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
-        _dataStreamsSelected = $scope.dataStreamsSelected;
         console.log(datastream);
       }
       $scope.$apply();
