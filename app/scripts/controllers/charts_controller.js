@@ -265,23 +265,6 @@ var ChartsCtrl = function ($scope,$location) {
     );
   };
 
-  $scope.generateChart = function(){
-    var defaultDates = getDefaultDates();
-    getDatapointHistory(
-    $scope.selectedDatastreamsBySchool,
-    function(seriesByDatasource){
-      $location.path('/charts');
-
-      _seriesByDataSource = seriesByDatasource;
-      _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
-      _dataStreamsSelected = $scope.dataStreamsSelected;
-      $scope.$apply();
-    },
-    defaultDates.startDate.toISOString(),
-    defaultDates.endDate.toISOString()
-    );
-  };
-
   $scope.open = function($event, datastreamId, type) {
     $event.preventDefault();
     $event.stopPropagation();
