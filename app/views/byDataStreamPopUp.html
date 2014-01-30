@@ -14,16 +14,16 @@
   <div class="modal-body" style="overflow:auto;overflow-x:hidden">
     <div class="row">
       <div ng-repeat='dataStream in dataStreams'>
-        <div class="input-group col-md-4">
+        <div class="input-group col-xs-4">
           <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
-            <span type="text" text-overflow class="col-md-9 modal-items-text" style="display:inline-block">
+            <span type="text" text-overflow class="col-xs-9 modal-items-text" style="display:inline-block">
               <span ng-switch on="dataStream.active" class="modal-active-inactive">
                 <span class="red-inactive" ng-switch-when="false" tooltip="{{toEuroFormat(dataStream.at)}}">●</span>
                 <span ng-switch-when="true" class="modal-active-inactive"/>
               </span>
               {{dataStream.label}}
             </span>
-            <span class="col-md-3" style="display:inline-block">
+            <span class="col-xs-3" style="display:inline-block">
               <span ng-switch on="selectedDatastreamsBySchool[dataStream.label][dataStream.deviceId]">
                 <span ng-switch-when="true"><span class='glyphicon glyphicon-check' style='color:#8dce91;font-size:17px'/></span>
                 <span ng-switch-default><span class='glyphicon glyphicon-unchecked' style='color:#8dce91;font-size:17px'/></span>
