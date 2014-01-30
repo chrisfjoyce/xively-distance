@@ -35,7 +35,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
     $scope.xivelyDataInitComplete = true;
     var getDataFromPermalink = function(code, callback) {
       $.get(
-        'http://xively-iostp-test.tierconnect.com/services/get_permalink.php?code=' + code,
+        './services/get_permalink.php?code=' + code,
         function(data){
           console.log('Data Received:');
           console.log(data);

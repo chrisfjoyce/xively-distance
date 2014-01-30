@@ -272,7 +272,7 @@ var ChartsCtrl = function ($scope,$location) {
     }
     var jsonData = JSON.stringify(jsonObject);
     $.post(
-      'http://xively-iostp-test.tierconnect.com/services/create_permalink.php',
+      './services/create_permalink.php',
       {
         'json_obskit': jsonData
       },
