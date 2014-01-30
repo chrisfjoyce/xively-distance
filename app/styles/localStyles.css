@@ -61,6 +61,8 @@
 .red-inactive {
   color: red;
   font-weight: bolder;
+  width:12px;
+  display:inline-block;
 }
 
 .green-active {
@@ -393,4 +395,21 @@
   background: #fbb040;
   padding: 0px 0px 0px 0px;
   text-decoration: none;
+}
+
+.schools-border-modal{
+  border-right: 1px solid #e5e5e5;
+}
+
+.schools-border-modal:nth-child(even){
+  border-right: 0px;
+}
+
+.span-overflow{
+  width:143px;
+  white-space: nowrap;
+  overflow:hidden;
+  display:inline-block;
+  float:right;
+  text-overflow:ellipsis;
 }
