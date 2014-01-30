@@ -1,6 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
+var TWO_YEAR_SECONDS = 60 * 60 * 24 * 365;
 var ChartsCtrl = function ($scope,$location) {
   $scope.alerts = [];
 
@@ -15,6 +16,9 @@ var ChartsCtrl = function ($scope,$location) {
   $scope.xivelyDataInitComplete = true;
 
   console.log(_seriesByDataSource);
+
+  $scope.loading = false;
+
   if(_seriesByDataSource == null){
     $location.path('/');
   } else {
@@ -199,7 +203,7 @@ var ChartsCtrl = function ($scope,$location) {
     var startDateObject = new Date(Date.parse(datastream.startDate));
     var endDateObject = new Date(Date.parse(datastream.endDate));
     var todayObject = new Date();
-    if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000)) {
+    if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000) || Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
       $scope.addAlert("The start date should be less than end date.");
       setTimeout(function() {
         if ($scope.alerts.length > 0) {
@@ -210,8 +214,8 @@ var ChartsCtrl = function ($scope,$location) {
       return;
     }
 
-    if (Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
-      $scope.addAlert("The maximum value for end date is today");
+    if (Math.floor(endDateObject.getTime()/1000) - Math.floor(startDateObject.getTime()/1000) >= TWO_YEAR_SECONDS) {
+      $scope.addAlert("You can only request a two year range.");
       setTimeout(function() {
         if ($scope.alerts.length > 0) {
           $scope.alerts.splice(0, 1);
@@ -227,21 +231,35 @@ var ChartsCtrl = function ($scope,$location) {
     getDatapointHistory(
     selectedDevicesByDatasourceAndDatastream,
     function(seriesByDatasource){
-      $location.path('/charts');
-      _backLocation = '/bySchool';
-
-      for (var datastreamId in _seriesByDataSource) {
-        if (seriesByDatasource[datastreamId] != null) {
-          seriesByDatasource[datastreamId].graph = _seriesByDataSource[datastreamId].graph;
-        }
+      var cnt = 0;
+      for(var key in seriesByDatasource){
+        cnt++;
       }
-      updateChart(seriesByDatasource);
-      console.log(seriesByDatasource[datastream.id]);
-      _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
-      $scope.chartDatastreams = _seriesByDataSource;
-      _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
-      _dataStreamsSelected = $scope.dataStreamsSelected;
-      console.log(datastream);
+      if(cnt == 0){
+        $scope.addAlert("The selected range does not contain data. Please select a new date range.");
+        setTimeout(function() {
+          if ($scope.alerts.length > 0) {
+            $scope.alerts.splice(0, 1);
+            $scope.$apply();
+          }
+        }, 5000);
+      }else{
+
+        $location.path('/charts');
+
+        for (var datastreamId in _seriesByDataSource) {
+          if (seriesByDatasource[datastreamId] != null) {
+            seriesByDatasource[datastreamId].graph = _seriesByDataSource[datastreamId].graph;
+          }
+        }
+        updateChart(seriesByDatasource);
+        console.log(seriesByDatasource[datastream.id]);
+        _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
+        $scope.chartDatastreams = _seriesByDataSource;
+        _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
+        _dataStreamsSelected = $scope.dataStreamsSelected;
+        console.log(datastream);
+      }
       $scope.$apply();
     }
     );
@@ -253,7 +271,6 @@ var ChartsCtrl = function ($scope,$location) {
     $scope.selectedDatastreamsBySchool,
     function(seriesByDatasource){
       $location.path('/charts');
-      _backLocation = '/bySchool';
 
       _seriesByDataSource = seriesByDatasource;
       _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;

@@ -15,6 +15,9 @@
   <span class="h3">
     <small>Please select the Weather Type(s) to create your observation kit:</small>
   </span>
+  <div class="text-center">
+    <img src="images/loading.gif" ng-show="loading" />
+  </div>
   <div class="row col-md-12 byDataType-div">
     <span ng-repeat='datastream in datastreams'>
       <button type="button" ng-click="open(datastream)" class="btn datastream-box col-md-4" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">

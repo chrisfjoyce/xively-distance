@@ -1,6 +1,11 @@
 <div style="background-color:#FFFFFF;overflow: hidden; width: 100%;">
-  <div class="container">
+  <div class="container text-center">
     <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+  </div>
+</div>
+<div style="background-color:#FFFFFF;overflow: hidden; width: 100%;">
+  <div class="container" ng-show="loading">
+    <img src="images/loading.gif" />
   </div>
 </div>
 <div class="smallBar-div" ng-show="xivelyDataInitComplete">

@@ -118,6 +118,13 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     });
     $scope.modal = modalInstance;
   };
+
+  if(_xivelyDataInitComplete) {
+    $scope.loading = false;
+  } else {
+    $scope.loading = true;
+  }
+
 };
 
 BySchoolsCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope'];

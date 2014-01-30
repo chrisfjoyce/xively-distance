@@ -15,6 +15,9 @@
   <span class="h3">
     <small>Please select schools to create your observation kit:</small>
   </span>
+  <div class="text-center">
+    <img src="images/loading.gif" ng-show="loading" />
+  </div>
   <div class="row">
     <div class="col-md-12" ng-repeat='(letter,schools) in schoolsByLetter'>
         <div class="row">
