@@ -4,6 +4,8 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   console.log(_seriesByDataSource);
   console.log($routeParams.code);
 
+  $scope.loading = true;
+
   var absUrl = $location.absUrl();
   $scope.baseUrl = absUrl.substring(0, absUrl.indexOf('#'));
 
@@ -42,6 +44,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
           if (data.error != null) {
             $scope.addAlert('Permalink code error: ' + data.error.replace(/\_/g,' ') + '. You will be redirected to Create New Observation Kit in 5 seconds.');
             $scope.xivelyDataInitComplete = false;
+            $scope.loading = false;
             setTimeout(function() {
               $location.path('/');
               $scope.$apply();
@@ -84,6 +87,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
         for (var datastreamId in _seriesByDataSource){
           _seriesByDataSource[datastreamId].id = datastreamId;
         }
+        $scope.loading = false;
         $scope.$apply();
         setTimeout(function() {
             var buildChartToApplyPermalink = function() {

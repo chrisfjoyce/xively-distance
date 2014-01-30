@@ -15,6 +15,9 @@ var ChartsCtrl = function ($scope,$location) {
   $scope.xivelyDataInitComplete = true;
 
   console.log(_seriesByDataSource);
+
+  $scope.loading = false;
+
   if(_seriesByDataSource == null){
     $location.path('/');
   } else {
