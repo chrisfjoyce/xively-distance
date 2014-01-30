@@ -256,7 +256,6 @@ var ChartsCtrl = function ($scope,$location) {
     $scope.selectedDatastreamsBySchool,
     function(seriesByDatasource){
       $location.path('/charts');
-      _backLocation = '/bySchool';
 
       _seriesByDataSource = seriesByDatasource;
       _selectedDatastreamsBySchool=$scope.selectedDatastreamsBySchool;
