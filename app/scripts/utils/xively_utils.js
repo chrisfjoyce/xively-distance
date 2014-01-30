@@ -341,7 +341,10 @@ var initXivelyData = function(){
     'http://api.xively.com/v2/feeds?user=iostp&tag=L1V3',
     {'x-apikey': XIVELY_API_KEY},
     processXivelyFeedData
-  );
+  ).fail(function(data) {
+    console.log("fail");
+    console.log(JSON.stringify(data));
+  });
 };
 
 var getDefaultDates = function() {
