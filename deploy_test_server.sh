@@ -15,6 +15,8 @@ printf %s $(date --date="4 hours ago" +%b_%d_%Y@%H_%M_%S) > /tmp/date.txt
 cd /tmp/app
 zip -9 -r /tmp/xively-iostp-$(cat /tmp/date.txt).zip *
 
+cp /tmp/xively-iostp-$(cat /tmp/date.txt).zip ~/xively-iostp-$(cat /tmp/date.txt).zip
+
 ssh -i ~/xively-key.pem ec2-user@ec2-54-242-146-91.compute-1.amazonaws.com 'rm -rf ~/xively-iostp-www/*'
 scp -i ~/xively-key.pem  /tmp/xively-iostp-$(cat /tmp/date.txt).zip  ec2-user@ec2-54-242-146-91.compute-1.amazonaws.com:~/xively-iostp-www
 ssh -i ~/xively-key.pem ec2-user@ec2-54-242-146-91.compute-1.amazonaws.com 'cp ~/xively-iostp-www/*.zip ~/xively-iostp-daily-builds'
