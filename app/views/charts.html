@@ -23,14 +23,18 @@
       </div>
     </div>
     <div class="row" ng-show="!isPreview">
-      <div class="col-md-4">
-        <span class="state-bar-text">PUBLIC LINK: </span>
-        <input type="text" ng-readonly="true" value="{{baseUrl}}#/permalink/{{permalink}}" />
-        <button ng-show="false">
-          <i class="glyphicon glyphicon-link"></i>
-        </button>
+      <div class="col-md-5">
+        <div class="row">
+          <span class="state-bar-text col-md-4">PUBLIC LINK: </span>
+          <div class="col-md-8">
+            <input type="text" ng-readonly="true" value="{{baseUrl}}#/permalink/{{permalink}}" class="form-control" onclick="this.select();" />
+          </div>
+          <button ng-show="false">
+            <i class="glyphicon glyphicon-link"></i>
+          </button>
+        </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <button class="btn btn-share pull-right" ng-click="sendEmail()">
           SHARE VIA EMAIL
           <i class="glyphicon glyphicon-envelope"></i>
