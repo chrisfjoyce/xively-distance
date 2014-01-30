@@ -1,6 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
+var TWO_YEAR_SECONDS = 60 * 60 * 24 * 365;
 var ChartsCtrl = function ($scope,$location) {
   $scope.alerts = [];
 
@@ -201,8 +202,9 @@ var ChartsCtrl = function ($scope,$location) {
     var endDate = new Date(Date.parse(datastream.endDate)).toISOString();
     var startDateObject = new Date(Date.parse(datastream.startDate));
     var endDateObject = new Date(Date.parse(datastream.endDate));
-    if (startDateObject.getTime() - endDateObject.getTime() > 0) {
-      $scope.addAlert("The end date should be before the start date.");
+    var todayObject = new Date();
+    if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000) || Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
+      $scope.addAlert("The start date should be less than end date.");
       setTimeout(function() {
         if ($scope.alerts.length > 0) {
           $scope.alerts.splice(0, 1);
@@ -211,6 +213,19 @@ var ChartsCtrl = function ($scope,$location) {
       }, 5000);
       return;
     }
+
+    if (Math.floor(endDateObject.getTime()/1000) - Math.floor(startDateObject.getTime()/1000) >= TWO_YEAR_SECONDS) {
+      $scope.addAlert("You can only request a two year range.");
+      setTimeout(function() {
+        if ($scope.alerts.length > 0) {
+          $scope.alerts.splice(0, 1);
+          $scope.$apply();
+        }
+      }, 5000);
+      return;
+    }
+
+
     selectedDevicesByDatasourceAndDatastream[datastream.label].start_date = startDate;
     selectedDevicesByDatasourceAndDatastream[datastream.label].end_date = endDate;
     getDatapointHistory(
