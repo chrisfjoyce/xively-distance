@@ -24,21 +24,21 @@
     </div>
     <div class="row" ng-show="!isPreview">
       <div class="col-md-4">
-        Public link:
+        <span class="state-bar-text">PUBLIC LINK: </span>
         <input type="text" ng-disabled="true" value="{{baseUrl}}#/permalink/{{permalink}}" />
         <button ng-show="false">
           <i class="glyphicon glyphicon-link"></i>
         </button>
       </div>
       <div class="col-md-4">
-        <button class="btn btn-warning pull-right" ng-click="sendEmail()">
-          Share via email
+        <button class="btn btn-share pull-right" ng-click="sendEmail()">
+          SHARE VIA EMAIL
           <i class="glyphicon glyphicon-envelope"></i>
         </button>
       </div>
       <div class="col-md-4">
-        <button ng-click='export();' class="btn btn-success pull-right">
-          Export Data Charts
+        <button ng-click='export();' class="btn btn-export pull-right">
+          EXPORT DATA CHARTS
           <i class="glyphicon glyphicon-download-alt"></i>
         </button>
         <br />
