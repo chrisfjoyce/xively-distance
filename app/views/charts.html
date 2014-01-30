@@ -25,7 +25,7 @@
     <div class="row" ng-show="!isPreview">
       <div class="col-md-4">
         <span class="state-bar-text">PUBLIC LINK: </span>
-        <input type="text" ng-disabled="true" value="{{baseUrl}}#/permalink/{{permalink}}" />
+        <input type="text" ng-readonly="true" value="{{baseUrl}}#/permalink/{{permalink}}" />
         <button ng-show="false">
           <i class="glyphicon glyphicon-link"></i>
         </button>
