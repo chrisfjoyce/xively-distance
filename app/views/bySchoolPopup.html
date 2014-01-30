@@ -8,7 +8,7 @@
       {{active}} Active
       &nbsp;&nbsp;&nbsp;
       <span class="red-inactive">●</span>
-      {{inactive}} Inactive
+      {{inactive}} Inactive (has not reported in 1.5 hrs)
     </small>
   </div>
   <div class="modal-body">
@@ -39,7 +39,7 @@
               <div class="row">
                 <div class="input-group col-xs-9">
                   <span ng-switch on="device.active" style="width:12px;display:inline-block;float:left">
-                    <span ng-switch-when="false" class="red-inactive" tooltip="{{toEuroFormat(device.at)}}">●</span>
+                    <span ng-switch-when="false" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">●</span>
                     <span ng-switch-when="true" class="red-inactive" />
                   </span>
                   <span class="span-overflow">{{device.location.name}}</span>

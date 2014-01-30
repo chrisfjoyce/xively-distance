@@ -8,7 +8,7 @@
         {{active}} Active
         &nbsp;&nbsp;&nbsp;
         <span class="red-inactive">●</span>
-        {{inactive}} Inactive
+        {{inactive}} Inactive (has not reported in 1.5 hrs)
       </small>
   </div>
   <div class="modal-body" style="overflow:auto;overflow-x:hidden">
@@ -18,7 +18,7 @@
           <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
             <span type="text" text-overflow class="col-xs-9 modal-items-text" style="display:inline-block">
               <span ng-switch on="dataStream.active" class="modal-active-inactive">
-                <span class="red-inactive" ng-switch-when="false" tooltip="{{toEuroFormat(dataStream.at)}}">●</span>
+                <span class="red-inactive" ng-switch-when="false" tooltip-placement="right" tooltip="{{toEuroFormat(dataStream.at)}}">●</span>
                 <span ng-switch-when="true" class="modal-active-inactive"/>
               </span>
               {{dataStream.label}}
