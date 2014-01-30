@@ -15,7 +15,7 @@
     <div class="row">
       <div ng-repeat='dataStream in dataStreams'>
         <div class="input-group col-xs-4">
-          <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
+          <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);" style="cursor:pointer">
             <span type="text" text-overflow class="col-xs-9 modal-items-text" style="display:inline-block">
               <span ng-switch on="dataStream.active" class="modal-active-inactive">
                 <span class="red-inactive" ng-switch-when="false" tooltip-placement="right" tooltip="{{toEuroFormat(dataStream.at)}}">●</span>

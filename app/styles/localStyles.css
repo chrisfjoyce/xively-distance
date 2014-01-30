@@ -184,6 +184,12 @@
   display: inline-block;
 }
 
+.h3-white{
+  color:white;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 2em;
+}
+
 .h3-orange-modal{
   color:#F8B041;
   font-family: 'Ropa Sans', sans-serif;
@@ -432,4 +438,35 @@
   display:inline-block;
   float:right;
   text-overflow:ellipsis;
+}
+
+.charts-title-bar{
+  background-color: #414042;
+  color: white;
+  height: 40px;
+  padding-top: 2px;
+}
+
+.calendar-btn-charts{
+  background: white;
+  display: inline-block;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 0;
+}
+
+.date-control-charts{
+  border: 0px solid #cccccc;
+  border-radius: 0;
+}
+
+.date-control-charts-left{
+  margin-left: 12px;
+  border: 0px solid #cccccc;
+  border-radius: 0;
 }
