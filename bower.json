@@ -16,6 +16,7 @@
     "rickshaw": "1.4.6",
     "d3": "3.4.0",
     "jquery-xdr": "~1.0.0",
+    "aight": "~1.2.2",
     "xively-js": "http://d23cj0cdvyoxg0.cloudfront.net/xivelyjs-1.0.4.min.js"
   },
   "devDependencies": {
