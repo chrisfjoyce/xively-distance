@@ -375,6 +375,12 @@
   text-decoration: none;
 }
 
+.btn-edit:hover {
+  background: #FAA31F;
+  text-decoration: none;
+  color:#ffffff;
+}
+
 .btn-generate {
   height:32px;
   width:162px;
@@ -389,6 +395,12 @@
   background: #6BBF73;
   padding: 0px 0px 0px 0px;
   text-decoration: none;
+}
+
+.btn-generate:hover {
+  background: #58d6a2;
+  text-decoration: none;
+  color:#ffffff;
 }
 
 .btn-export {
@@ -407,6 +419,12 @@
   text-decoration: none;
 }
 
+.btn-export:hover {
+  background: #58d6a2;
+  text-decoration: none;
+  color:#ffffff;
+}
+
 .btn-share {
   height:32px;
   width:220px;
@@ -421,6 +439,12 @@
   background: #fbb040;
   padding: 0px 0px 0px 0px;
   text-decoration: none;
+}
+
+.btn-share:hover {
+  background: #58d6a2;
+  text-decoration: none;
+  color:#ffffff;
 }
 
 .schools-border-modal{
@@ -469,4 +493,16 @@
   margin-left: 12px;
   border: 0px solid #cccccc;
   border-radius: 0;
+}
+
+.modal-item{
+  cursor:pointer;
+}
+
+.modal-item:hover{
+  color:#b2b2b2;
+}
+
+.modal-item:active{
+  color:#6BBF73;
 }
