@@ -22,6 +22,10 @@
    color: #414042;
 }
 
+.school-box:hover{
+   background-color:#e5e5e5;
+}
+
 .school-box-selected{
   -webkit-box-shadow: 0 5px 0px 0px #8DCF91;
   -moz-box-shadow:    0 5px 0px 0px #8DCF91;
@@ -43,6 +47,10 @@
    font-size: 1.5em;
    line-height: 22px;
    color: #414042;
+}
+
+.datastream-box:hover{
+   background-color:#e5e5e5;
 }
 
 .datastream-box-selected{
@@ -173,6 +181,13 @@
   color:#F8B041;
   font-family: 'Ropa Sans', sans-serif;
   font-size: 2em;
+  display: inline-block;
+}
+
+.h3-orange-modal{
+  color:#F8B041;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 1.35em;
   display: inline-block;
 }
 
