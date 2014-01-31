@@ -71,7 +71,7 @@
             <span class="input-group-btn">
               <button class="btn calendar-btn-charts" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
-            <input type="text" class="form-control date-control-charts-left" ng-model="datastream.endDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
+            <input type="text" class="form-control date-control-charts-left" ng-model="datastream.endDate" max="maxDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
             <span class="input-group-btn">
               <button class="btn calendar-btn-charts" ng-click="open($event, datastream.id, 'end')"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>

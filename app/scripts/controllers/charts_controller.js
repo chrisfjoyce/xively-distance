@@ -46,6 +46,8 @@ var ChartsCtrl = function ($scope,$location) {
     'end' : []
   };
 
+  $scope.maxDate = new Date();
+
   $scope.isPreview = true;
 
   // if (_datapointErrors != null) {
