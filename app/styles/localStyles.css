@@ -257,6 +257,8 @@
   background-color:#FFFFFF;
   overflow: hidden;
   width: 100%;
+  position: fixed;
+  z-index: 100;
 }
 
 .home-div{
@@ -507,4 +509,17 @@
 
 .modal-item:active{
   color:#6BBF73;
+}
+
+.push-content{
+  margin-top: 50px;
+}
+
+.school-item-text{
+  white-space: nowrap;
+  width: 240px;
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height: 17px;
 }
