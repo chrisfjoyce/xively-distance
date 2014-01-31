@@ -83,25 +83,30 @@ var buildChart = function(seriesByDataSource) {
       series[i].hasNotReported = Math.round(Math.abs(now.getTime() - lastReported.getTime()) / 1000 / 3600 * 100) / 100;
       series[i].lastReported = _toEuroFormat(series[i].at);
     }
-    var graph = new Rickshaw.Graph( {
-      element: document.querySelector('#graph-' + datastreamId),
-      height: 200,
-      width: 600,
-      renderer: 'line',
-      min: parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
-      max: parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
-      padding: {
-        top: 0.02,
-        right: 0.02,
-        bottom: 0.02,
-        left: 0.02
-      },
-      series: series
-    });
 
-    seriesByDataSource[datastreamId].graph = graph;
+    console.log(seriesByDataSource[datastreamId].graph);
+    if (seriesByDataSource[datastreamId].graph == null) {
+      var graph = new Rickshaw.Graph( {
+        element: document.querySelector('#graph-' + datastreamId),
+        height: 200,
+        width: 600,
+        renderer: 'line',
+        min: parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
+        max: parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
+        padding: {
+          top: 0.02,
+          right: 0.02,
+          bottom: 0.02,
+          left: 0.02
+        },
+        series: series
+      });
 
-    graph.render();
+      graph.render();
+      
+      seriesByDataSource[datastreamId].graph = graph;
+    }
+
 
     var ticksTreatment = 'glow';
 
