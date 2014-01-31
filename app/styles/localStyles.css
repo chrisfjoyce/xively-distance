@@ -9,7 +9,7 @@
 }
 
 .school-box{
-   width:283px; 
+   width:283px;
   -webkit-box-shadow: 0 5px 0px 0px #8DCF91;
   -moz-box-shadow:    0 5px 0px 0px #8DCF91;
    box-shadow:        0 5px 0px 0px #8DCF91;
@@ -36,7 +36,7 @@
 }
 
 .datastream-box{
-   width:270px; 
+   width:270px;
   -webkit-box-shadow: 0 5px 0px 0px #F8B041;
   -moz-box-shadow:    0 5px 0px 0px #F8B041;
    box-shadow:        0 5px 0px 0px #F8B041;
@@ -142,7 +142,7 @@
 }
 
 .h1-title{
-  color: white !important; 
+  color: white !important;
   font-family: 'Ropa Sans', sans-serif;
 }
 .h1-title:hover{
@@ -442,8 +442,18 @@
 }
 
 .btn-share:hover {
-  background: #58d6a2;
+  background: #FAA31F;
   text-decoration: none;
+  color:#ffffff;
+}
+
+.btn-share:active {
+  background: #FAA31F;
+  text-decoration: none;
+  color:#ffffff;
+}
+
+.btn-share:visited {
   color:#ffffff;
 }
 
