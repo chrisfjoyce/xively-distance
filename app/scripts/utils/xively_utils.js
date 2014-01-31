@@ -60,7 +60,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
   var selectedDevicesCount = 0;
   _retrievedDevicesCount = 0;
 
-  console.warn(selectedDevicesByDatastream);
+  //console.log(selectedDevicesByDatastream);
   for(var datastreamLabel in selectedDevicesByDatastream){
     var datasourceConf = {
       'datastream_name' : datastreamLabel,
