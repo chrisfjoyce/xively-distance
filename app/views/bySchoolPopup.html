@@ -23,7 +23,7 @@
                   <span ng-switch-when="false" class="red-inactive" tooltip="{{toEuroFormat(device.at)}}">●</span>
                   <span ng-switch-when="true" style="width:8px;display:inline-block"/>
                 </span>
-                <span class="span-overflow">{{device.location.name}}</span>
+                <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
               </div>
               <div class="input-group col-xs-2 modal-item" style="display:inline-block">
                 <span class='glyphicon glyphicon-check' style='color:#8dce91;font-size:17px'/>
@@ -42,7 +42,7 @@
                     <span ng-switch-when="false" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">●</span>
                     <span ng-switch-when="true" class="red-inactive" />
                   </span>
-                  <span class="span-overflow">{{device.location.name}}</span>
+                  <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
                 </div>
                 <div class="input-group col-md-3 modal-item">
                   <span class='glyphicon glyphicon-unchecked' style='color:#8dce91;font-size:17px'/>
