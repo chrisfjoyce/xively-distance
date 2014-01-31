@@ -9,41 +9,41 @@
 <div class="smallBar-div" ng-show="xivelyDataInitComplete && !loading">
   <div class="container">
     <div class="row" ng-show="isPreview">
-      <div class="col-md-3">
-        <span class="h3" style="vertical-align: bottom">KIT PREVIEW</span>
+      <div class="col-xs-3">
+        <span class="h3" style="vertical-align:bottom;display:inline-block">KIT PREVIEW</span>
       </div>
-      <div class="col-md-3">
+      <div class="col-xs-3">
         <button class="btn btn-edit" ng-click="back()">
           <span style="vertical-align: middle;">EDIT&nbsp;<i class="glyphicon glyphicon-cog"/></span>
 
         </button>
       </div>
-      <div class="col-md-6">
-        <div class="pull-right">
-          <span class="state-bar-text">{{totalWeatherTypes()}} Weather Type(s) Selected</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class="col-xs-6">
+        <div class="smallBar-div-text">
+          <span class="state-bar-text">{{totalWeatherTypes()}} Weather Type(s) Selected</span>
           <button class="btn btn-generate" ng-click="generateFinalChart()">GENERATE<img src="images/preview-btn-en.png"></button>
         </div>
       </div>
     </div>
     <div class="row" ng-show="!isPreview">
-      <div class="col-md-5">
+      <div class="col-xs-5">
         <div class="row">
-          <span class="state-bar-text col-md-4">PUBLIC LINK: </span>
-          <div class="col-md-8">
-            <input type="text" ng-readonly="true" value="{{baseUrl}}#/permalink/{{permalink}}" class="form-control" onclick="this.select();" style="cursor: text;" />
+          <span class="state-bar-text col-xs-4">PUBLIC LINK: </span>
+          <div class="col-xs-8">
+            <input type="text" ng-readonly="true" value="{{baseUrl}}#/permalink/{{permalink}}" class="form-control" onclick="this.select();" style="cursor: text;display:inline-block" />
           </div>
           <button ng-show="false">
             <i class="glyphicon glyphicon-link"></i>
           </button>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-xs-3">
         <button class="btn btn-share pull-right" ng-click="sendEmail()">
           SHARE VIA EMAIL
           <i class="glyphicon glyphicon-envelope"></i>
         </button>
       </div>
-      <div class="col-md-4">
+      <div class="col-xs-4">
         <button ng-click='export();' class="btn btn-export pull-right">
           EXPORT DATA CHARTS
           <i class="glyphicon glyphicon-download-alt"></i>
@@ -71,7 +71,7 @@
             <span class="input-group-btn">
               <button class="btn calendar-btn-charts" ng-click="open($event, datastream.id, 'start')"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
-            <input type="text" class="form-control date-control-charts-left" ng-model="datastream.endDate" max="maxDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
+            <input type="text" class="form-control date-control-charts-left" ng-model="datastream.endDate" datepicker-popup="fullDate" is-open="isOpened['end'][datastream.id]" />
             <span class="input-group-btn">
               <button class="btn calendar-btn-charts" ng-click="open($event, datastream.id, 'end')"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
@@ -96,7 +96,7 @@
           <div class="row" style="height: 234px; overflow: auto;">
             <div class="col-xs-12" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series" style="padding-top: 5px">
               <div class="row" ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)" ng-click="enableDisable(datastream, serie)" style="border: solid; border-radius: 6px; border-width: {{serie.borderWidth}}; border-color: {{serie.borderColor}}; margin-bottom: 5px;">
-                <i class="glyphicon glyphicon-stop col-xs-2" ng-style="getSerieStyle(serie)"></i>
+                <i class="glyphicon glyphicon-stop col-xs-2" style="color: {{serie.color}}"></i>
                 <span class="col-xs-6">{{serie.name}}</span>
                 <span ng-switch on="serie.disabled" class="col-xs-2">
                   <i ng-switch-when="true" class="glyphicon glyphicon-eye-close" style="color: #777777"></i>

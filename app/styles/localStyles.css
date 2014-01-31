@@ -259,6 +259,14 @@
   width: 100%;
   position: fixed;
   z-index: 100;
+  min-width: 960px;
+}
+
+.smallBar-div-text{
+  position: absolute;
+  display: inline-block;
+  white-space: nowrap;
+  margin-left: 12%;
 }
 
 .home-div{
@@ -446,7 +454,7 @@
 }
 
 .btn-share:hover {
-  background: #58d6a2;
+  background: #fbb040;
   text-decoration: none;
   color:#ffffff;
 }

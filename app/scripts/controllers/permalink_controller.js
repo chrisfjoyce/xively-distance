@@ -37,7 +37,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
     $scope.xivelyDataInitComplete = true;
     var getDataFromPermalink = function(code, callback) {
       $.get(
-        './services/get_permalink.php?code=' + code,
+        'http://iostp.org/services/get_permalink.php?code=' + code,
         function(data){
           console.log('Data Received:');
           console.log(data);
