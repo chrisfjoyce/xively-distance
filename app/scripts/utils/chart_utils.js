@@ -103,7 +103,7 @@ var buildChart = function(seriesByDataSource) {
       });
 
       graph.render();
-      
+
       seriesByDataSource[datastreamId].graph = graph;
     }
 
@@ -187,6 +187,8 @@ var updateChart = function(seriesByDataSource) {
       series[i].enabledColor = series[i].color;
       series[i].disabledColor = d3.interpolateRgb(series[i].color, d3.rgb('#d8d8d8'))(0.9).toString();
       series[i].unit = data.unit;
+      var lastReported = new Date(Date.parse(series[i].at));
+      var now = new Date();
       series[i].hasNotReported = Math.round(Math.abs(now.getTime() - lastReported.getTime()) / 1000 / 3600 * 100) / 100;
       series[i].lastReported = _toEuroFormat(series[i].at);
     }
