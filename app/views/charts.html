@@ -3,12 +3,10 @@
     <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
   </div>
 </div>
-<div style="background-color:#FFFFFF;overflow: hidden; width: 100%;">
-  <div class="container" ng-show="loading">
-    <img src="images/loading.gif" />
-  </div>
+<div ng-show="loading" style="position:absolute; top: 40%; left: 50%">
+  <img src="images/loading.gif" />
 </div>
-<div class="smallBar-div" ng-show="xivelyDataInitComplete">
+<div class="smallBar-div" ng-show="xivelyDataInitComplete && !loading">
   <div class="container">
     <div class="row" ng-show="isPreview">
       <div class="col-md-3">
@@ -59,7 +57,7 @@
   </div>
 </div>
 <br />
-<div class="container" ng-show="xivelyDataInitComplete">
+<div class="container" ng-show="xivelyDataInitComplete && !loading">
   <div class="row">
     <div ng-repeat="datastream in chartDatastreams">
       <div class="col-xs-12 charts-title-bar">

@@ -17,7 +17,7 @@ var ChartsCtrl = function ($scope,$location) {
 
   console.log(_seriesByDataSource);
 
-  $scope.loading = false;
+  $scope.loading = true;
 
   if(_seriesByDataSource == null){
     $location.path('/');
@@ -134,6 +134,7 @@ var ChartsCtrl = function ($scope,$location) {
   setTimeout(function() {
       var buildChartToApply = function() {
         buildChart(_seriesByDataSource);
+        $scope.loading = false;
       };
       $scope.$apply(buildChartToApply);
     },

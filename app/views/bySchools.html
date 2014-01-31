@@ -1,3 +1,6 @@
+<div ng-show="loading" style="position:absolute; top: 40%; left: 50%">
+  <img src="images/loading.gif" />
+</div>
 <div class="smallBar-div">
   <div class="container">
     <span class="pull-right">
@@ -15,10 +18,7 @@
   <span class="h3">
     <small>Please select schools to create your observation kit:</small>
   </span>
-  <div class="text-center">
-    <img src="images/loading.gif" ng-show="loading" />
-  </div>
-  <div class="row">
+  <div class="row" ng-show="!loading">
     <div class="col-md-12" ng-repeat='(letter,schools) in schoolsByLetter'>
         <div class="row">
           <span class="h3-single-letter">{{letter}}</span>

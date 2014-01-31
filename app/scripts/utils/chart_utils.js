@@ -86,6 +86,7 @@ var buildChart = function(seriesByDataSource) {
     var graph = new Rickshaw.Graph( {
       element: document.querySelector('#graph-' + datastreamId),
       height: 200,
+      width: 600,
       renderer: 'line',
       min: parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
       max: parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),

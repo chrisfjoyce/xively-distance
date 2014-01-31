@@ -35,6 +35,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   };
 
   $scope.generateChart = function(){
+    $scope.loading = true;
     var defaultDates = getDefaultDates();
     for(var datastreamLabel in $scope.selectedDevicesByDatasource){
       $scope.selectedDevicesByDatasource[datastreamLabel].start_date = defaultDates.startDate.toISOString();

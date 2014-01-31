@@ -47,6 +47,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   };
 
   $scope.generateChart = function(){
+    $scope.loading = true;
     var defaultDates = getDefaultDates();
 
     for(var datastreamLabel in $scope.selectedDatastreamsBySchool){
