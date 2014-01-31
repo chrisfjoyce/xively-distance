@@ -13,6 +13,10 @@ var ChartsCtrl = function ($scope,$location) {
     $scope.alerts.splice(index, 1);
   };
 
+  $scope.getSerieStyle = function(serie){
+    return {'color': serie.color};
+  };
+
   $scope.xivelyDataInitComplete = true;
 
   console.log(_seriesByDataSource);

@@ -96,7 +96,7 @@
           <div class="row" style="height: 234px; overflow: auto;">
             <div class="col-xs-12" id="legend-{{datastream.id}}" ng-repeat="serie in datastream.series" style="padding-top: 5px">
               <div class="row" ng-mouseover="over(datastream, serie)" ng-mouseleave="leave(datastream, serie)" ng-click="enableDisable(datastream, serie)" style="border: solid; border-radius: 6px; border-width: {{serie.borderWidth}}; border-color: {{serie.borderColor}}; margin-bottom: 5px;">
-                <i class="glyphicon glyphicon-stop col-xs-2" style="color: {{serie.color}}"></i>
+                <i class="glyphicon glyphicon-stop col-xs-2" ng-style="getSerieStyle(serie)"></i>
                 <span class="col-xs-6">{{serie.name}}</span>
                 <span ng-switch on="serie.disabled" class="col-xs-2">
                   <i ng-switch-when="true" class="glyphicon glyphicon-eye-close" style="color: #777777"></i>
