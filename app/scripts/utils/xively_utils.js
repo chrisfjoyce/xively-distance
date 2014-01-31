@@ -310,7 +310,7 @@ var processXivelyFeedData = function(data){
   //console.log(_schools)
 
   var rootScope = angular.element('#ngApp').scope();
-  if(rootScope.route != null){
+  if(rootScope != null && rootScope.route != null){
     var currentController = rootScope.route.current.$$route.controller;
     console.log(currentController);
     if(currentController == 'BySchoolsCtrl' || currentController == 'ByDataTypeCtrl'){
