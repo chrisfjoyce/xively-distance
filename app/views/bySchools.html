@@ -14,7 +14,7 @@
   </div>
 </div>
 <br/>
-<div class="container">
+<div class="container push-content">
   <span class="h3">
     <small>Please select schools to create your observation kit:</small>
   </span>
@@ -25,7 +25,7 @@
         </div>
         <span ng-repeat='school in schools'>
           <button type="button" ng-click="open(school.schoolName)" class="btn school-box col-md-3" ng-class="{'school-box-selected':dataStreamsSelected[school.schoolName]}">
-            {{school.schoolName }}
+            <span title="{{school.schoolName }}" class="school-item-text">{{school.schoolName }}</span>
             <br/>
             <small style="color:#93C748" ng-if="dataStreamsSelected[school.schoolName]">Selected({{dataStreamsSelected[school.schoolName]}}) of </small>
             <small style="color:#97989A">{{datastreamsBySchool[school.schoolName].length}} Weather Types </small>

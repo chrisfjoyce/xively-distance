@@ -14,14 +14,14 @@
   </div>
 </div>
 <br/>
-<div class="container">
+<div class="container push-content">
   <span class="h3">
     <small>Please select the Weather Type(s) to create your observation kit:</small>
   </span>
   <div class="row col-md-12 byDataType-div" ng-show="!loading">
     <span ng-repeat='datastream in datastreams'>
       <button type="button" ng-click="open(datastream)" class="btn datastream-box col-md-4" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">
-        {{datastream}}
+        <span title="{{datastream}}" class="school-item-text">{{datastream}}</span>
         <br/>
         <small style="color:#93C748" ng-if="devicesSelected[datastream]">
           Selected({{devicesSelected[datastream]}}) of 
