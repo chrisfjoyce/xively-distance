@@ -109,7 +109,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
         historyCallback
       );
       */
-      var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=86400&start=' + startDateISO + '&end=' + endDateISO + '&interval_type=discrete';
+      var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=21600&start=' + startDateISO + '&end=' + endDateISO;
       $.get(
         url,
         {'x-apikey': XIVELY_API_KEY},
