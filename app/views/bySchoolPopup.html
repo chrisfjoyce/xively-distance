@@ -3,7 +3,7 @@
     <h3 class="h3-orange">{{selectedDS}}</h3>
     <br/>
     <small class="normal-text">
-      Schools
+      Locations
       &nbsp;&nbsp;&nbsp;
       {{active}} Active
       &nbsp;&nbsp;&nbsp;
@@ -14,7 +14,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-xs-4 datastream_background modal-body-weathertype">
-        <h3 class="h3-orange-modal">School(s) selected: {{devicesSelected[selectedDS]}} of {{devices.length}}</h3>
+        <h3 class="h3-orange-modal">Location(s) selected: {{devicesSelected[selectedDS]}} of {{devices.length}}</h3>
         <div class="row">
           <div ng-repeat='device in devices'>
             <div ng-if="selectedDevicesByDatasource[selectedDS][device.id] == true" ng-click="setSelected($event, device.id,false)">

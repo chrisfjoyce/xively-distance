@@ -5,7 +5,7 @@
   <div class="container">
     <span class="pull-right">
       <span class="state-bar-green-text">Selected {{totalSelected()}}</span>
-      <span class="state-bar-text"> of {{datastreams.length}} Weather Types </span>
+      <span class="state-bar-text"> of {{datastreams.length}} Data Types </span>
       <span ng-switch="totalSelected()">
         <button ng-switch-when="0"class="btn preview-btn-disabled">PREVIEW<img src="images/preview-btn-dis.png"></button>
         <button ng-switch-default class="btn preview-btn" ng-click="generateChart()">PREVIEW<img src="images/preview-btn-en.png"></button>
@@ -16,7 +16,7 @@
 <br/>
 <div class="container push-content">
   <span class="h3">
-    <small>Please select the Weather Type(s) to create your observation kit:</small>
+    <small>Please select the Data Type(s) to create your observation kit:</small>
   </span>
   <div class="row col-md-12 byDataType-div" ng-show="!loading">
     <span ng-repeat='datastream in datastreams'>
@@ -27,7 +27,7 @@
           Selected({{devicesSelected[datastream]}}) of 
         </small>
         <small style="color:#97989A">
-          {{devicesByDatastream[datastream].length}} Schools
+          {{devicesByDatastream[datastream].length}} Locations
         </small>
       </button>
     </span>
