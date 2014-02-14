@@ -30,16 +30,16 @@ var ChartsCtrl = function ($scope,$location) {
     for (var serie in _seriesByDataSource) {
       seriesLength++;
     }
-    if (seriesLength == 0) {
-      $scope.xivelyDataInitComplete = false;
-      $scope.addAlert("None of the Schools contains data to be displayed. You will be redirected to Edit the Observation Kit in 5 seconds.");
-      setTimeout(function() {
-        if ($scope.alerts.length > 0) {
-          $scope.back();
-          $scope.$apply();
-        }
-      }, 5000);
-    }
+    // if (seriesLength == 0) {
+    //   $scope.xivelyDataInitComplete = false;
+    //   $scope.addAlert("None of the Schools contains data to be displayed. You will be redirected to Edit the Observation Kit in 5 seconds.");
+    //   setTimeout(function() {
+    //     if ($scope.alerts.length > 0) {
+    //       $scope.back();
+    //       $scope.$apply();
+    //     }
+    //   }, 5000);
+    // }
   }
 
   var absUrl = $location.absUrl();
@@ -137,15 +137,22 @@ var ChartsCtrl = function ($scope,$location) {
   for (var datastreamId in _seriesByDataSource){
     _seriesByDataSource[datastreamId].id = datastreamId;
   }
-  setTimeout(function() {
-      var buildChartToApply = function() {
-        buildChart(_seriesByDataSource);
-        $scope.loading = false;
-      };
-      $scope.$apply(buildChartToApply);
-    },
-    1000
-  );
+  var buildChartToApply = function() {
+    buildChart(_seriesByDataSource);
+    $scope.loading = false;
+  };
+  var applyCharts = function() {
+    $scope.$apply(buildChartToApply);
+  }
+  var waitForApplyCharts = function() {
+    console.log(_iterationsTotal + '-' + _iterationsFinished);
+    if (_iterationsTotal == _iterationsFinished) {
+      setTimeout(applyCharts, 2000);
+    } else {
+      setTimeout(waitForApplyCharts, 1000);
+    }
+  };
+  setTimeout(applyCharts, 1000);
 
   $scope.enableDisable = function(datastream, serie) {
     if(serie.disabled == null) {
@@ -210,27 +217,27 @@ var ChartsCtrl = function ($scope,$location) {
     var startDateObject = new Date(Date.parse(datastream.startDate));
     var endDateObject = new Date(Date.parse(datastream.endDate));
     var todayObject = new Date();
-    if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000) || Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
-      $scope.addAlert("The start date should be less than end date.");
-      setTimeout(function() {
-        if ($scope.alerts.length > 0) {
-          $scope.alerts.splice(0, 1);
-          $scope.$apply();
-        }
-      }, 5000);
-      return;
-    }
+    // if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000) || Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
+    //   $scope.addAlert("The start date should be less than end date.");
+    //   setTimeout(function() {
+    //     if ($scope.alerts.length > 0) {
+    //       $scope.alerts.splice(0, 1);
+    //       $scope.$apply();
+    //     }
+    //   }, 5000);
+    //   return;
+    // }
 
-    if (Math.floor(endDateObject.getTime()/1000) - Math.floor(startDateObject.getTime()/1000) >= TWO_YEAR_SECONDS) {
-      $scope.addAlert("You can only request a two year range.");
-      setTimeout(function() {
-        if ($scope.alerts.length > 0) {
-          $scope.alerts.splice(0, 1);
-          $scope.$apply();
-        }
-      }, 5000);
-      return;
-    }
+    // if (Math.floor(endDateObject.getTime()/1000) - Math.floor(startDateObject.getTime()/1000) >= TWO_YEAR_SECONDS) {
+    //   $scope.addAlert("You can only request a two year range.");
+    //   setTimeout(function() {
+    //     if ($scope.alerts.length > 0) {
+    //       $scope.alerts.splice(0, 1);
+    //       $scope.$apply();
+    //     }
+    //   }, 5000);
+    //   return;
+    // }
 
 
     selectedDevicesByDatasourceAndDatastream[datastream.label].start_date = startDate;
@@ -242,15 +249,15 @@ var ChartsCtrl = function ($scope,$location) {
       for(var key in seriesByDatasource){
         cnt++;
       }
-      if(cnt == 0){
-        $scope.addAlert("The selected range does not contain data. Please select a new date range.");
-        setTimeout(function() {
-          if ($scope.alerts.length > 0) {
-            $scope.alerts.splice(0, 1);
-            $scope.$apply();
-          }
-        }, 5000);
-      }else{
+      // if(cnt == 0){
+      //   $scope.addAlert("The selected range does not contain data. Please select a new date range.");
+      //   setTimeout(function() {
+      //     if ($scope.alerts.length > 0) {
+      //       $scope.alerts.splice(0, 1);
+      //       $scope.$apply();
+      //     }
+      //   }, 5000);
+      // }else{
 
         $location.path('/charts');
 
@@ -259,12 +266,12 @@ var ChartsCtrl = function ($scope,$location) {
             seriesByDatasource[datastreamId].graph = _seriesByDataSource[datastreamId].graph;
           }
         }
-        updateChart(seriesByDatasource);
+        updateChart(seriesByDatasource, datastream);
         console.log(seriesByDatasource[datastream.id]);
         _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
         $scope.chartDatastreams = _seriesByDataSource;
         console.log(datastream);
-      }
+      // }
       $scope.$apply();
     }
     );

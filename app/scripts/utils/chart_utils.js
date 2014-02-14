@@ -61,6 +61,22 @@ var buildFormatter = function(series, x, y) {
   return content;
 };
 
+var pointsComparator = function(a, b) {
+  if (a.x < b.x) {
+    return -1;
+  } else if (a.x > b.x) {
+    return 1;
+  } else {
+    if (a.y < b.y) {
+      return -1;
+    } else if (a.y > b.y) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
+
 var buildChart = function(seriesByDataSource) {
   for (var datastreamId in seriesByDataSource) {
     // Build Graph
@@ -82,6 +98,7 @@ var buildChart = function(seriesByDataSource) {
       var now = new Date();
       series[i].hasNotReported = Math.round(Math.abs(now.getTime() - lastReported.getTime()) / 1000 / 3600 * 100) / 100;
       series[i].lastReported = _toEuroFormat(series[i].at);
+      series[i].data.sort(pointsComparator);
     }
 
     console.log(seriesByDataSource[datastreamId].graph);
@@ -99,6 +116,7 @@ var buildChart = function(seriesByDataSource) {
           bottom: 0.02,
           left: 0.02
         },
+        interpolation: 'linear',
         series: series
       });
 
@@ -177,7 +195,7 @@ var buildChart = function(seriesByDataSource) {
   }
 };
 
-var updateChart = function(seriesByDataSource) {
+var updateChart = function(seriesByDataSource, datastream) {
   for (var datastreamId in seriesByDataSource) {
     seriesByDataSource[datastreamId].id = datastreamId;
     var data = seriesByDataSource[datastreamId];
@@ -191,10 +209,13 @@ var updateChart = function(seriesByDataSource) {
       var now = new Date();
       series[i].hasNotReported = Math.round(Math.abs(now.getTime() - lastReported.getTime()) / 1000 / 3600 * 100) / 100;
       series[i].lastReported = _toEuroFormat(series[i].at);
+      series[i].data.sort(pointsComparator);
     }
     var graph = _seriesByDataSource[datastreamId].graph;
     graph.min_value = parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));
     graph.max_value = parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value));
+    graph.min = graph.min_value;
+    graph.max = graph.max_value;
     for (i = 0; i < seriesByDataSource[datastreamId].series.length; i++) {
       graph.series[i] = seriesByDataSource[datastreamId].series[i];
     }
