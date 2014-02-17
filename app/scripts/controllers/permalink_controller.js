@@ -37,7 +37,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
     $scope.xivelyDataInitComplete = true;
     var getDataFromPermalink = function(code, callback) {
       $.get(
-        'http://iostp.org/services/get_permalink.php?code=' + code,
+        './services/get_permalink.php?code=' + code,
         function(data){
           console.log('Data Received:');
           console.log(data);
@@ -66,16 +66,16 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       function(seriesByDatasource){
 
         if (_datapointErrors != null) {
-          if (_datapointErrors.length > 0) {
-            $scope.xivelyDataInitComplete = false;
-            $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
-            setTimeout(function() {
-              if ($scope.alerts.length > 0) {
-                $location.path('/');
-                $scope.$apply();
-              }
-            }, 5000);
-          }
+          // if (_datapointErrors.length > 0) {
+          //   $scope.xivelyDataInitComplete = false;
+          //   $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
+          //   setTimeout(function() {
+          //     if ($scope.alerts.length > 0) {
+          //       $location.path('/');
+          //       $scope.$apply();
+          //     }
+          //   }, 5000);
+          // }
         }
 
         _backLocation = '/';
