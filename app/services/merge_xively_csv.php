@@ -57,7 +57,7 @@ $INTERVAL_VALUES = array(
     'maximum' => 8640
   )
 );
-$INTERVAL_CURRENT_INDEX = 8;
+$INTERVAL_CURRENT_INDEX = 0;
 
 
 //$link = mysql_connect('localhost','root','') or die('Could not connect to MySQL: ' . mysql_error());
@@ -103,7 +103,7 @@ foreach ($devicesByDatastream as $datastreamLabel => $datastream) {
       while ($newStartDate < $endDate) {
          $newStartDateISO = $newStartDate->format("c");
          $newEndDateISO = $newEndDate->format("c");
-         $data = explode("\n", file_get_contents(sprintf('http://api.xively.com/v2/feeds/%d/datastreams/%s.csv?interval=%s&start=%s&end=%s&x-apikey=LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs',$device->id,$device->datastreamId,$INTERVAL_VALUES[$INTERVAL_CURRENT_INDEX]['interval'],$newStartDateISO,$newEndDateISO)));
+         $data = explode("\n", file_get_contents(sprintf('http://api.xively.com/v2/feeds/%d/datastreams/%s.csv?interval=%s&start=%s&end=%s&limit=1000&x-apikey=LZ8CcFmj2huPno20yShkEGlm3QQAiuiMYsLQOjHEQpWOSzDs',$device->id,$device->datastreamId,$INTERVAL_VALUES[$INTERVAL_CURRENT_INDEX]['interval'],$newStartDateISO,$newEndDateISO)));
          for ($i = 0; $i < count($data); $i++) {
             if ($data[$i] != "") {
                array_push($contentsTmp, $data[$i]);

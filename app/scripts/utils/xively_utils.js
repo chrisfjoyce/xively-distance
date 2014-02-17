@@ -81,7 +81,7 @@ var INTERVAL_VALUES = [
     'maximum': 8640
   }
 ];
-var INTERVAL_CURRENT_INDEX = 8;
+var INTERVAL_CURRENT_INDEX = 0;
 
 var registerXivelyGetData = function(fn){
   if(_datastreams != null){
@@ -184,7 +184,7 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
             historyCallback
           );
           */
-          var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=' + INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].interval + '&start=' + newStartDateISO + '&end=' + newEndDateISO + '&find_previous=';
+          var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=' + INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].interval + '&start=' + newStartDateISO + '&end=' + newEndDateISO + '&limit=1000&find_previous=';
           $.get(
             url,
             {'x-apikey': XIVELY_API_KEY},
@@ -262,7 +262,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
           seriesByDataSource[filteredDatastreamLabel].series[serieIndex].data.push(points[ii]);
         }
         seriesByDataSource[filteredDatastreamLabel].min_value = Math.min(seriesByDataSource[filteredDatastreamLabel].min_value, datastream_min_value);
-        seriesByDataSource[filteredDatastreamLabel].max_value = Math.max(seriesByDataSource[filteredDatastreamLabel].min_value, datastream_max_value);
+        seriesByDataSource[filteredDatastreamLabel].max_value = Math.max(seriesByDataSource[filteredDatastreamLabel].max_value, datastream_max_value);
       }
     }
 
@@ -475,6 +475,6 @@ var getDefaultDates = function() {
   var result = {};
   var currentDate = new Date();
   result.endDate = currentDate;
-  result.startDate = new Date(new Date(currentDate).setMonth(currentDate.getMonth() - 1));
+  result.startDate = new Date(new Date(currentDate).setDate(currentDate.getDate() - 7));
   return result;
 };
