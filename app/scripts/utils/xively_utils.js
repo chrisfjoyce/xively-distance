@@ -357,31 +357,46 @@ var processXivelyFeedData = function(data){
       //datastreamId = datastreamId.replace(/\_/g,' ');
       //Extracting data stream label
       var datastreamLabel = datastreamId;
+      var newDatastreamLabel = "";
+      // var allTags = '(';
       for (var index = 0; index < datastream.tags.length; index++) {
-        if(datastream.tags[index] == 'Minimum' || datastream.tags[index] == 'Maximum' || datastream.tags[index] == 'Average' || datastream.tags[index].indexOf('lbv') == 0 || datastream.tags[index].indexOf('skv') == 0 || datastream.tags[index] == '') {
-          continue;
-        }
-        datastreamLabel = datastream.tags[index];
-
-        var diffMillis = nowMillis - Date.parse(datastream.at);
-        var activeDevice = diffMillis <= INACTIVE_TIMEOUT_MILLIS;
-        _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':activeDevice,'elapsedTime':Math.round(diffMillis/(1000 * 60))+' minutes'};
-
-        // if(isNaN(parseInt(datastreamId))){
-          //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
-          if(devicesByDatastream[datastreamLabel] == null){
-            devicesByDatastream[datastreamLabel] = [];
-            datastreams.push(datastreamLabel);
-          }
-
-          _deviceInformation[device.id] = {'schoolName' : schoolName,'label':datastreamLabel,'active':activeDevice,'at':datastream.at};
-          devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
-          _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
-          // console.log('"' + schoolName + '","' + datastreamLabel + '","' + device.id + '","' + activeDevice + '","' + datastream.at + '","' + datastreamId + '"')
-          _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
-          //console.log(schoolName);
+        // if (index != 0) {
+        //   allTags = allTags + '/';
         // }
+        // allTags = allTags + datastream.tags[index];
+        if(datastream.tags[index] == 'Minimum' || datastream.tags[index] == 'Maximum' || datastream.tags[index] == 'Average' || datastream.tags[index].indexOf('lbv') == 0 || datastream.tags[index].indexOf('skv') == 0 || datastream.tags[index] == '') {
+          newDatastreamLabel = newDatastreamLabel + '-' + datastream.tags[index];
+        } else {
+          newDatastreamLabel = datastream.tags[index] + newDatastreamLabel;
+        }
       }
+      // allTags = allTags + ')'
+      if (newDatastreamLabel != '') {
+        datastreamLabel = newDatastreamLabel;
+      }
+      if (newDatastreamLabel.indexOf('-') != newDatastreamLabel.lastIndexOf('-')) {
+        continue;
+      }
+
+      var diffMillis = nowMillis - Date.parse(datastream.at);
+      var activeDevice = diffMillis <= INACTIVE_TIMEOUT_MILLIS;
+      _schoolsMap[schoolName].datastreams[datastreamLabel] = {'at':datastream.at,'active':activeDevice,'elapsedTime':Math.round(diffMillis/(1000 * 60))+' minutes'};
+
+      // if(isNaN(parseInt(datastreamId))){
+        //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
+        if(devicesByDatastream[datastreamLabel] == null){
+          devicesByDatastream[datastreamLabel] = [];
+          datastreams.push(datastreamLabel);
+        }
+
+        _deviceInformation[device.id] = {'schoolName' : schoolName,'label':datastreamLabel,'active':activeDevice,'at':datastream.at};
+        devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
+        _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
+        // console.log('"' + schoolName + '","' + datastreamLabel + '","' + device.id + '","' + activeDevice + '","' + datastream.at + '","' + datastreamId + '"')
+        // console.log('"' + schoolName + '","' + datastreamId + '","' + device.id + '","' + allTags + '"')
+        _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
+        //console.log(schoolName);
+      // }
     }
 
     if(_datastreamsBySchool[schoolName].length == 0){
@@ -424,6 +439,37 @@ var processXivelyFeedData = function(data){
   //     }
   //   }
   // }
+
+  // Display the repeated datastreams by location
+  // var __countRepeated = {};
+  // for (var school in _datastreamsBySchool) {
+  //   for (var ii = 0; ii < _datastreamsBySchool[school].length; ii++) {
+  //     var newLabel = school + '-' + _datastreamsBySchool[school][ii].label;
+  //     if (__countRepeated[newLabel] == null) {
+  //       __countRepeated[newLabel] = 0;
+  //     }
+  //     __countRepeated[newLabel]++;
+  //   }
+  // }
+  // for (var verifier in __countRepeated) {
+  //   if (__countRepeated[verifier] > 1) {
+  //     // console.log(verifier + ':' + __countRepeated[verifier]);
+  //     var arr = verifier.split('-');
+  //     var sch = arr[0];
+  //     var tag = arr[1];
+  //     for (var ii = 2; ii < arr.length; ii++) {
+  //       tag = tag + '-' + arr[ii];
+  //     }
+  //     // console.log('"' + sch + '":"' + tag + '",');
+  //     // for (var ii = 0; ii < _datastreamsBySchool[sch].length; ii++) {
+  //     //   var ds = _datastreamsBySchool[sch][ii];
+  //     //   if (ds.label == tag) {
+  //     //     console.log(ds.deviceId);
+  //     //   }
+  //     // }
+  //   }
+  // }
+
 
   for (var k = _callbacks.length - 1; k >= 0; k--) {
     _callbacks[k]();

@@ -61,7 +61,10 @@
   <div class="row">
     <div ng-repeat="datastream in chartDatastreams">
       <div class="col-xs-12 charts-title-bar">
-        <span class="h3-white">{{datastream.label}} ({{datastream.unit}})</span>
+        <span class="h3-white">
+          {{datastream.label.indexOf('-') < 0 && datastream.label || (datastream.label.replace('-', '(') + ')')}}
+          ({{datastream.unit}})
+        </span>
       </div>
       <br />
       <div class="row" style="margin-bottom: 24px;">
