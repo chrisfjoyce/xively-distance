@@ -14,7 +14,7 @@
   <div class="modal-body" style="overflow:auto;overflow-x:hidden">
     <div class="row">
       <div ng-repeat='dataStream in dataStreams'>
-        <div class="input-group col-xs-4">
+        <div class="input-group col-xs-6">
           <div class="row" ng-click="checkSchool(dataStream.label,dataStream.deviceId);setSelected(dataStream.label,dataStream.deviceId);">
             <span type="text" text-overflow class="col-xs-9 modal-items-text modal-item" style="display:inline-block">
               <span ng-switch on="dataStream.active" class="modal-active-inactive">

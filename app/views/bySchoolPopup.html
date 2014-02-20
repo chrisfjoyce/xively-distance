@@ -1,4 +1,4 @@
-<div class="modal-div">
+<div class="modal-div modal-dialog-locations">
   <div class="modal-header">
     <h3 class="h3-orange">{{selectedDS}}</h3>
     <br/>
@@ -13,7 +13,7 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-xs-4 datastream_background modal-body-weathertype">
+      <div class="col-xs-6 datastream_background modal-body-weathertype">
         <h3 class="h3-orange-modal">Location(s) selected: {{devicesSelected[selectedDS]}} of {{devices.length}}</h3>
         <div class="row">
           <div ng-repeat='device in devices'>
@@ -32,10 +32,10 @@
           </div>
         </div>
       </div>
-      <div class="col-xs-8 modal-body-weathertype">
+      <div class="col-xs-6 modal-body-weathertype">
         <div class="row">
           <div ng-repeat='device in devices'>
-            <div ng-if="selectedDevicesByDatasource[selectedDS][device.id] == null || selectedDevicesByDatasource[selectedDS][device.id] == false" ng-click="setSelected($event, device.id,true)" class="col-xs-6 schools-border-modal">
+            <div ng-if="selectedDevicesByDatasource[selectedDS][device.id] == null || selectedDevicesByDatasource[selectedDS][device.id] == false" ng-click="setSelected($event, device.id,true)" class="col-xs-12 schools-border-modal">
               <div class="row">
                 <div class="input-group col-xs-9 modal-item">
                   <span ng-switch on="device.active" style="width:12px;display:inline-block;float:left">
