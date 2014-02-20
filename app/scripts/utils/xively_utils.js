@@ -114,7 +114,7 @@ var _toEuroFormat = function(isoStringDate){
   if (lrSeconds < 10) {
     lrSeconds = '0' + lrSeconds;
   }
-  return lrDate + "." + lrMonth + "." + lrYear + " " + lrHour + ":" + lrMinutes + ":" + lrSeconds;
+  return lrDate + '.' + lrMonth + '.' + lrYear + ' ' + lrHour + ':' + lrMinutes + ':' + lrSeconds;
 };
 
 var getDatapointHistory = function(selectedDevicesByDatastream,callback){
@@ -162,44 +162,44 @@ var getDatapointHistory = function(selectedDevicesByDatastream,callback){
       var millisecondsDifference = Math.abs(startDateNotISO.getTime() - endDateNotISO.getTime());
       _iterationsTotal += Math.ceil(millisecondsDifference / ((1000 * 3600 * INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].maximum)));
       // if (hoursDifference > INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].maximum) {
-        var timeToAdd = (1000 * 3600 * INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].maximum);
-        var newEndDate = new Date(startDateNotISO);
+      var timeToAdd = (1000 * 3600 * INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].maximum);
+      var newEndDate = new Date(startDateNotISO);
+      newEndDate.setTime(newEndDate.getTime() + timeToAdd);
+      for (var newStartDate = startDateNotISO; newStartDate < endDateNotISO;) {
+        var newStartDateISO = newStartDate.toISOString();
+        var newEndDateISO = newEndDate.toISOString();
+        var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback,newStartDateISO,newEndDateISO, startDateISO, endDateISO);
+
+        /*
+        xively.datapoint.history(
+          device.id,
+          device.datastreamId,
+          {
+            //'duration' : '180days',
+            'interval' : 86400,
+            'start'    : startDateISO,
+            'end'      : endDateISO,
+            'interval_type':'discrete'
+          },
+          historyCallback
+        );
+        */
+        var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=' + INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].interval + '&start=' + newStartDateISO + '&end=' + newEndDateISO + '&limit=1000&find_previous=';
+        $.get(
+          url,
+          {'x-apikey': XIVELY_API_KEY},
+          historyCallback
+        ).fail(function( data ) {
+          _datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not exists anymore.');
+        });
+
+        //Generate the new interval of dates
         newEndDate.setTime(newEndDate.getTime() + timeToAdd);
-        for (var newStartDate = startDateNotISO; newStartDate < endDateNotISO;) {
-          var newStartDateISO = newStartDate.toISOString();
-          var newEndDateISO = newEndDate.toISOString();
-          var historyCallback = buildDataCallback(device,datastreamLabel,selectedDevicesCount,seriesByDataSource,callback,newStartDateISO,newEndDateISO, startDateISO, endDateISO);
-
-          /*
-          xively.datapoint.history(
-            device.id,
-            device.datastreamId,
-            {
-              //'duration' : '180days',
-              'interval' : 86400,
-              'start'    : startDateISO,
-              'end'      : endDateISO,
-              'interval_type':'discrete'
-            },
-            historyCallback
-          );
-          */
-          var url = 'http://api.xively.com/v2/feeds/' + device.id + '/datastreams/' + device.datastreamId + '?interval=' + INTERVAL_VALUES[INTERVAL_CURRENT_INDEX].interval + '&start=' + newStartDateISO + '&end=' + newEndDateISO + '&limit=1000&find_previous=';
-          $.get(
-            url,
-            {'x-apikey': XIVELY_API_KEY},
-            historyCallback
-          ).fail(function( data ) {
-            _datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not exists anymore.');
-          });
-
-          //Generate the new interval of dates
-          newEndDate.setTime(newEndDate.getTime() + timeToAdd);
-          newStartDate.setTime(newStartDate.getTime() + timeToAdd);
-          if (newEndDate > endDateNotISO) {
-            newEndDate = new Date(endDateNotISO);
-          }
+        newStartDate.setTime(newStartDate.getTime() + timeToAdd);
+        if (newEndDate > endDateNotISO) {
+          newEndDate = new Date(endDateNotISO);
         }
+      }
       // }
 
     }
@@ -258,8 +258,8 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
           color: '#000000'
         });
       } else {
-        for (var ii = 0; ii < points.length; ii++) {
-          seriesByDataSource[filteredDatastreamLabel].series[serieIndex].data.push(points[ii]);
+        for (var jj = 0; jj < points.length; jj++) {
+          seriesByDataSource[filteredDatastreamLabel].series[serieIndex].data.push(points[jj]);
         }
         seriesByDataSource[filteredDatastreamLabel].min_value = Math.min(seriesByDataSource[filteredDatastreamLabel].min_value, datastream_min_value);
         seriesByDataSource[filteredDatastreamLabel].max_value = Math.max(seriesByDataSource[filteredDatastreamLabel].max_value, datastream_max_value);
@@ -357,7 +357,7 @@ var processXivelyFeedData = function(data){
       //datastreamId = datastreamId.replace(/\_/g,' ');
       //Extracting data stream label
       var datastreamLabel = datastreamId;
-      var newDatastreamLabel = "";
+      var newDatastreamLabel = '';
       // var allTags = '(';
       for (var index = 0; index < datastream.tags.length; index++) {
         // if (index != 0) {
@@ -384,18 +384,18 @@ var processXivelyFeedData = function(data){
 
       // if(isNaN(parseInt(datastreamId))){
         //console.log(datastreamId + ',' + datastreamLabel + ',' + device.id);
-        if(devicesByDatastream[datastreamLabel] == null){
-          devicesByDatastream[datastreamLabel] = [];
-          datastreams.push(datastreamLabel);
-        }
+      if(devicesByDatastream[datastreamLabel] == null){
+        devicesByDatastream[datastreamLabel] = [];
+        datastreams.push(datastreamLabel);
+      }
 
-        _deviceInformation[device.id] = {'schoolName' : schoolName,'label':datastreamLabel,'active':activeDevice,'at':datastream.at};
-        devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
-        _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
-        // console.log('"' + schoolName + '","' + datastreamLabel + '","' + device.id + '","' + activeDevice + '","' + datastream.at + '","' + datastreamId + '"')
-        // console.log('"' + schoolName + '","' + datastreamId + '","' + device.id + '","' + allTags + '"')
-        _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
-        //console.log(schoolName);
+      _deviceInformation[device.id] = {'schoolName' : schoolName,'label':datastreamLabel,'active':activeDevice,'at':datastream.at};
+      devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
+      _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
+      // console.log('"' + schoolName + '","' + datastreamLabel + '","' + device.id + '","' + activeDevice + '","' + datastream.at + '","' + datastreamId + '"')
+      // console.log('"' + schoolName + '","' + datastreamId + '","' + device.id + '","' + allTags + '"')
+      _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
+      //console.log(schoolName);
       // }
     }
 
@@ -512,7 +512,7 @@ var initXivelyData = function(){
     {'x-apikey': XIVELY_API_KEY},
     processXivelyFeedData
   ).fail(function(data) {
-    console.log("fail");
+    console.log('fail');
     console.log(JSON.stringify(data));
   });
 };

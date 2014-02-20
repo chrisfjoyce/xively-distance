@@ -205,11 +205,11 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   };
 
   $scope.sendEmail = function() {
-    var link = "mailto:?"
-             + "&subject=" + escape("Check my observation kit!!!")
-             + "&body=" + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
+    var link = 'mailto:?' +
+             '&subject=' + escape('Check my observation kit!!!') +
+             '&body=' + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
     window.open(link, '_blank');
-  }
+  };
 
 };
 

@@ -20,12 +20,14 @@
   "strict": true,
   "trailing": true,
   "smarttabs": true,
+  "loopfunc": true,
   "globals": {
     "angular": false,
     "xively" : false,
     "Rickshaw": false,
     "d3": false,
     "$": false,
+    "jQuery": false,
     "buildChart": true,
     "initXivelyData": true,
     "registerXivelyGetData": true,
@@ -44,6 +46,12 @@
     "_selectedDevicesByDatasource": true,
     "getDefaultDates": true,
     "updateChart": true,
-    "_deviceInformation": true
+    "_deviceInformation": true,
+    "_toEuroFormat": true,
+    "_xivelyDataInitComplete": true,
+    "escape": false,
+    "_iterationsFinished": true,
+    "_datapointErrors": true,
+    "_iterationsTotal": true
   }
 }

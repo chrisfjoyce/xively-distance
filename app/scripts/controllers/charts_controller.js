@@ -143,7 +143,7 @@ var ChartsCtrl = function ($scope,$location) {
   };
   var applyCharts = function() {
     $scope.$apply(buildChartToApply);
-  }
+  };
   var waitForApplyCharts = function() {
     console.log(_iterationsTotal + '-' + _iterationsFinished);
     if (_iterationsTotal == _iterationsFinished) {
@@ -259,18 +259,18 @@ var ChartsCtrl = function ($scope,$location) {
       //   }, 5000);
       // }else{
 
-        $location.path('/charts');
+      $location.path('/charts');
 
-        for (var datastreamId in _seriesByDataSource) {
-          if (seriesByDatasource[datastreamId] != null) {
-            seriesByDatasource[datastreamId].graph = _seriesByDataSource[datastreamId].graph;
-          }
+      for (var datastreamId in _seriesByDataSource) {
+        if (seriesByDatasource[datastreamId] != null) {
+          seriesByDatasource[datastreamId].graph = _seriesByDataSource[datastreamId].graph;
         }
-        updateChart(seriesByDatasource, datastream);
-        console.log(seriesByDatasource[datastream.id]);
-        _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
-        $scope.chartDatastreams = _seriesByDataSource;
-        console.log(datastream);
+      }
+      updateChart(seriesByDatasource, datastream);
+      console.log(seriesByDatasource[datastream.id]);
+      _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
+      $scope.chartDatastreams = _seriesByDataSource;
+      console.log(datastream);
       // }
       $scope.$apply();
     }
@@ -312,11 +312,11 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.sendEmail = function() {
-    var link = 'mailto:?'
-             + '&subject=' + escape('Check my observation kit!')
-             + '&body=' + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
+    var link = 'mailto:?' +
+             '&subject=' + escape('Check my observation kit!') +
+             '&body=' + escape($scope.baseUrl + '#/permalink/' + $scope.permalink);
     window.open(link, '_blank');
-  }
+  };
 
 };
 

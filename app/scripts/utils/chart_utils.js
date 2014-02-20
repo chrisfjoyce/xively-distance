@@ -75,7 +75,7 @@ var pointsComparator = function(a, b) {
       return 0;
     }
   }
-}
+};
 
 var buildChart = function(seriesByDataSource) {
   for (var datastreamId in seriesByDataSource) {
@@ -102,8 +102,9 @@ var buildChart = function(seriesByDataSource) {
     }
 
     console.log(seriesByDataSource[datastreamId].graph);
+    var graph = seriesByDataSource[datastreamId].graph;
     if (seriesByDataSource[datastreamId].graph == null) {
-      var graph = new Rickshaw.Graph( {
+      graph = new Rickshaw.Graph( {
         element: document.querySelector('#graph-' + datastreamId),
         height: 200,
         width: 600,
@@ -176,7 +177,7 @@ var buildChart = function(seriesByDataSource) {
     });
 
     $('#vslider-' + datastreamId).slider({
-      orientation: "vertical",
+      orientation: 'vertical',
       range: true,
       max: graph.max,
       min: graph.min,
