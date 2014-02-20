@@ -63,7 +63,7 @@
 }
 
 .modal-dialog {
-  width: 560px;
+  width: 700px;
 }
 
 .red-inactive {
@@ -468,7 +468,7 @@
 }
 
 .span-overflow{
-  width:143px;
+  width:213px;
   white-space: nowrap;
   overflow:hidden;
   display:inline-block;

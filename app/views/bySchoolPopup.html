@@ -1,6 +1,6 @@
 <div class="modal-div modal-dialog-locations">
   <div class="modal-header">
-    <h3 class="h3-orange">{{selectedDS}}</h3>
+    <h3 class="h3-orange">{{selectedDS.label}}</h3>
     <br/>
     <small class="normal-text">
       Locations
@@ -14,10 +14,10 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-xs-6 datastream_background modal-body-weathertype">
-        <h3 class="h3-orange-modal">Location(s) selected: {{devicesSelected[selectedDS]}} of {{devices.length}}</h3>
+        <h3 class="h3-orange-modal">Location(s) selected: {{devicesSelected[selectedDS.label]}} of {{devices.length}}</h3>
         <div class="row">
           <div ng-repeat='device in devices'>
-            <div ng-if="selectedDevicesByDatasource[selectedDS][device.id] == true" ng-click="setSelected($event, device.id,false)">
+            <div ng-if="selectedDevicesByDatasource[device.datastreamLabel][device.id] == true" ng-click="setSelected($event, device.id, device.datastreamLabel, false)">
               <div class="input-group col-xs-10 modal-item">
                 <span ng-switch on="device.active">
                   <span ng-switch-when="false" class="red-inactive" tooltip="{{toEuroFormat(device.at)}}">●</span>
@@ -35,16 +35,16 @@
       <div class="col-xs-6 modal-body-weathertype">
         <div class="row">
           <div ng-repeat='device in devices'>
-            <div ng-if="selectedDevicesByDatasource[selectedDS][device.id] == null || selectedDevicesByDatasource[selectedDS][device.id] == false" ng-click="setSelected($event, device.id,true)" class="col-xs-12 schools-border-modal">
+            <div ng-if="selectedDevicesByDatasource[device.datastreamLabel][device.id] == null || selectedDevicesByDatasource[device.datastreamLabel][device.id] == false" ng-click="setSelected($event, device.id, device.datastreamLabel, true)" class="col-xs-12 schools-border-modal">
               <div class="row">
-                <div class="input-group col-xs-9 modal-item">
+                <div class="input-group col-xs-10 modal-item">
                   <span ng-switch on="device.active" style="width:12px;display:inline-block;float:left">
                     <span ng-switch-when="false" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">●</span>
                     <span ng-switch-when="true" class="red-inactive" />
                   </span>
                   <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
                 </div>
-                <div class="input-group col-md-3 modal-item">
+                <div class="input-group col-md-2 modal-item">
                   <span class='glyphicon glyphicon-unchecked' style='color:#8dce91;font-size:17px'/>
                 </div>
               </div>

@@ -10,7 +10,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
   //   $scope.$apply(readGlobals);
   // });
   $rootScope.route = $route;
-  $scope.datastreams = _datastreams;
+  $scope.datastreams = _datastreamsGroups;
 
 
   $scope.devicesByDatastream = _devicesByDatastream;

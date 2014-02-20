@@ -21,7 +21,7 @@
   <div class="row col-md-12 byDataType-div" ng-show="!loading">
     <span ng-repeat='datastream in datastreams'>
       <button type="button" ng-click="open(datastream)" class="btn datastream-box col-md-4" ng-class="{'datastream-box-selected':devicesSelected[datastream]}">
-        <span title="{{datastream.indexOf('-') < 0 ? datastream : datastream.substring(0, datastream.indexOf('-'))}}" class="school-item-text">{{datastream.indexOf('-') < 0 && datastream || (datastream.replace('-', '(') + ')')}}</span>
+        <span title="{{datastream.indexOf('-') < 0 ? datastream : datastream.substring(0, datastream.indexOf('-'))}}" class="school-item-text">{{datastream.label}}</span>
         <br/>
         <small style="color:#93C748" ng-if="devicesSelected[datastream]">
           Selected({{devicesSelected[datastream]}}) of 

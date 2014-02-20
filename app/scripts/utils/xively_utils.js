@@ -4,6 +4,7 @@
 
 var _devicesByDatastream = null;
 var _datastreams = null;
+var _datastreamsGroups = null;
 var _callbacks = [];
 var _retrievedDevicesCount = null;
 var _schoolsBooleanMap = {};
@@ -359,23 +360,34 @@ var processXivelyFeedData = function(data){
       var datastreamLabel = datastreamId;
       var newDatastreamLabel = '';
       // var allTags = '(';
+      var secondTag = '';
       for (var index = 0; index < datastream.tags.length; index++) {
         // if (index != 0) {
         //   allTags = allTags + '/';
         // }
         // allTags = allTags + datastream.tags[index];
         if(datastream.tags[index] == 'Minimum' || datastream.tags[index] == 'Maximum' || datastream.tags[index] == 'Average' || datastream.tags[index].indexOf('lbv') == 0 || datastream.tags[index].indexOf('skv') == 0 || datastream.tags[index] == '') {
-          newDatastreamLabel = newDatastreamLabel + '-' + datastream.tags[index];
+          secondTag = secondTag + '-' + datastream.tags[index];
         } else {
-          newDatastreamLabel = datastream.tags[index] + newDatastreamLabel;
+          newDatastreamLabel = datastream.tags[index] + ' ' + newDatastreamLabel;
+          while (newDatastreamLabel.lastIndexOf(' ') == newDatastreamLabel.length - 1) {
+            newDatastreamLabel = newDatastreamLabel.substring(0, newDatastreamLabel.length - 1);
+          }
         }
       }
       // allTags = allTags + ')'
       if (newDatastreamLabel != '') {
+        while (newDatastreamLabel.lastIndexOf(' ') == newDatastreamLabel.length - 1) {
+          newDatastreamLabel = newDatastreamLabel.substring(0, newDatastreamLabel.length - 1);
+        }
         datastreamLabel = newDatastreamLabel;
       }
-      if (newDatastreamLabel.indexOf('-') != newDatastreamLabel.lastIndexOf('-')) {
+      if (secondTag.indexOf('-') != secondTag.lastIndexOf('-')) {
         continue;
+      }
+      if (secondTag != '') {
+        datastreamLabel = datastreamLabel + secondTag;
+        secondTag = ' ' + secondTag.replace('-', '(') + ')';
       }
 
       var diffMillis = nowMillis - Date.parse(datastream.at);
@@ -390,7 +402,7 @@ var processXivelyFeedData = function(data){
       }
 
       _deviceInformation[device.id] = {'schoolName' : schoolName,'label':datastreamLabel,'active':activeDevice,'at':datastream.at};
-      devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'location':{'name':device.location.name}});
+      devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'datastreamLabel':datastreamLabel,'location':{'name':device.location.name + secondTag}});
       _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
       // console.log('"' + schoolName + '","' + datastreamLabel + '","' + device.id + '","' + activeDevice + '","' + datastream.at + '","' + datastreamId + '"')
       // console.log('"' + schoolName + '","' + datastreamId + '","' + device.id + '","' + allTags + '"')
@@ -413,6 +425,21 @@ var processXivelyFeedData = function(data){
   _datastreams = datastreams.sort();
   _devicesByDatastream = devicesByDatastream;
   _schools = _schools.sort();
+
+  _datastreamsGroups = {};
+  for (var ii = 0; ii < datastreams.length; ii++) {
+    var arrDatastream = datastreams[ii].split('-');
+    if (arrDatastream.length > 0) {
+      if (_datastreamsGroups[arrDatastream[0]] == null) {
+        _datastreamsGroups[arrDatastream[0]] = {
+          label: arrDatastream[0],
+          datastreams: []
+        };
+      }
+      _datastreamsGroups[arrDatastream[0]].datastreams.push(datastreams[ii]);
+    }
+  }
+  console.log(_datastreamsGroups);
 
   // Display sorted by data type
   // for (var ii = 0; ii < _datastreams.length; ii++) {
