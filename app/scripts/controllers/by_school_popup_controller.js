@@ -12,7 +12,7 @@ var BySchoolPopupCtrl = function ($scope) {
   $scope.toEuroFormat = _toEuroFormat;
   //TODO garivera remove simulation of active/inactive
   //simulate active/inactive
-  for (var i = 0; i < $scope.devices.length; i++) {
+  for (i = 0; i < $scope.devices.length; i++) {
     if ($scope.devices[i].active) {
       $scope.active++;
     } else {
@@ -23,9 +23,9 @@ var BySchoolPopupCtrl = function ($scope) {
   if ($scope.devicesSelected == null) {
     $scope.devicesSelected = [];
   }
-  $scope.devicesSelected[$scope.selectedDS] = 0;
+  $scope.devicesSelected[$scope.selectedDS.label] = 0;
 
-  for (var i = 0; i < $scope.selectedDS.datastreams.length; i++) {
+  for (i = 0; i < $scope.selectedDS.datastreams.length; i++) {
     for (var selectedDevice in $scope.selectedDevicesByDatasource[$scope.selectedDS.datastreams[i]]) {
       if ($scope.selectedDevicesByDatasource[$scope.selectedDS.datastreams[i]][selectedDevice] == true) {
         $scope.devicesSelected[$scope.selectedDS.label]++;
