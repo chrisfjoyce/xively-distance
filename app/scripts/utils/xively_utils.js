@@ -401,8 +401,13 @@ var processXivelyFeedData = function(data){
         datastreams.push(datastreamLabel);
       }
 
+      var secondTagAbbreviation = secondTag;
+      secondTagAbbreviation = secondTagAbbreviation.replace('Average', 'Avg');
+      secondTagAbbreviation = secondTagAbbreviation.replace('Maximum', 'Max');
+      secondTagAbbreviation = secondTagAbbreviation.replace('Minimum', 'Min');
+
       _deviceInformation[device.id] = {'schoolName' : schoolName,'label':datastreamLabel,'active':activeDevice,'at':datastream.at};
-      devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'datastreamLabel':datastreamLabel,'location':{'name':device.location.name + secondTag}});
+      devicesByDatastream[datastreamLabel].push({'id':device.id,'datastreamId':datastreamId,'active':activeDevice,'at':datastream.at,'datastreamLabel':datastreamLabel,'location':{'name':device.location.name + secondTagAbbreviation}});
       _datastreamsBySchool[schoolName].push({'label':datastreamLabel,'deviceId':device.id,'active':activeDevice,'at':datastream.at,'id':datastreamId});
       // console.log('"' + schoolName + '","' + datastreamLabel + '","' + device.id + '","' + activeDevice + '","' + datastream.at + '","' + datastreamId + '"')
       // console.log('"' + schoolName + '","' + datastreamId + '","' + device.id + '","' + allTags + '"')
