@@ -52,6 +52,7 @@
     "escape": false,
     "_iterationsFinished": true,
     "_datapointErrors": true,
-    "_iterationsTotal": true
+    "_iterationsTotal": true,
+    "_datastreamsGroups": true
   }
 }
