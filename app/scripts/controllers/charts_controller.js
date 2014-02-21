@@ -9,6 +9,10 @@ var ChartsCtrl = function ($scope,$location) {
     $scope.alerts.push({type: 'danger', msg: message});
   };
 
+  $scope.addAlertMessage = function(message) {
+    $scope.alerts.push({type: 'info', msg: message});
+  };
+
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
@@ -129,6 +133,7 @@ var ChartsCtrl = function ($scope,$location) {
     console.log(_seriesByDataSource);
     console.log(jsonObject);
     console.log(jsonData);
+    $scope.addAlertMessage("This process may take some time, please be patient.");
     $('#ta').html(jsonData);
     $('#fa').submit();
   };
