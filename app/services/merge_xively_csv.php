@@ -126,6 +126,11 @@ foreach ($devicesByDatastream as $datastreamLabel => $datastream) {
       $rows = count($contents[$i]);
    }
 
+
+   if (strpos($datastreamLabel, '-') !== false) {
+      $datastreamLabel = str_replace('-', '(', $datastreamLabel);
+      $datastreamLabel.= ')';
+   }
    echo $datastreamLabel . "\n";
    for($col=0;$col<$cols;$col++){
       echo 'Date' . ',"' . $schools[$col] . '",,';
