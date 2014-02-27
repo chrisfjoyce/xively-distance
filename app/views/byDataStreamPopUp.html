@@ -5,6 +5,7 @@
       <small class="normal-text">
         Data Types
         &nbsp;&nbsp;&nbsp;
+        <span class="green-active">●</span>
         {{active}} Active
         &nbsp;&nbsp;&nbsp;
         <span class="red-inactive">●</span>
@@ -19,7 +20,9 @@
             <span type="text" text-overflow class="col-xs-9 modal-items-text modal-item" style="display:inline-block">
               <span ng-switch on="dataStream.active" class="modal-active-inactive">
                 <span class="red-inactive" ng-switch-when="false" tooltip-placement="right" tooltip="{{toEuroFormat(dataStream.at)}}">●</span>
-                <span ng-switch-when="true" class="modal-active-inactive"/>
+                <span ng-switch-when="true" class="modal-active-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(dataStream.at)}}">
+                  <span class="green-active">●</span>
+                </span>
               </span>
               {{dataStream.label.indexOf('-') < 0 && dataStream.label || (dataStream.label.replace('-', '(') + ')')}}
             </span>

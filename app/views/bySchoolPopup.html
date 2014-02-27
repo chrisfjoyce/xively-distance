@@ -5,6 +5,7 @@
     <small class="normal-text">
       Locations
       &nbsp;&nbsp;&nbsp;
+      <span class="green-active">●</span>
       {{active}} Active
       &nbsp;&nbsp;&nbsp;
       <span class="red-inactive">●</span>
@@ -21,7 +22,9 @@
               <div class="input-group col-xs-10 modal-item">
                 <span ng-switch on="device.active">
                   <span ng-switch-when="false" class="red-inactive" tooltip="{{toEuroFormat(device.at)}}">●</span>
-                  <span ng-switch-when="true" style="width:8px;display:inline-block"/>
+                  <span ng-switch-when="true" style="width:8px;display:inline-block" tooltip="{{toEuroFormat(device.at)}}">
+                    <span class="green-active">●</span>
+                  </span>
                 </span>
                 <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
               </div>
@@ -40,7 +43,9 @@
                 <div class="input-group col-xs-10 modal-item">
                   <span ng-switch on="device.active" style="width:12px;display:inline-block;float:left">
                     <span ng-switch-when="false" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">●</span>
-                    <span ng-switch-when="true" class="red-inactive" />
+                    <span ng-switch-when="true" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">
+                      <span class="green-active">●</span>
+                    </span>
                   </span>
                   <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
                 </div>
