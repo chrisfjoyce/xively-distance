@@ -48,6 +48,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.generateChart = function(){
     $scope.loading = true;
+    $scope.loadingMessage = 'Generating charts.';
     var defaultDates = getDefaultDates();
 
     for(var datastreamLabel in $scope.selectedDatastreamsBySchool){
@@ -126,6 +127,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.loading = false;
   } else {
     $scope.loading = true;
+    $scope.loadingMessage = 'Loading locations.';
   }
 
 };

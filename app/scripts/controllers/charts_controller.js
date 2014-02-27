@@ -26,6 +26,7 @@ var ChartsCtrl = function ($scope,$location) {
   console.log(_seriesByDataSource);
 
   $scope.loading = true;
+  $scope.loadingMessage = 'Generating charts.';
 
   if(_seriesByDataSource == null){
     $location.path('/');

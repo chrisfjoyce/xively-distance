@@ -5,6 +5,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   console.log($routeParams.code);
 
   $scope.loading = true;
+  $scope.loadingMessage = 'Generating charts.';
 
   var absUrl = $location.absUrl();
   $scope.baseUrl = absUrl.substring(0, absUrl.indexOf('#'));
