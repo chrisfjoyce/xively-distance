@@ -18,6 +18,49 @@ Date.prototype.parseISO = function(iso){
   return new Date(stamp);
 };
 
+var customRenderer = function(args) {
+  args = args || {};
+
+  var graph = this.graph;
+
+  var series = args.series || graph.series;
+  var vis = args.vis || graph.vis;
+
+  var dotSize = this.dotSize;
+
+  vis.selectAll('*').remove();
+
+  series.forEach( function(series) {
+
+    if (series.disabled) {
+      return;
+    }
+
+    var nodes = vis.selectAll('path')
+      .data(series.stack.filter( function(d) { return d.y !== null; } ))
+      .enter().append('svg:circle')
+        .attr('cx', function(d) { return graph.x(d.x); })
+        .attr('cy', function(d) { return graph.y(d.y); })
+        .attr('r', function(d) { return ('r' in d) ? d.r : dotSize; });
+    if (series.className) {
+      nodes.classed(series.className, true);
+    }
+
+    Array.prototype.forEach.call(nodes[0], function(n) {
+      if (!n) {
+        return;
+      }
+      n.setAttribute('data-color', series.color);
+      n.setAttribute('fill', 'white');
+      n.setAttribute('stroke', series.color);
+      n.setAttribute('stroke-width', dotSize - 1);
+    } );
+
+  }, this );
+};
+
+Rickshaw.Graph.Renderer.ScatterPlot.prototype.render = customRenderer;
+
 // var colorList = [
 //   '#000000',
 //   '#FF0000',
@@ -108,7 +151,9 @@ var buildChart = function(seriesByDataSource) {
         element: document.querySelector('#graph-' + datastreamId),
         height: 200,
         width: 600,
-        renderer: 'lineplot',
+        renderer: 'scatterplot',
+        fill: false,
+        dotSize: 3,
         min: parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
         max: parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
         padding: {

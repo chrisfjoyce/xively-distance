@@ -133,7 +133,7 @@ var ChartsCtrl = function ($scope,$location) {
     console.log(_seriesByDataSource);
     console.log(jsonObject);
     console.log(jsonData);
-    $scope.addAlertMessage("This process may take some time, please be patient.");
+    $scope.addAlertMessage('This process may take some time, please be patient.');
     $('#ta').html(jsonData);
     $('#fa').submit();
   };
