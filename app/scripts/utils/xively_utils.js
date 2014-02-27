@@ -225,9 +225,9 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
       }
     }
 
-    if(points.length == 0){
-      //_datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not contain data for the given dates.');
-    }else{
+    // if(points.length == 0){
+    //   //_datapointErrors.push(_deviceInformation[device.id].schoolName + ' - ' + datastreamLabel + 'does not contain data for the given dates.');
+    // }else{
       if(seriesByDataSource[filteredDatastreamLabel] == null){
         seriesByDataSource[filteredDatastreamLabel] = {
           'series' : [],
@@ -265,7 +265,7 @@ var buildDataCallback = function(device,datastreamLabel,selectedDevicesCount,ser
         seriesByDataSource[filteredDatastreamLabel].min_value = Math.min(seriesByDataSource[filteredDatastreamLabel].min_value, datastream_min_value);
         seriesByDataSource[filteredDatastreamLabel].max_value = Math.max(seriesByDataSource[filteredDatastreamLabel].max_value, datastream_max_value);
       }
-    }
+    // }
 
     _retrievedDevicesCount++;
     _iterationsFinished++;
