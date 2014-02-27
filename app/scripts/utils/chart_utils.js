@@ -153,7 +153,7 @@ var buildChart = function(seriesByDataSource) {
         width: 600,
         renderer: 'scatterplot',
         fill: false,
-        dotSize: 3,
+        dotSize: 2,
         min: parseFloat(data.min_value) - 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
         max: parseFloat(data.max_value) + 0.25*(parseFloat(data.max_value) - parseFloat(data.min_value)),
         padding: {
