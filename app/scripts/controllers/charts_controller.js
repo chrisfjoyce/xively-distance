@@ -39,6 +39,7 @@ var ChartsCtrl = function ($scope,$location) {
         var serieObject = serie2.series[indexSerie];
         console.log(serieObject);
         if (serieObject.data == null || serieObject.data.length == 0) {
+          serieObject.noData = true;
           serieObject.data.push({x: new Date(serie2.startDate).getTime()/1000.0, y: parseFloat(0)});
           serieObject.data.push({x: new Date(serie2.endDate).getTime()/1000.0, y: parseFloat(0)});
         }

@@ -100,7 +100,12 @@ var colorList = [
 
 var buildFormatter = function(series, x, y) {
   var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + ' padding: 4px;"></span>';
-  var content = swatch + '&nbsp;&nbsp;' + parseFloat(y) + '&nbsp;' + series.unit + '&nbsp;&nbsp;<br>';
+  var content = '';
+  if (series.noData != null && series.noData) {
+    content = swatch + '&nbsp;&nbsp;No Data&nbsp;&nbsp;<br>';
+  } else {
+    content = swatch + '&nbsp;&nbsp;' + parseFloat(y) + '&nbsp;' + series.unit + '&nbsp;&nbsp;<br>';
+  }
   return content;
 };
 
