@@ -9,7 +9,6 @@
 }
 
 .school-box{
-   width:283px; 
   -webkit-box-shadow: 0 5px 0px 0px #8DCF91;
   -moz-box-shadow:    0 5px 0px 0px #8DCF91;
    box-shadow:        0 5px 0px 0px #8DCF91;
@@ -525,7 +524,6 @@
 
 .school-item-text{
   white-space: nowrap;
-  width: 240px;
   display: inline-block;
   text-overflow: ellipsis;
   overflow: hidden;
