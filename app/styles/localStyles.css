@@ -529,3 +529,26 @@
   overflow: hidden;
   line-height: 20px;
 }
+
+.h3-single-letter-link{
+  color:#f7941e;
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 1.5em;
+  display: inline-block;
+  margin-left: 13px;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -130px;
+  visibility: hidden;
+}
+
+.navbar-offset {
+  top: 130px;
+}
+
+.scroll {
+  overflow: auto;
+}

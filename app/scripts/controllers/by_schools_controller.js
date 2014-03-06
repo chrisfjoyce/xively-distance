@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
+var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorScroll) {
   // var onXivelyReady = function(){
   //   //$scope.schools = _schools;
   //   $scope.schoolsByLetter = _schoolsByLetter;
@@ -130,8 +130,17 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     $scope.loadingMessage = 'Loading locations.';
   }
 
+  $scope.scroll = function(letter) {
+    var old = $location.hash();
+    $location.hash(letter);
+    $anchorScroll();
+    $location.hash(old);
+  }
+
+  $('body').scrollspy({ target: '#navbar-letters' })
+
 };
 
-BySchoolsCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope'];
+BySchoolsCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope', '$anchorScroll'];
 var app = angular.module('xivelyIostpApp');
 app.controller('BySchoolsCtrl', BySchoolsCtrl);

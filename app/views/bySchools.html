@@ -5,6 +5,22 @@
 </div>
 <div class="smallBar-div">
   <div class="container">
+    <span class="pull-left">
+      <nav id="navbar-letters" class="navbar navbar-default navbar-static" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-letters-index" ng-repeat='(letter,schools) in schoolsByLetter'>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse navbar-letters-index">
+            <ul class="nav navbar-nav">
+              <li ng-repeat='(letter,schools) in schoolsByLetter'><a ng-click="scroll(letter)">{{letter}}</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </span>
     <span class="pull-right">
       <span class="state-bar-green-text">Selected {{totalSchoolsSelected()}}</span>
       <span class="state-bar-text">of {{totalSchools}} Locations</span>
@@ -20,8 +36,9 @@
   <span class="h3">
     <small>Please select locations to create your observation kit:</small>
   </span>
-  <div class="row" ng-show="!loading">
-    <div class="col-md-12" ng-repeat='(letter,schools) in schoolsByLetter'>
+  <div class="row" ng-show="!loading" data-spy="scroll" data-target="#navbar-letters" data-offset="0" ng-repeat='(letter,schools) in schoolsByLetter'>
+    <a id="{{letter}}" class="anchor"></a>
+    <div class="col-md-12">
       <div class="row">
         <span class="h3-single-letter">{{letter}}</span>
       </div>
