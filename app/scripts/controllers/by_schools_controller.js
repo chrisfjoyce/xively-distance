@@ -1,7 +1,7 @@
 /*jshint sub:true*/
 'use strict';
 
-var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorScroll) {
+var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorScroll,$window) {
   // var onXivelyReady = function(){
   //   //$scope.schools = _schools;
   //   $scope.schoolsByLetter = _schoolsByLetter;
@@ -130,17 +130,53 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     $scope.loadingMessage = 'Loading locations.';
   }
 
+  $scope.selectedLetter = {};
+  var first = true;
+  for (var letter in _schoolsByLetter) {
+    if (first) {
+      $scope.selectedLetter[letter] = true;
+      first = false;
+    } else {
+      $scope.selectedLetter[letter] = false;
+    }
+  }
+
   $scope.scroll = function(letter) {
     var old = $location.hash();
-    $location.hash(letter);
+    $location.hash(letter + "-anchor");
     $anchorScroll();
     $location.hash(old);
+    $scope.verifySelectedLetter();
   }
+
+  $scope.verifySelectedLetter = function() {
+    for (var letter in _schoolsByLetter) {
+      $scope.selectedLetter[letter] = false;
+    }
+    var minOffset = 999999;
+    var minLetter = '';
+    for (var letter in _schoolsByLetter) {
+      var element = $('#' + letter).get(0);
+      var offset = element.getBoundingClientRect();
+      if (offset.top < minOffset && offset.top >= 130) {
+        minOffset = offset.top;
+        minLetter = letter;
+      }
+    }
+    if (minLetter != '') {
+      $scope.selectedLetter[minLetter] = true;
+    }
+  }
+
+  angular.element($window).bind("scroll", function(e) {
+    $scope.verifySelectedLetter();
+    $scope.$apply();
+  })
 
   $('body').scrollspy({ target: '#navbar-letters' })
 
 };
 
-BySchoolsCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope', '$anchorScroll'];
+BySchoolsCtrl.$inject = ['$scope','$modal','$location','$route','$rootScope', '$anchorScroll', '$window'];
 var app = angular.module('xivelyIostpApp');
 app.controller('BySchoolsCtrl', BySchoolsCtrl);

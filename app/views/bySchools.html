@@ -15,7 +15,7 @@
           </div>
           <div class="collapse navbar-collapse navbar-letters-index">
             <ul class="nav navbar-nav">
-              <li ng-repeat='(letter,schools) in schoolsByLetter'><a ng-click="scroll(letter)" class="nav-less-padding">{{letter}}</a></li>
+              <li ng-repeat='(letter,schools) in schoolsByLetter' class="{{selectedLetter[letter] && 'active' || ''}}"><a ng-click="scroll(letter)" class="nav-less-padding navbar-nav" id="{{letter}}-index">{{letter}}</a></li>
             </ul>
           </div>
         </div>
@@ -37,8 +37,8 @@
     <small>Please select locations to create your observation kit:</small>
   </span>
   <div class="row" ng-show="!loading" data-spy="scroll" data-target="#navbar-letters" data-offset="0" ng-repeat='(letter,schools) in schoolsByLetter'>
-    <a id="{{letter}}" class="anchor"></a>
-    <div class="col-md-12">
+    <a id="{{letter}}-anchor" class="anchor"></a>
+    <div class="col-md-12" id="{{letter}}">
       <div class="row">
         <span class="h3-single-letter">{{letter}}</span>
       </div>
