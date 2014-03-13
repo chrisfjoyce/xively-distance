@@ -14,43 +14,49 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-xs-6 datastream_background modal-body-weathertype">
-        <h3 class="h3-orange-modal">Location(s) selected: {{devicesSelected[selectedDS.label]}} of {{devices.length}}</h3>
-        <div class="row">
-          <div ng-repeat='device in devices'>
-            <div ng-if="selectedDevicesByDatasource[device.datastreamLabel][device.id] == true" ng-click="setSelected($event, device.id, device.datastreamLabel, false)">
-              <div class="input-group col-xs-10 modal-item">
-                <span ng-switch on="device.active">
-                  <span ng-switch-when="false" class="red-inactive" tooltip="{{toEuroFormat(device.at)}}">●</span>
-                  <span ng-switch-when="true" style="width:8px;display:inline-block" tooltip="{{toEuroFormat(device.at)}}">
-                    <span class="green-active">●</span>
-                  </span>
-                </span>
-                <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
-              </div>
-              <div class="input-group col-xs-2 modal-item" style="display:inline-block">
-                <span class='glyphicon glyphicon-check' style='color:#8dce91;font-size:17px'/>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-6 modal-body-weathertype">
+      <div class="col-xs-12 modal-body-weathertype">
         <div class="row">
           <div ng-repeat='device in devices'>
             <div ng-if="selectedDevicesByDatasource[device.datastreamLabel][device.id] == null || selectedDevicesByDatasource[device.datastreamLabel][device.id] == false" ng-click="setSelected($event, device.id, device.datastreamLabel, true)" class="col-xs-12 schools-border-modal">
               <div class="row">
-                <div class="input-group col-xs-10 modal-item">
-                  <span ng-switch on="device.active" style="width:12px;display:inline-block;float:left">
+                <div class="input-group col-md-1 modal-item">
+                  <span ng-switch on="device.active" class="active-inactive">
                     <span ng-switch-when="false" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">●</span>
                     <span ng-switch-when="true" class="red-inactive" tooltip-placement="right" tooltip="{{toEuroFormat(device.at)}}">
                       <span class="green-active">●</span>
                     </span>
                   </span>
-                  <span class="span-overflow" title="{{device.location.name}}">{{device.location.name}}</span>
                 </div>
-                <div class="input-group col-md-2 modal-item">
+                <div class="input-group col-md-10 modal-item">
+                  <span class="span-overflow datatype-text" title="{{device.location.name}}">{{device.location.name}}</span>
+                </div>
+                <div class="input-group col-md-1 modal-item">
                   <span class='glyphicon glyphicon-unchecked' style='color:#8dce91;font-size:17px'/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 datastream-background modal-body-weathertype">
+        <h3 class="h3-orange-modal">Location(s) selected: {{devicesSelected[selectedDS.label]}} of {{devices.length}}</h3>
+        <div class="row">
+          <div ng-repeat='device in devices'>
+            <div ng-if="selectedDevicesByDatasource[device.datastreamLabel][device.id] == true" ng-click="setSelected($event, device.id, device.datastreamLabel, false)">
+              <div class="row">
+                <div class="input-group col-md-1 modal-item">
+                  <span ng-switch on="device.active" class="active-inactive">
+                    <span ng-switch-when="false" class="red-inactive" tooltip="{{toEuroFormat(device.at)}}">●</span>
+                    <span ng-switch-when="true" style="width:8px;display:inline-block" tooltip="{{toEuroFormat(device.at)}}">
+                      <span class="green-active">●</span>
+                    </span>
+                  </span>
+                </div>
+                <div class="input-group col-md-10 modal-item" style="display:inline-block">
+                  <span class="span-overflow datatype-text" title="{{device.location.name}}">{{device.location.name}}</span>
+                </div>
+                <div class="input-group col-md-1 modal-item" style="display:inline-block">
+                  <span class='glyphicon glyphicon-check' style='color:#8dce91;font-size:17px'/>
                 </div>
               </div>
             </div>

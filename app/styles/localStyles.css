@@ -4,8 +4,9 @@
 .datastream_text{
   color: #F8B041;
 }
-.datastream_background{
+.datastream-background{
   background-color: #F1F1F1;
+  padding: 0px 30px;
 }
 
 .school-box{
@@ -228,7 +229,7 @@
 }
 
 .modal-body-weathertype{
-  height: 300px;
+  height: 150px;
   overflow: auto;
   overflow-x: hidden;
 }
@@ -467,11 +468,10 @@
 }
 
 .span-overflow{
-  width:213px;
+  width:500px;
   white-space: nowrap;
   overflow:hidden;
   display:inline-block;
-  float:right;
   text-overflow:ellipsis;
 }
 
@@ -558,4 +558,16 @@
   padding-right: 10px !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
+}
+
+.active-inactive {
+  width: 12px;
+  display: inline-block;
+  float: left;
+}
+
+.datatype-text {
+  border-bottom: 1px solid #e3e3e2;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
 }
