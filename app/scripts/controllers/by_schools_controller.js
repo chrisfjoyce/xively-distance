@@ -156,24 +156,49 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     var minOffset = 999999;
     var minLetter = '';
     for (var letter in _schoolsByLetter) {
-      var element = $('#' + letter).get(0);
-      var offset = element.getBoundingClientRect();
-      if (offset.top < minOffset && offset.top >= 130) {
-        minOffset = offset.top;
-        minLetter = letter;
+      var selector = $('#' + letter);
+      if (selector == null) {
+        return false;
+      } else {
+        var element = selector.get(0);
+        console.log(element);
+        if (element == null) {
+          return false;
+        } else {
+          var offset = element.getBoundingClientRect();
+          if (offset.top < minOffset && offset.top >= 130) {
+            minOffset = offset.top;
+            minLetter = letter;
+          }
+        }
       }
     }
     if (minLetter != '') {
+      console.log(minLetter + "-" + minOffset);
       $scope.selectedLetter[minLetter] = true;
     }
+    return true;
   }
 
   angular.element($window).bind("scroll", function(e) {
     $scope.verifySelectedLetter();
     $scope.$apply();
-  })
+  });
 
-  $('body').scrollspy({ target: '#navbar-letters' })
+  $('body').scrollspy({ target: '#navbar-letters' });
+
+  var verifiedFirst = false;
+  var setSelectedLetter = function() {
+    verifiedFirst = $scope.verifySelectedLetter();
+    console.log(verifiedFirst);
+    if (verifiedFirst) {
+      $scope.$apply();
+    } else {
+      setTimeout(setSelectedLetter, 2000);
+    }
+  };
+
+  setSelectedLetter();
 
 };
 
