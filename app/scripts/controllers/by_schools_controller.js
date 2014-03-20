@@ -189,10 +189,9 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
 
   $('body').scrollspy({ target: '#navbar-letters' });
 
-  var verifiedFirst = false;
+  var verifiedFirst = true;
   var setSelectedLetter = function() {
     verifiedFirst = $scope.verifySelectedLetter();
-    console.log(verifiedFirst);
     if (verifiedFirst) {
       $scope.$apply();
     } else {
@@ -200,7 +199,15 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     }
   };
 
-  setSelectedLetter();
+  var setSelectedLetterInit = function() {
+    if (_xivelyDataInitComplete) {
+      setSelectedLetter();
+    } else {
+      setTimeout(setSelectedLetterInit, 1000);
+    }
+  }
+
+  setSelectedLetterInit();
 
 };
 
