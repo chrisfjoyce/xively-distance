@@ -368,6 +368,7 @@ var processXivelyFeedData = function(data){
       var datastreamLabel = datastreamId;
       var newDatastreamLabel = '';
       // var allTags = '(';
+      var firstTag = '';
       var secondTag = '';
       for (var index = 0; index < datastream.tags.length; index++) {
         // if (index != 0) {
@@ -377,6 +378,11 @@ var processXivelyFeedData = function(data){
         if(datastream.tags[index] == 'Minimum' || datastream.tags[index] == 'Maximum' || datastream.tags[index] == 'Average' || datastream.tags[index].indexOf('lbv') == 0 || datastream.tags[index].indexOf('skv') == 0 || datastream.tags[index] == '') {
           secondTag = secondTag + '-' + datastream.tags[index];
         } else {
+          if (firstTag == '') {
+            firstTag = datastream.tags[index];
+          } else {
+            firstTag = datastream.tags[index] + ' ' + firstTag;
+          }
           newDatastreamLabel = datastream.tags[index] + ' ' + newDatastreamLabel;
           while (newDatastreamLabel.lastIndexOf(' ') == newDatastreamLabel.length - 1) {
             newDatastreamLabel = newDatastreamLabel.substring(0, newDatastreamLabel.length - 1);
@@ -408,8 +414,8 @@ var processXivelyFeedData = function(data){
         devicesByDatastream[datastreamLabel] = [];
         datastreams.push(datastreamLabel);
       }
-      if (_devicesStatusByDatastream[datastreamLabel] == null) {
-        _devicesStatusByDatastream[datastreamLabel] = {active: 0, inactive: 0};
+      if (_devicesStatusByDatastream[firstTag] == null) {
+        _devicesStatusByDatastream[firstTag] = {active: 0, inactive: 0};
       }
 
       var secondTagAbbreviation = secondTag;
@@ -426,10 +432,10 @@ var processXivelyFeedData = function(data){
       //console.log(schoolName);
       // }
       if(activeDevice) {
-        _devicesStatusByDatastream[datastreamLabel].active++;
+        _devicesStatusByDatastream[firstTag].active++;
         _devicesStatusByLocation[schoolName].active++;
       } else {
-        _devicesStatusByDatastream[datastreamLabel].inactive++;
+        _devicesStatusByDatastream[firstTag].inactive++;
         _devicesStatusByLocation[schoolName].inactive++;
       }
     }

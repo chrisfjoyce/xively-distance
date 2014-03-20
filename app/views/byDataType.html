@@ -23,6 +23,8 @@
   <div class="row col-md-12 byDataType-div" ng-show="!loading">
     <span ng-repeat='datastream in datastreams'>
       <button type="button" ng-click="open(datastream)" class="btn datastream-box col-md-4" ng-class="{'datastream-box-selected':devicesSelected[datastream.label]}">
+        <span class="green-active-button" ng-show="devicesStatusByDatastream[datastream.label].active > 0">●</span>
+        <span class="red-inactive-button" ng-show="devicesStatusByDatastream[datastream.label].inactive > 0">●</span>
         <span title="{{datastream.indexOf('-') < 0 ? datastream : datastream.substring(0, datastream.indexOf('-'))}}" class="school-item-text">{{datastream.label}}</span>
         <br/>
         <small style="color:#93C748" ng-if="devicesSelected[datastream.label]">

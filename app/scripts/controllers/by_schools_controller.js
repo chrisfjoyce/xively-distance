@@ -163,7 +163,6 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
         return false;
       } else {
         var element = selector.get(0);
-        console.log(element);
         if (element == null) {
           return false;
         } else {
@@ -176,7 +175,6 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
       }
     }
     if (minLetter != '') {
-      console.log(minLetter + "-" + minOffset);
       $scope.selectedLetter[minLetter] = true;
     }
     return true;

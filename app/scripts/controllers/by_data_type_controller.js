@@ -17,6 +17,10 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.selectedDatastream = {};
 
+  $scope.devicesStatusByDatastream = _devicesStatusByDatastream;
+
+  console.log(_devicesStatusByDatastream);
+
   if (_isBack) {
     _isBack = false;
     $scope.devicesSelected = _devicesSelected;

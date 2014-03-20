@@ -83,6 +83,21 @@
   font-weight: bolder;
 }
 
+.green-active-button {
+  color: green;
+  font-weight: bolder;
+  font-size: 14px;
+  vertical-align: top;
+}
+
+.red-inactive-button {
+  color: red;
+  font-weight: bolder;
+  display:inline-block;
+  font-size: 14px;
+  vertical-align: top;
+}
+
 .dropdown-menu {
   z-index: 100;
 }
