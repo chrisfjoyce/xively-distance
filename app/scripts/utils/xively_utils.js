@@ -19,6 +19,8 @@ var _datastreamByDeviceIdDatastreamLabel={};
 var _seriesByDataSource = null;
 var _xivelyDataInitComplete = false;
 var _datapointErrors = [];
+var _devicesStatusByDatastream = null;
+var _devicesStatusByLocation = null;
 
 var _iterationsTotal = null;
 var _iterationsFinished = null;
@@ -316,6 +318,8 @@ var processXivelyFeedData = function(data){
   _datastreamsBySchool = {};
   _deviceInformation = {};
   _datastreamByDeviceIdDatastreamLabel={};
+  _devicesStatusByDatastream = {};
+  _devicesStatusByLocation = {};
 
   var devices = data.results;
   var len = devices.length;
@@ -344,6 +348,10 @@ var processXivelyFeedData = function(data){
 
       //Preparing for DataStreams
       _datastreamsBySchool[schoolName] = [];
+
+      //Prepare Device Status
+      _devicesStatusByLocation[schoolName] = {active: 0, inactive: 0};
+
     }
 
     var nowMillis = Date.now();
@@ -400,6 +408,9 @@ var processXivelyFeedData = function(data){
         devicesByDatastream[datastreamLabel] = [];
         datastreams.push(datastreamLabel);
       }
+      if (_devicesStatusByDatastream[datastreamLabel] == null) {
+        _devicesStatusByDatastream[datastreamLabel] = {active: 0, inactive: 0};
+      }
 
       var secondTagAbbreviation = secondTag;
       secondTagAbbreviation = secondTagAbbreviation.replace('Average', 'Avg');
@@ -414,6 +425,13 @@ var processXivelyFeedData = function(data){
       _datastreamByDeviceIdDatastreamLabel[datastreamLabel+device.id]=datastreamId;
       //console.log(schoolName);
       // }
+      if(activeDevice) {
+        _devicesStatusByDatastream[datastreamLabel].active++;
+        _devicesStatusByLocation[schoolName].active++;
+      } else {
+        _devicesStatusByDatastream[datastreamLabel].inactive++;
+        _devicesStatusByLocation[schoolName].inactive++;
+      }
     }
 
     if(_datastreamsBySchool[schoolName].length == 0){

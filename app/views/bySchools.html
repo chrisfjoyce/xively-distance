@@ -44,6 +44,8 @@
       </div>
       <span ng-repeat='school in schools'>
         <button type="button" ng-click="open(school.schoolName)" class="btn school-box col-md-12" ng-class="{'school-box-selected':dataStreamsSelected[school.schoolName]}">
+          <span class="green-active" ng-show="devicesStatusByLocation[school.schoolName].active > 0">●</span>
+          <span class="red-inactive" ng-show="devicesStatusByLocation[school.schoolName].inactive > 0">●</span>
           <span title="{{school.schoolName }}" class="school-item-text">{{school.schoolName }}</span>
           <br/>
           <small style="color:#93C748" ng-if="dataStreamsSelected[school.schoolName]">Selected({{dataStreamsSelected[school.schoolName]}}) of </small>

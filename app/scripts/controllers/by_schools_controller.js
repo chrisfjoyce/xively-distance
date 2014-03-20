@@ -21,6 +21,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
 
   $scope.datastreamsBySchool = _datastreamsBySchool;
 
+  $scope.devicesStatusByLocation = _devicesStatusByLocation;
+
   if (_isBack) {
     _isBack = false;
     $scope.dataStreamsSelected = _dataStreamsSelected;
