@@ -20,6 +20,7 @@
    font-size: 1.5em;
    line-height: 22px;
    color: #414042;
+   min-width: 930px;
 }
 
 .school-box:hover{
@@ -315,6 +316,14 @@
   color:#015b32;
 }
 
+.home-btn:focus {
+  color: #FFFFFF;
+}
+
+.home-btn:hover {
+  color: #FFFFFF;
+}
+
 .preview-btn {
   height:32px;
   width:162px;
@@ -335,6 +344,10 @@
   background: #FAA31F;
   text-decoration: none;
   color:#ffffff;
+}
+
+.preview-btn:focus {
+  color: #FFFFFF;
 }
 
 .preview-btn-disabled {
@@ -369,6 +382,10 @@
   text-decoration: none;
 }
 
+.popup-save-btn {
+  color: #FFFFFF;
+}
+
 .popup-cancel-btn {
   height:32px;
   width:95px;
@@ -384,6 +401,10 @@
   padding: 0px 0px 0px 0px;
   text-decoration: none;
   margin-left: 13px;
+}
+
+.popup-cancel-btn {
+  color: #FFFFFF;
 }
 
 .btn-edit {
@@ -428,6 +449,10 @@
   background: #58d6a2;
   text-decoration: none;
   color:#ffffff;
+}
+
+.btn-generate:focus {
+  color: #FFFFFF;
 }
 
 .btn-export {
