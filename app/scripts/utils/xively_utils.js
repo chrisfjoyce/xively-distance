@@ -261,7 +261,7 @@ var loadChartTestData = function(callback){
 };
 
 var processXivelyFeedData = function(data){
-  console.log('Devices collected in: ms ' + (Date.now() - _startDevicesTimestamp));
+  // console.log('Devices collected in: ms ' + (Date.now() - _startDevicesTimestamp));
   _xivelyDataInitComplete = true;
 
   _schools = [];
@@ -406,7 +406,7 @@ var processXivelyFeedData = function(data){
       _datastreamsGroups[arrDatastream[0]].datastreams.push(datastreams[ii]);
     }
   }
-  console.log(_datastreamsGroups);
+  // console.log(_datastreamsGroups);
 
   for (var k = _callbacks.length - 1; k >= 0; k--) {
     _callbacks[k]();
@@ -415,7 +415,7 @@ var processXivelyFeedData = function(data){
   var rootScope = angular.element('#ngApp').scope();
   if(rootScope != null && rootScope.route != null){
     var currentController = rootScope.route.current.$$route.controller;
-    console.log(currentController);
+    // console.log(currentController);
     if(currentController == 'BySchoolsCtrl' || currentController == 'ByDataTypeCtrl'){
       rootScope.route.reload();
     }
@@ -437,8 +437,8 @@ var initXivelyData = function(){
     {'x-apikey': XIVELY_API_KEY},
     processXivelyFeedData
   ).fail(function(data) {
-    console.log('fail');
-    console.log(JSON.stringify(data));
+    // console.log('fail');
+    // console.log(JSON.stringify(data));
   });
 };
 

@@ -131,7 +131,7 @@ var buildChart = function(seriesByDataSource) {
       series[i].data.sort(pointsComparator);
     }
 
-    console.log(seriesByDataSource[datastreamId].graph);
+    // console.log(seriesByDataSource[datastreamId].graph);
     var graph = seriesByDataSource[datastreamId].graph;
     if (seriesByDataSource[datastreamId].graph == null) {
       graph = new Rickshaw.Graph( {
@@ -196,8 +196,8 @@ var buildChart = function(seriesByDataSource) {
       values: [ graph.min, graph.max ],
       slide: function( event, ui ) {
         var dsid = event.target.id.substring(event.target.id.indexOf('-') + 1);
-        console.log(dsid);
-        console.log(ui);
+        // console.log(dsid);
+        // console.log(ui);
         _seriesByDataSource[dsid].graph.min = ui.values[0];
         _seriesByDataSource[dsid].graph.max = ui.values[1];
         _seriesByDataSource[dsid].graph.update();
