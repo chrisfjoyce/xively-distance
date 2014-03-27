@@ -61,24 +61,6 @@ var customRenderer = function(args) {
 
 Rickshaw.Graph.Renderer.ScatterPlot.prototype.render = customRenderer;
 
-// var colorList = [
-//   '#000000',
-//   '#FF0000',
-//   '#00FF00',
-//   '#0000FF',
-//   '#FFFF00',
-//   '#00FFFF',
-//   '#FF00FF',
-//   '#C0C0C0',
-//   '#808080',
-//   '#800000',
-//   '#808000',
-//   '#008000',
-//   '#800080',
-//   '#008080',
-//   '#000080'
-// ];
-
 var colorList = [
   '#27aae1',
   '#f15a29',
@@ -199,27 +181,6 @@ var buildChart = function(seriesByDataSource) {
       graph: graph,
       formatter: buildFormatter
     });
-
-    // //Legend
-    // var legend = new Rickshaw.Graph.Legend({
-    //   graph: graph,
-    //   element: document.querySelector('#legend-' + datastreamId)
-    // });
-
-    // var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
-    //   graph: graph,
-    //   legend: legend
-    // });
-
-    // var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-    //   graph: graph,
-    //   legend: legend
-    // });
-
-    // var order = new Rickshaw.Graph.Behavior.Series.Order({
-    //   graph: graph,
-    //   legend: legend
-    // });
 
     var slider = new Rickshaw.Graph.RangeSlider({
       graph: graph,
