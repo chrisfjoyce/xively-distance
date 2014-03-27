@@ -12,7 +12,7 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
 
   $scope.devicesStatusByDatastream = _devicesStatusByDatastream;
 
-  console.log(_devicesStatusByDatastream);
+  // console.log(_devicesStatusByDatastream);
 
   if (_isBack) {
     _isBack = false;
@@ -64,12 +64,12 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     };
 
     $scope.ok = function() {
-      console.log('ok');
+      // console.log('ok');
       $scope.modal.dismiss('ok');
-      console.log($scope.devicesSelected);
+      // console.log($scope.devicesSelected);
     };
     $scope.cancel = function() {
-      console.log('cancel');
+      // console.log('cancel');
       $scope.modal.dismiss('cancel');
 
       $scope.devicesSelected             = _devicesSelected             = $scope.preModalState.devicesSelected;
@@ -88,8 +88,8 @@ var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
     modalInstance.result.then(function (datastream) {
       $scope.selectedDatastream = datastream;
     }, function (type) {
-      console.log('Modal dismissed at: ' + new Date());
-      console.log('Caused by: ' + type);
+      // console.log('Modal dismissed at: ' + new Date());
+      // console.log('Caused by: ' + type);
     });
     $scope.modal = modalInstance;
   };

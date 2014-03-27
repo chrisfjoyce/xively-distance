@@ -1,8 +1,8 @@
 /*jshint sub:true*/
 'use strict';
 var PermalinkCtrl = function ($scope,$location,$routeParams) {
-  console.log(_seriesByDataSource);
-  console.log($routeParams.code);
+  // console.log(_seriesByDataSource);
+  // console.log($routeParams.code);
 
   $scope.loading = true;
   $scope.loadingMessage = 'Generating charts.';
@@ -40,8 +40,8 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       $.get(
         './services/get_permalink.php?code=' + code,
         function(data){
-          console.log('Data Received:');
-          console.log(data);
+          // console.log('Data Received:');
+          // console.log(data);
           if (data.error != null) {
             $scope.addAlert('Permalink code error: ' + data.error.replace(/\_/g,' ') + '. You will be redirected to Create New Observation Kit in 5 seconds.');
             $scope.xivelyDataInitComplete = false;
@@ -61,7 +61,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
   };
 
   var drawFromReceivedData = function(jsonObject) {
-    console.log(jsonObject);
+    // console.log(jsonObject);
     getDatapointHistory(
       jsonObject,
       function(seriesByDatasource){
@@ -81,7 +81,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
           var serie2 = _seriesByDataSource[serie];
           for (var indexSerie = 0; indexSerie < serie2.series.length; indexSerie++) {
             var serieObject = serie2.series[indexSerie];
-            console.log(serieObject);
+            // console.log(serieObject);
             serieObject.noData = true;
             if (serieObject.data == null || serieObject.data.length == 0) {
               serieObject.data.push({x: new Date(serie2.startDate).getTime()/1000.0, y: parseFloat(0)});
@@ -131,9 +131,9 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       }
     }
     var jsonData = JSON.stringify(jsonObject);
-    console.log(_seriesByDataSource);
-    console.log(jsonObject);
-    console.log(jsonData);
+    // console.log(_seriesByDataSource);
+    // console.log(jsonObject);
+    // console.log(jsonData);
     $('#ta').html(jsonData);
     $('#fa').submit();
   };
@@ -198,7 +198,7 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
 
   $scope.back = function() {
     if (_backLocation != null && _backLocation != '') {
-      console.log(_backLocation);
+      // console.log(_backLocation);
       $location.path(_backLocation);
       _backLocation = '';
       _isBack = true;

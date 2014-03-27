@@ -2,7 +2,7 @@
 'use strict';
 
 var BySchoolPopupCtrl = function ($scope) {
-  console.log($scope.selectedDS);
+  // console.log($scope.selectedDS);
   $scope.devices = [];
   for (var i = 0; i < $scope.selectedDS.datastreams.length; i++) {
     $scope.devices = $scope.devices.concat(_devicesByDatastream[$scope.selectedDS.datastreams[i]]);
@@ -31,9 +31,9 @@ var BySchoolPopupCtrl = function ($scope) {
   }
 
   $scope.setSelected = function($event, deviceId, datastreamLabel, value) {
-    console.log(deviceId);
-    console.log(datastreamLabel);
-    console.log(value);
+    // console.log(deviceId);
+    // console.log(datastreamLabel);
+    // console.log(value);
     if ($scope.selectedDevicesByDatasource[datastreamLabel] == null) {
       $scope.selectedDevicesByDatasource[datastreamLabel] = {};
     }

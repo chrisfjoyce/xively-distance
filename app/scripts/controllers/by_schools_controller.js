@@ -15,8 +15,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     _isBack = false;
     $scope.dataStreamsSelected = _dataStreamsSelected;
     $scope.selectedDatastreamsBySchool = _selectedDevicesByDatasource;
-    console.log(_dataStreamsSelected);
-    console.log(_selectedDevicesByDatasource);
+    // console.log(_dataStreamsSelected);
+    // console.log(_selectedDevicesByDatasource);
   } else {
     $scope.dataStreamsSelected = {};
     $scope.selectedDatastreamsBySchool = {};
@@ -46,7 +46,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
       $scope.selectedDatastreamsBySchool[datastreamLabel].end_date = defaultDates.endDate.toISOString();
     }
 
-    console.log($scope.selectedDatastreamsBySchool);
+    // console.log($scope.selectedDatastreamsBySchool);
     getDatapointHistory(
       $scope.selectedDatastreamsBySchool,
       function(seriesByDatasource){
@@ -78,11 +78,11 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     }
 
     $scope.ok = function() {
-      console.log('ok');
+      // console.log('ok');
       $scope.modal.dismiss('ok');
     };
     $scope.cancel = function() {
-      console.log('cancel');
+      // console.log('cancel');
 
       $scope.modal.dismiss('cancel');
 
@@ -103,8 +103,8 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     modalInstance.result.then(function (school) {
       $scope.selectedSchool = school;
     }, function (type) {
-      console.log('Modal dismissed at: ' + new Date());
-      console.log('Caused by: ' + type);
+      // console.log('Modal dismissed at: ' + new Date());
+      // console.log('Caused by: ' + type);
     });
     $scope.modal = modalInstance;
   };

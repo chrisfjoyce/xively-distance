@@ -37,7 +37,7 @@ var ByDataStreamPopUpCtrl = function ($scope) {
     var checked = $scope.selectedDatastreamsBySchool[label][deviceId];
 
     checked = checked == null ? true : !$scope.selectedDatastreamsBySchool[label][deviceId];
-    console.log(checked);
+    // console.log(checked);
     $scope.selectedDatastreamsBySchool[label][deviceId]=checked;
     if (checked) {
       $scope.dataStreamsSelected[$scope.selectedSchool]++;

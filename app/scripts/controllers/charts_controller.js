@@ -23,7 +23,7 @@ var ChartsCtrl = function ($scope,$location) {
 
   $scope.xivelyDataInitComplete = true;
 
-  console.log(_seriesByDataSource);
+  // console.log(_seriesByDataSource);
 
   $scope.loading = true;
   $scope.loadingMessage = 'Generating charts.';
@@ -37,7 +37,7 @@ var ChartsCtrl = function ($scope,$location) {
       var serie2 = _seriesByDataSource[serie];
       for (var indexSerie = 0; indexSerie < serie2.series.length; indexSerie++) {
         var serieObject = serie2.series[indexSerie];
-        console.log(serieObject);
+        // console.log(serieObject);
         if (serieObject.data == null || serieObject.data.length == 0) {
           serieObject.noData = true;
           serieObject.data.push({x: new Date(serie2.startDate).getTime()/1000.0, y: parseFloat(0)});
@@ -84,9 +84,9 @@ var ChartsCtrl = function ($scope,$location) {
       }
     }
     var jsonData = JSON.stringify(jsonObject);
-    console.log(_seriesByDataSource);
-    console.log(jsonObject);
-    console.log(jsonData);
+    // console.log(_seriesByDataSource);
+    // console.log(jsonObject);
+    // console.log(jsonData);
     $scope.addAlertMessage('This process may take some time, please be patient.');
     $('#ta').html(jsonData);
     $('#fa').submit();
@@ -104,7 +104,7 @@ var ChartsCtrl = function ($scope,$location) {
     $scope.$apply(buildChartToApply);
   };
   var waitForApplyCharts = function() {
-    console.log(_iterationsTotal + '-' + _iterationsFinished);
+    // console.log(_iterationsTotal + '-' + _iterationsFinished);
     if (_iterationsTotal == _iterationsFinished) {
       setTimeout(applyCharts, 2000);
     } else {
@@ -161,7 +161,7 @@ var ChartsCtrl = function ($scope,$location) {
 
   $scope.back = function() {
     if (_backLocation != null && _backLocation != '') {
-      console.log(_backLocation);
+      // console.log(_backLocation);
       $location.path(_backLocation);
       _backLocation = '';
       _isBack = true;
@@ -194,10 +194,10 @@ var ChartsCtrl = function ($scope,$location) {
         }
       }
       updateChart(seriesByDatasource, datastream);
-      console.log(seriesByDatasource[datastream.id]);
+      // console.log(seriesByDatasource[datastream.id]);
       _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
       $scope.chartDatastreams = _seriesByDataSource;
-      console.log(datastream);
+      // console.log(datastream);
       $scope.$apply();
     }
     );
@@ -210,7 +210,7 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.generateFinalChart = function() {
-    console.log(_seriesByDataSource);
+    // console.log(_seriesByDataSource);
     var jsonObject = {};
     for (var datastreamId in _seriesByDataSource) {
       var datastreamLabel = _seriesByDataSource[datastreamId].label;
@@ -229,7 +229,7 @@ var ChartsCtrl = function ($scope,$location) {
         'json_obskit': jsonData
       },
       function(data) {
-        console.log(data);
+        // console.log(data);
         $scope.permalink = data.code;
         $scope.isPreview = false;
         $scope.$apply();
