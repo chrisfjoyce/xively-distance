@@ -45,16 +45,6 @@ var ChartsCtrl = function ($scope,$location) {
         }
       }
     }
-    // if (seriesLength == 0) {
-    //   $scope.xivelyDataInitComplete = false;
-    //   $scope.addAlert("None of the Schools contains data to be displayed. You will be redirected to Edit the Observation Kit in 5 seconds.");
-    //   setTimeout(function() {
-    //     if ($scope.alerts.length > 0) {
-    //       $scope.back();
-    //       $scope.$apply();
-    //     }
-    //   }, 5000);
-    // }
   }
 
   var absUrl = $location.absUrl();
@@ -69,19 +59,6 @@ var ChartsCtrl = function ($scope,$location) {
 
   $scope.isPreview = true;
 
-  // if (_datapointErrors != null) {
-  //   if (_datapointErrors.length > 0) {
-  //     $scope.xivelyDataInitComplete = false;
-  //     $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
-  //     setTimeout(function() {
-  //       if ($scope.alerts.length > 0) {
-  //         $location.path('/');
-  //         $scope.$apply();
-  //       }
-  //     }, 5000);
-  //   }
-  // }
-
   $scope.totalWeatherTypes = function(){
     var sum = 0;
     for(var datastreamLabel in _seriesByDataSource){
@@ -91,40 +68,6 @@ var ChartsCtrl = function ($scope,$location) {
   };
 
   $scope.export = function(){
-    // var jsonData = JSON.stringify({
-    //   'Wind Direction': {
-    //     'start_date': '2014-01-01T13:35:07.437Z',
-    //     'end_date': '2014-01-21T13:35:07.437Z',
-    //     'devices': [
-    //       {
-    //         'id': 491325353,
-    //         'schoolName':'School1',
-    //         'datastreamId': 'Wind_Direction'
-    //       },
-    //       {
-    //         'id': 491325353,
-    //         'schoolName':'School2',
-    //         'datastreamId': 'Wind_Direction'
-    //       }
-    //     ]
-    //   },
-    //   'Wind Direction2': {
-    //     'start_date': '2014-01-01T13:35:07.437Z',
-    //     'end_date': '2014-01-21T13:35:07.437Z',
-    //     'devices': [
-    //       {
-    //         'id': 491325353,
-    //         'schoolName':'School1',
-    //         'datastreamId': 'Wind_Direction'
-    //       },
-    //       {
-    //         'id': 491325353,
-    //         'schoolName':'School2',
-    //         'datastreamId': 'Wind_Direction'
-    //       }
-    //     ]
-    //   }
-    // });
     var jsonObject = {};
     for (var datastreamFixedLabel in _seriesByDataSource) {
       var datastreamLabel = _seriesByDataSource[datastreamFixedLabel].label;
@@ -233,29 +176,6 @@ var ChartsCtrl = function ($scope,$location) {
     var startDateObject = new Date(Date.parse(datastream.startDate));
     var endDateObject = new Date(Date.parse(datastream.endDate));
     var todayObject = new Date();
-    // if (Math.floor(startDateObject.getTime()/1000) >= Math.floor(endDateObject.getTime()/1000) || Math.floor(endDateObject.getTime()/1000) >= Math.floor(todayObject.getTime()/1000)) {
-    //   $scope.addAlert("The start date should be less than end date.");
-    //   setTimeout(function() {
-    //     if ($scope.alerts.length > 0) {
-    //       $scope.alerts.splice(0, 1);
-    //       $scope.$apply();
-    //     }
-    //   }, 5000);
-    //   return;
-    // }
-
-    // if (Math.floor(endDateObject.getTime()/1000) - Math.floor(startDateObject.getTime()/1000) >= TWO_YEAR_SECONDS) {
-    //   $scope.addAlert("You can only request a two year range.");
-    //   setTimeout(function() {
-    //     if ($scope.alerts.length > 0) {
-    //       $scope.alerts.splice(0, 1);
-    //       $scope.$apply();
-    //     }
-    //   }, 5000);
-    //   return;
-    // }
-
-
     selectedDevicesByDatasourceAndDatastream[datastream.label].start_date = startDate;
     selectedDevicesByDatasourceAndDatastream[datastream.label].end_date = endDate;
     getDatapointHistory(
@@ -265,15 +185,6 @@ var ChartsCtrl = function ($scope,$location) {
       for(var key in seriesByDatasource){
         cnt++;
       }
-      // if(cnt == 0){
-      //   $scope.addAlert("The selected range does not contain data. Please select a new date range.");
-      //   setTimeout(function() {
-      //     if ($scope.alerts.length > 0) {
-      //       $scope.alerts.splice(0, 1);
-      //       $scope.$apply();
-      //     }
-      //   }, 5000);
-      // }else{
 
       $location.path('/charts');
 
@@ -287,7 +198,6 @@ var ChartsCtrl = function ($scope,$location) {
       _seriesByDataSource[datastream.id] = seriesByDatasource[datastream.id];
       $scope.chartDatastreams = _seriesByDataSource;
       console.log(datastream);
-      // }
       $scope.$apply();
     }
     );

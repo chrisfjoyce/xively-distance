@@ -6,8 +6,6 @@ var ByDataStreamPopUpCtrl = function ($scope) {
   $scope.active = 0;
   $scope.inactive = 0;
   $scope.toEuroFormat = _toEuroFormat;
-  //TODO garivera remove simulation of active/inactive
-  //simulate active/inactive
   for (var i = 0; i < $scope.dataStreams.length; i++) {
     if ($scope.dataStreams[i].active) {
       $scope.active++;
@@ -15,7 +13,6 @@ var ByDataStreamPopUpCtrl = function ($scope) {
       $scope.inactive++;
     }
   }
-  //end simulate active/inactive
   if ($scope.dataStreamsSelected == null) {
     $scope.dataStreamsSelected = [];
   }

@@ -2,13 +2,6 @@
 'use strict';
 
 var ByDataTypeCtrl = function ($scope,$modal,$location,$route,$rootScope) {
-  // registerXivelyGetData(function(){
-  //   var readGlobals = function(){
-  //     $scope.weatherTypes = _datastreams;
-  //     $scope.devicesByDatastream = _devicesByDatastream;
-  //   };
-  //   $scope.$apply(readGlobals);
-  // });
   $rootScope.route = $route;
   $scope.datastreams = _datastreamsGroups;
 

@@ -66,19 +66,6 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       jsonObject,
       function(seriesByDatasource){
 
-        if (_datapointErrors != null) {
-          // if (_datapointErrors.length > 0) {
-          //   $scope.xivelyDataInitComplete = false;
-          //   $scope.addAlert("Sorry!  The data in this Observation Kit has been removed, or no longer exists. You will be redirected to Create New Observation Kit in 5 seconds.");
-          //   setTimeout(function() {
-          //     if ($scope.alerts.length > 0) {
-          //       $location.path('/');
-          //       $scope.$apply();
-          //     }
-          //   }, 5000);
-          // }
-        }
-
         _backLocation = '/';
         _seriesByDataSource = seriesByDatasource;
         _selectedDevicesByDatasource = $scope.selectedDevicesByDatasource;
@@ -193,7 +180,6 @@ var PermalinkCtrl = function ($scope,$location,$routeParams) {
       }
       serie.color = serie.enabledColor;
       serie.borderColor = '#ed9c28';
-      // serie.borderWidth = '2px';
       serie.borderWidth = '1px';
       datastream.graph.update();
     }
