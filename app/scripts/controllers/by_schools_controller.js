@@ -2,22 +2,10 @@
 'use strict';
 
 var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorScroll,$window) {
-  // var onXivelyReady = function(){
-  //   //$scope.schools = _schools;
-  //   $scope.schoolsByLetter = _schoolsByLetter;
-  // };
-
-  // registerXivelyGetData(function(){
-  //   $scope.$apply(onXivelyReady);
-  // });
   $rootScope.route = $route;
 
   $scope.totalSchools = _schools.length;
   $scope.schoolsByLetter = _schoolsByLetter;
-
-  // $scope.selectedDatastreamsBySchool={};
-
-  // $scope.dataStreamsSelected = {};
 
   $scope.datastreamsBySchool = _datastreamsBySchool;
 
@@ -81,9 +69,6 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
       dataStreamsSelected         : jQuery.extend(true, {}, $scope.dataStreamsSelected),
       selectedDatastreamsBySchool : jQuery.extend(true, {}, $scope.selectedDatastreamsBySchool)
     };
-    // if($scope.selectedDatastreamsBySchool[school] == null){
-    //   $scope.selectedDatastreamsBySchool[school]={};
-    // }
 
     for (var i = _datastreamsBySchool[school].length - 1; i >= 0; i--) {
       var datastream = _datastreamsBySchool[school][i];
@@ -94,7 +79,6 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
 
     $scope.ok = function() {
       console.log('ok');
-      // selectedElementsCounter($scope.selectedDatastreamsBySchool);
       $scope.modal.dismiss('ok');
     };
     $scope.cancel = function() {
@@ -145,11 +129,11 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
 
   $scope.scroll = function(letter) {
     var old = $location.hash();
-    $location.hash(letter + "-anchor");
+    $location.hash(letter + '-anchor');
     $anchorScroll();
     $location.hash(old);
     $scope.verifySelectedLetter();
-  }
+  };
 
   $scope.verifySelectedLetter = function() {
     for (var letter in _schoolsByLetter) {
@@ -157,7 +141,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     }
     var minOffset = 999999;
     var minLetter = '';
-    for (var letter in _schoolsByLetter) {
+    for (letter in _schoolsByLetter) {
       var selector = $('#' + letter);
       if (selector == null) {
         return false;
@@ -178,9 +162,9 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
       $scope.selectedLetter[minLetter] = true;
     }
     return true;
-  }
+  };
 
-  angular.element($window).bind("scroll", function(e) {
+  angular.element($window).bind('scroll', function(e) {
     $scope.verifySelectedLetter();
     $scope.$apply();
   });
@@ -203,7 +187,7 @@ var BySchoolsCtrl = function ($scope,$modal,$location,$route,$rootScope,$anchorS
     } else {
       setTimeout(setSelectedLetterInit, 1000);
     }
-  }
+  };
 
   setSelectedLetterInit();
 

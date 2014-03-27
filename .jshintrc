@@ -53,6 +53,8 @@
     "_iterationsFinished": true,
     "_datapointErrors": true,
     "_iterationsTotal": true,
-    "_datastreamsGroups": true
+    "_datastreamsGroups": true,
+    "_devicesStatusByLocation": false,
+    "_devicesStatusByDatastream": false
   }
 }
